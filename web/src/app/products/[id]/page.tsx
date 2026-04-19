@@ -4,7 +4,7 @@ import { products, getProductById } from '@/lib/dummy-data';
 import type { Metadata } from 'next';
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateStaticParams() {
@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = getProductById(params.id);
+  const { id } = await params;
+  const product = getProductById(id);
   if (!product) return { title: '商品が見つかりません' };
   return {
     title: product.name,
@@ -22,8 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ProductDetailPage({ params }: Props) {
-  const product = getProductById(params.id);
+export default async function ProductDetailPage({ params }: Props) {
+  const { id } = await params;
+  const product = getProductById(id);
 
   if (!product) {
     notFound();
