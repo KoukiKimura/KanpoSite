@@ -3,9 +3,9 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'ブランドについて',
+  title: 'ブランド紹介',
   description:
-    '山草の恵みのブランドコンセプト、創業の想い、漢方への向き合い方についてご紹介します。',
+    '山草の恵みのブランド紹介。創業の想い、理念、漢方への向き合い方についてご紹介します。',
 };
 
 const philosophies = [

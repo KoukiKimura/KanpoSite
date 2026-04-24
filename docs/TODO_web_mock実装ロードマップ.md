@@ -24,8 +24,8 @@
 - 参考デザイン
   - `https://www.roccadeifiori.eu/en/the-company/`
 - 環境参照元
-  - `env/.env.deploy`
-- `env/.env.deploy` の `DEPLOY_SITE_URL` は公開サイトの基準 URL として扱い、`web_mock/` の文言や遷移設計の参照先に利用する
+  - `env/.env.mock.deploy`
+- `env/.env.mock.deploy` の `DEPLOY_SITE_URL` はモック公開 URL の基準値として扱い、`web_mock/` のデプロイ先参照に利用する
 - `web_mock/` 自体の確認 URL は `NEXT_PUBLIC_MOCK_SITE_URL` で管理する
 
 ## 3. デザイン方針
@@ -85,3 +85,4 @@
 | 日付 | 変更内容 |
 |---|---|
 | 2026-04-21 | 初版作成。参考サイト、環境参照元、初回雛形の範囲を定義 |
+| 2026-04-21 | モックの環境参照元を `env/.env.mock.deploy` に変更 |

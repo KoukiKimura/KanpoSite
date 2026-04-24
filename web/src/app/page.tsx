@@ -66,7 +66,7 @@ export default function HomePage() {
               商品を見る
             </Link>
             <Link
-              href="/brand"
+              href="/about"
               className="text-sm tracking-widest text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
             >
               ブランドについて
@@ -108,7 +108,7 @@ export default function HomePage() {
             積み重ねてきたものです。私たちはその伝統を誠実に受け取り、
             現代の暮らしに寄り添う形にして、お届けしています。
           </p>
-          <Link href="/brand" className="btn-outline">
+          <Link href="/about" className="btn-outline">
             ブランドストーリーを読む
           </Link>
         </div>
@@ -157,7 +157,7 @@ export default function HomePage() {
                   その思いを形にしたのが、山草の恵みです。
                 </p>
               </div>
-              <Link href="/brand" className="btn-outline-white mt-8 inline-flex">
+              <Link href="/about" className="btn-outline-white mt-8 inline-flex">
                 ストーリー全文を読む
               </Link>
             </div>
@@ -193,7 +193,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <Link href="/field" className="btn-outline">
+          <Link href="/farm" className="btn-outline">
             畑のことをもっと知る
           </Link>
         </div>

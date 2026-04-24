@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 const navLinks = [
   { href: '/', label: 'トップ' },
   { href: '/products', label: '商品' },
-  { href: '/brand', label: 'ブランドについて' },
-  { href: '/field', label: '畑のこと' },
-  { href: '/guesthouse', label: 'ゲストハウス' },
+  { href: '/about', label: 'ブランド' },
+  { href: '/farm', label: '畑' },
+  { href: '/kominka', label: '古民家' },
   { href: '/contact', label: 'お問い合わせ' },
 ];
 

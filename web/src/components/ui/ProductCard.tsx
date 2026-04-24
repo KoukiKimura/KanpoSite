@@ -50,7 +50,7 @@ export default function ProductCard({ product, showDescription = true }: Product
             <span className="text-xs text-brand-muted ml-1">（税込）</span>
           </p>
           <Link
-            href={`/products/${product.id}`}
+            href={`/products/${product.slug}`}
             className="text-xs tracking-widest text-primary border border-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors duration-200"
           >
             詳細を見る
