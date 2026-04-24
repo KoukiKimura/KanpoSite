@@ -1,0 +1,354 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html[data-theme='current'] {
+  --mock-background: 244 239 230;
+  --mock-paper: 251 248 241;
+  --mock-ink: 29 36 28;
+  --mock-moss: 65 84 59;
+  --mock-olive: 109 123 82;
+  --mock-earth: 143 105 73;
+  --mock-sand: 217 198 173;
+  --mock-border: 216 207 191;
+  --mock-muted: 111 106 93;
+  --mock-gold: 173 139 87;
+  --mock-body-top: 247 243 236;
+  --mock-body-bottom: 241 233 221;
+  --mock-frame-base: 217 198 173;
+  --mock-frame-1: 211 194 171;
+  --mock-frame-2: 220 198 171;
+  --mock-frame-3: 208 186 162;
+  --mock-frame-4: 202 183 158;
+  --mock-frame-5: 207 185 157;
+  --mock-frame-6: 214 193 168;
+  --mock-frame-7: 200 179 157;
+  --mock-frame-8: 215 192 163;
+  --mock-frame-9: 210 185 159;
+  --mock-frame-10: 202 181 153;
+  --mock-frame-11: 215 197 173;
+  --mock-section-hero: 40 48 37;
+  --mock-section-products: 45 53 41;
+  --mock-section-kominka: 43 32 24;
+  --mock-footer-bg: 236 228 216;
+  --mock-note-bg: 246 241 232;
+  --mock-gallery-bg: 243 236 225;
+  --mock-panel-soft-1: 242 235 225;
+  --mock-panel-soft-2: 214 202 184;
+  --mock-section-text: 248 244 238;
+  --mock-section-muted: 224 216 204;
+  --mock-section-soft: 214 204 190;
+  --mock-section-border: 255 255 255;
+  --mock-section-border-alpha: 0.1;
+  --mock-chip-bg: 255 255 255;
+  --mock-chip-bg-alpha: 0.08;
+  --mock-chip-border: 255 255 255;
+  --mock-chip-border-alpha: 0.16;
+  --font-cormorant: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-noto-sans: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-noto-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+}
+
+html[data-theme='white'] {
+  --mock-background: 255 255 255;
+  --mock-paper: 255 255 255;
+  --mock-ink: 54 56 56;
+  --mock-moss: 108 114 111;
+  --mock-olive: 146 152 148;
+  --mock-earth: 176 159 139;
+  --mock-sand: 248 246 243;
+  --mock-border: 235 231 225;
+  --mock-muted: 121 118 112;
+  --mock-gold: 182 167 145;
+  --mock-body-top: 255 255 255;
+  --mock-body-bottom: 250 248 245;
+  --mock-frame-base: 250 248 245;
+  --mock-frame-1: 250 248 245;
+  --mock-frame-2: 248 246 243;
+  --mock-frame-3: 246 244 240;
+  --mock-frame-4: 244 241 237;
+  --mock-frame-5: 249 247 244;
+  --mock-frame-6: 247 245 241;
+  --mock-frame-7: 245 242 238;
+  --mock-frame-8: 248 246 243;
+  --mock-frame-9: 246 243 239;
+  --mock-frame-10: 244 240 236;
+  --mock-frame-11: 249 247 244;
+  --mock-section-hero: 255 255 255;
+  --mock-section-products: 255 255 255;
+  --mock-section-kominka: 255 255 255;
+  --mock-footer-bg: 250 248 245;
+  --mock-note-bg: 251 249 246;
+  --mock-gallery-bg: 255 255 255;
+  --mock-panel-soft-1: 250 248 245;
+  --mock-panel-soft-2: 237 231 222;
+  --mock-section-text: 54 56 56;
+  --mock-section-muted: 97 98 95;
+  --mock-section-soft: 121 118 112;
+  --mock-section-border: 54 56 56;
+  --mock-section-border-alpha: 0.12;
+  --mock-chip-bg: 246 244 240;
+  --mock-chip-bg-alpha: 1;
+  --mock-chip-border: 54 56 56;
+  --mock-chip-border-alpha: 0.12;
+}
+
+html[data-theme='washi'] {
+  --mock-background: 250 247 241;
+  --mock-paper: 255 252 246;
+  --mock-ink: 57 67 58;
+  --mock-moss: 118 139 117;
+  --mock-olive: 155 173 147;
+  --mock-earth: 183 146 117;
+  --mock-sand: 238 229 214;
+  --mock-border: 223 214 198;
+  --mock-muted: 117 111 101;
+  --mock-gold: 187 156 123;
+  --mock-body-top: 253 250 245;
+  --mock-body-bottom: 245 237 227;
+  --mock-frame-base: 238 229 214;
+  --mock-frame-1: 234 225 210;
+  --mock-frame-2: 240 231 216;
+  --mock-frame-3: 230 221 205;
+  --mock-frame-4: 226 216 200;
+  --mock-frame-5: 235 226 211;
+  --mock-frame-6: 239 229 214;
+  --mock-frame-7: 225 216 199;
+  --mock-frame-8: 236 227 211;
+  --mock-frame-9: 230 220 204;
+  --mock-frame-10: 223 213 196;
+  --mock-frame-11: 238 228 213;
+  --mock-section-hero: 247 243 236;
+  --mock-section-products: 244 239 231;
+  --mock-section-kominka: 242 236 227;
+  --mock-footer-bg: 243 236 226;
+  --mock-note-bg: 248 242 234;
+  --mock-gallery-bg: 247 241 233;
+  --mock-panel-soft-1: 246 239 230;
+  --mock-panel-soft-2: 229 217 199;
+  --mock-section-text: 57 67 58;
+  --mock-section-muted: 97 104 95;
+  --mock-section-soft: 120 119 108;
+  --mock-section-border: 57 67 58;
+  --mock-section-border-alpha: 0.1;
+  --mock-chip-bg: 255 252 246;
+  --mock-chip-bg-alpha: 0.72;
+  --mock-chip-border: 57 67 58;
+  --mock-chip-border-alpha: 0.12;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 28%),
+      linear-gradient(180deg, rgb(var(--mock-body-top)) 0%, rgb(var(--mock-body-bottom)) 100%);
+    color: rgb(var(--mock-ink));
+    font-family: var(--font-noto-sans), 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-serif {
+    font-family: var(--font-cormorant), var(--font-noto-serif), serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .mock-shell {
+    @apply mx-auto max-w-screen-2xl px-6 lg:px-10;
+  }
+
+  .mock-section {
+    @apply py-20 md:py-28;
+  }
+
+  .mock-card {
+    @apply border border-mock-border bg-mock-paper shadow-frame;
+  }
+
+  .mock-button-primary {
+    @apply inline-flex items-center justify-center gap-3 bg-mock-ink px-6 py-3 text-sm uppercase tracking-[0.28em] text-mock-paper transition hover:bg-mock-moss;
+  }
+
+  .mock-button-secondary {
+    @apply inline-flex items-center justify-center gap-3 border border-mock-ink px-6 py-3 text-sm uppercase tracking-[0.28em] text-mock-ink transition hover:bg-mock-ink hover:text-mock-paper;
+  }
+
+  .mock-image-frame {
+    @apply relative overflow-hidden border border-white/15 shadow-frame;
+    background-color: rgb(var(--mock-frame-base));
+  }
+
+  .mock-image-frame img {
+    @apply h-full w-full object-cover;
+  }
+
+  .mock-sticky-stage {
+    @apply relative overflow-hidden;
+  }
+
+  .mock-sticky-copy {
+    @apply space-y-20 py-12 md:space-y-24 md:py-16 lg:space-y-32 lg:py-20;
+  }
+
+  .mock-sticky-visual {
+    @apply lg:sticky lg:top-24;
+  }
+
+  .mock-faded-band {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .mock-preview-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(20, 20, 20, 0.38), rgba(20, 20, 20, 0.04)),
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 35%);
+  }
+
+  .mock-hero-slide.is-active img {
+    animation: mockHeroZoom 5.2s ease-out both;
+  }
+
+  .mock-page-title-band {
+    min-height: 34vh;
+  }
+
+  .mock-section-hero {
+    background-color: rgb(var(--mock-section-hero));
+  }
+
+  .mock-section-products {
+    background-color: rgb(var(--mock-section-products));
+  }
+
+  .mock-section-kominka {
+    background-color: rgb(var(--mock-section-kominka));
+  }
+
+  .mock-footer-bg {
+    background-color: rgb(var(--mock-footer-bg));
+  }
+
+  .mock-note-panel {
+    background-color: rgb(var(--mock-note-bg));
+  }
+
+  .mock-gallery-section {
+    background-color: rgb(var(--mock-gallery-bg));
+  }
+
+  .mock-surface-1 {
+    background-color: rgb(var(--mock-frame-1));
+  }
+
+  .mock-surface-2 {
+    background-color: rgb(var(--mock-frame-2));
+  }
+
+  .mock-surface-3 {
+    background-color: rgb(var(--mock-frame-3));
+  }
+
+  .mock-surface-4 {
+    background-color: rgb(var(--mock-frame-4));
+  }
+
+  .mock-surface-5 {
+    background-color: rgb(var(--mock-frame-5));
+  }
+
+  .mock-surface-6 {
+    background-color: rgb(var(--mock-frame-6));
+  }
+
+  .mock-surface-7 {
+    background-color: rgb(var(--mock-frame-7));
+  }
+
+  .mock-surface-8 {
+    background-color: rgb(var(--mock-frame-8));
+  }
+
+  .mock-surface-9 {
+    background-color: rgb(var(--mock-frame-9));
+  }
+
+  .mock-surface-10 {
+    background-color: rgb(var(--mock-frame-10));
+  }
+
+  .mock-surface-11 {
+    background-color: rgb(var(--mock-frame-11));
+  }
+
+  .mock-section-kicker {
+    color: rgb(var(--mock-section-soft));
+  }
+
+  .mock-section-title {
+    color: rgb(var(--mock-section-text));
+  }
+
+  .mock-section-body {
+    color: rgb(var(--mock-section-muted));
+  }
+
+  .mock-section-line {
+    border-color: rgb(var(--mock-section-border) / var(--mock-section-border-alpha));
+  }
+
+  .mock-section-chip {
+    border-color: rgb(var(--mock-chip-border) / var(--mock-chip-border-alpha));
+    background-color: rgb(var(--mock-chip-bg) / var(--mock-chip-bg-alpha));
+    color: rgb(var(--mock-section-muted));
+  }
+}
+
+@media (min-width: 1024px) {
+  .mock-faded-band {
+    background-attachment: fixed;
+  }
+
+  .mock-page-title-band {
+    min-height: 46vh;
+  }
+}
+
+@keyframes mockHeroZoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}

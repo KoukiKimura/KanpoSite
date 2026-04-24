@@ -1,5 +1,6 @@
 export type Product = {
   id: string;
+  slug: string;
   name: string;
   nameEn: string;
   price: number;
@@ -15,8 +16,7 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    id: 'youki-tea',
-    name: '養気茶',
+    id: 'youki-tea',    slug: 'youki-tea',    name: '養気茶',
     nameEn: 'Youki Tea',
     price: 2800,
     description: '気力と活力を補う、滋養豊かなブレンド茶。朝の一杯に最適です。',
@@ -33,6 +33,7 @@ export const products: Product[] = [
   },
   {
     id: 'anmin-socha',
+    slug: 'anmin-socha',
     name: '安眠草茶',
     nameEn: 'Anmin Socha',
     price: 2600,
@@ -50,6 +51,7 @@ export const products: Product[] = [
   },
   {
     id: 'katsuketsu-tea',
+    slug: 'katsuketsu-tea',
     name: '活血茶',
     nameEn: 'Katsuketsu Tea',
     price: 3000,
@@ -68,6 +70,7 @@ export const products: Product[] = [
   },
   {
     id: 'shouka-tea',
+    slug: 'shouka-tea',
     name: '消化助茶',
     nameEn: 'Shouka Tea',
     price: 2400,
@@ -85,6 +88,7 @@ export const products: Product[] = [
   },
   {
     id: 'bihada-tea',
+    slug: 'bihada-tea',
     name: '美肌草茶',
     nameEn: 'Bihada Tea',
     price: 3200,
@@ -103,6 +107,7 @@ export const products: Product[] = [
   },
   {
     id: 'seasonal-set',
+    slug: 'seasonal-set',
     name: '季節の漢方セット',
     nameEn: 'Seasonal Kampo Set',
     price: 8500,
@@ -126,6 +131,9 @@ export const getFeaturedProducts = (): Product[] =>
 
 export const getProductById = (id: string): Product | undefined =>
   products.find((p) => p.id === id);
+
+export const getProductBySlug = (slug: string): Product | undefined =>
+  products.find((p) => p.slug === slug);
 
 export const getProductsByCategory = (category: string): Product[] =>
   category === 'all' ? products : products.filter((p) => p.category === category);

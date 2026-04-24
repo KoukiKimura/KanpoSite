@@ -3,12 +3,12 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'ゲストハウス',
+  title: '古民家',
   description:
-    '山草の恵みの古民家ゲストハウス。漢方と自然を体感する宿泊体験。近日公開予定。',
+    '山草の恵みの古民家。漢方と自然を体感する体験施設。近日公開予定。',
 };
 
-export default function GuesthousePage() {
+export default function KominkaPage() {
   return (
     <>
       {/* ヒーローセクション */}

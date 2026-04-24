@@ -7,9 +7,10 @@ const productLinks = [
 ];
 
 const brandLinks = [
-  { href: '/brand', label: 'ブランドについて' },
-  { href: '/field', label: '畑のこと' },
-  { href: '/guesthouse', label: 'ゲストハウス' },
+  { href: '/about', label: 'ブランド紹介' },
+  { href: '/concept', label: 'コンセプト' },
+  { href: '/farm', label: '畑紹介' },
+  { href: '/kominka', label: '古民家' },
   { href: '/contact', label: 'お問い合わせ' },
 ];
 

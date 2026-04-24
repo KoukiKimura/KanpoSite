@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>山草のめぐみ icon</title>
+  <rect x="4" y="4" width="56" height="56" rx="18" fill="#3f5441"/>
+  <path
+    d="M18 34L32 20L46 34"
+    fill="none"
+    stroke="#f8f4ec"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="4.5"
+  />
+  <path
+    d="M24 34V44H40V34"
+    fill="none"
+    stroke="#f8f4ec"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="4.5"
+  />
+  <path
+    d="M32 41C32 34.5 35.8 30.2 41 29.8C40.3 35.6 36.8 39.8 32 41Z"
+    fill="#c49a6c"
+  />
+  <path
+    d="M32 41C31.7 35.9 28.9 32.4 24 31.8C24.4 36.6 27.4 39.9 32 41Z"
+    fill="#8ca46e"
+  />
+</svg>
