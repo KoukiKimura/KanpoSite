@@ -179,11 +179,11 @@ html[data-theme='washi'] {
 
 @layer components {
   .mock-shell {
-    @apply mx-auto max-w-screen-2xl px-6 lg:px-10;
+    @apply mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-10;
   }
 
   .mock-section {
-    @apply py-20 md:py-28;
+    @apply py-14 md:py-28;
   }
 
   .mock-card {
@@ -191,11 +191,11 @@ html[data-theme='washi'] {
   }
 
   .mock-button-primary {
-    @apply inline-flex items-center justify-center gap-3 bg-mock-ink px-6 py-3 text-sm uppercase tracking-[0.28em] text-mock-paper transition hover:bg-mock-moss;
+    @apply inline-flex w-full items-center justify-center gap-3 bg-mock-ink px-4 py-3 text-xs uppercase tracking-[0.22em] text-mock-paper transition hover:bg-mock-moss sm:w-auto md:px-6 md:text-sm md:tracking-[0.28em];
   }
 
   .mock-button-secondary {
-    @apply inline-flex items-center justify-center gap-3 border border-mock-ink px-6 py-3 text-sm uppercase tracking-[0.28em] text-mock-ink transition hover:bg-mock-ink hover:text-mock-paper;
+    @apply inline-flex w-full items-center justify-center gap-3 border border-mock-ink px-4 py-3 text-xs uppercase tracking-[0.22em] text-mock-ink transition hover:bg-mock-ink hover:text-mock-paper sm:w-auto md:px-6 md:text-sm md:tracking-[0.28em];
   }
 
   .mock-image-frame {
@@ -204,7 +204,11 @@ html[data-theme='washi'] {
   }
 
   .mock-image-frame img {
-    @apply h-full w-full object-cover;
+    @apply block h-full w-full object-cover;
+  }
+
+  .mock-image-frame picture {
+    @apply block h-full w-full;
   }
 
   .mock-sticky-stage {
@@ -239,7 +243,7 @@ html[data-theme='washi'] {
   }
 
   .mock-page-title-band {
-    min-height: 34vh;
+    min-height: 30vh;
   }
 
   .mock-section-hero {
