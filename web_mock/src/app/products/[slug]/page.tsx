@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import AddToCartControls from '@/components/cart/AddToCartControls';
 import PhotoPanel from '@/components/ui/PhotoPanel';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { getProductBySlug, mockProducts } from '@/lib/mock/site';
@@ -29,7 +30,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   return (
     <>
       <section id={`product-detail-${product.slug}-hero`} className="border-b border-mock-border bg-[rgba(255,255,255,0.32)]">
-        <div id={`product-detail-${product.slug}-hero-inner`} className="mock-shell py-14 md:py-18">
+        <div id={`product-detail-${product.slug}-hero-inner`} className="mock-shell py-10 md:py-18">
           <Link
             id={`product-detail-${product.slug}-back-link`}
             href="/products"
@@ -39,7 +40,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </Link>
           <div
             id={`product-detail-${product.slug}-layout`}
-            className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
+            className="mt-6 grid gap-8 md:mt-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-10"
           >
             <div id={`product-detail-${product.slug}-gallery`} className="grid gap-5 md:grid-cols-[1.35fr_0.65fr]">
               <PhotoPanel
@@ -76,11 +77,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 <p id={`product-detail-${product.slug}-category`} className="text-xs uppercase tracking-[0.32em] text-mock-gold">
                   {product.category}
                 </p>
-                <h1 id={`product-detail-${product.slug}-title`} className="font-serif text-4xl leading-tight text-mock-ink md:text-5xl">
+                <h1 id={`product-detail-${product.slug}-title`} className="font-serif text-3xl leading-tight text-mock-ink md:text-5xl">
                   {product.name}
                 </h1>
               </div>
-              <p id={`product-detail-${product.slug}-price`} className="text-2xl tracking-[0.2em] text-mock-earth">
+              <p id={`product-detail-${product.slug}-price`} className="text-xl tracking-[0.16em] text-mock-earth md:text-2xl md:tracking-[0.2em]">
                 {product.priceLabel}
               </p>
               <p id={`product-detail-${product.slug}-summary-body`} className="text-base leading-8 text-mock-muted">
@@ -89,20 +90,24 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <p id={`product-detail-${product.slug}-story`} className="text-sm leading-8 text-mock-muted">
                 {product.story}
               </p>
-              <div id={`product-detail-${product.slug}-actions`} className="flex flex-wrap gap-3">
-                <button id={`product-detail-${product.slug}-add-to-cart`} type="button" className="mock-button-primary">
-                  カートに入れる
-                </button>
-                <button id={`product-detail-${product.slug}-shipping-link`} type="button" className="mock-button-secondary">
-                  配送について見る
-                </button>
-                <Link
-                  id={`product-detail-${product.slug}-ingredients-link`}
-                  href={`/products/${product.slug}/ingredients/#product-ingredients-${product.slug}-list`}
-                  className="mock-button-secondary"
-                >
-                  成分表示を見る
-                </Link>
+              <div id={`product-detail-${product.slug}-actions`} className="space-y-4">
+                <AddToCartControls
+                  product={product}
+                  idBase={`product-detail-${product.slug}-cart`}
+                  variant="detail"
+                />
+                <div id={`product-detail-${product.slug}-sub-actions`} className="flex flex-wrap gap-3">
+                  <button id={`product-detail-${product.slug}-shipping-link`} type="button" className="mock-button-secondary">
+                    配送について見る
+                  </button>
+                  <Link
+                    id={`product-detail-${product.slug}-ingredients-link`}
+                    href={`/products/${product.slug}/ingredients/#product-ingredients-${product.slug}-list`}
+                    className="mock-button-secondary"
+                  >
+                    成分表示を見る
+                  </Link>
+                </div>
               </div>
               <ul
                 id={`product-detail-${product.slug}-notes`}

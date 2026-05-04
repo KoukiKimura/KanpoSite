@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "kominka-hero-stay.webp",
+        "image_alt": "古民家滞在ページのメイン画像",
+        "eyebrow": "Kominka",
+        "title": "古民家",
+        "text": "築年数を重ねた古民家で、畑の景色と湯気のある朝を味わう滞在を想定しています。",
+        "overlay_opacity": 34,
+        "mobile_height": 48,
+        "desktop_height": 54
+      }
+    },
+    "overview": {
+      "type": "page-kominka-overview",
+      "blocks": {
+        "schedule_1": {
+          "type": "schedule",
+          "settings": { "text": "15:00 チェックイン" }
+        },
+        "schedule_2": {
+          "type": "schedule",
+          "settings": { "text": "17:30 畑と里山の散歩" }
+        },
+        "schedule_3": {
+          "type": "schedule",
+          "settings": { "text": "19:00 季節の夕食またはお茶の時間" }
+        },
+        "schedule_4": {
+          "type": "schedule",
+          "settings": { "text": "翌朝 古民家の縁側で朝の一服" }
+        }
+      },
+      "block_order": ["schedule_1", "schedule_2", "schedule_3", "schedule_4"],
+      "settings": {}
+    },
+    "gallery": {
+      "type": "kominka-gallery",
+      "blocks": {
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "kominka-hero-stay.webp",
+            "alt": "古民家の外観と庭先の景色"
+          }
+        },
+        "image_2": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "home-kominka-guest-room.webp",
+            "alt": "古民家の客室"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "kominka-living-room.webp",
+            "alt": "古民家の居間"
+          }
+        },
+        "image_4": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "home-field-walk.webp",
+            "alt": "古民家から畑へ向かう散歩道"
+          }
+        },
+        "image_5": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "home-morning-tea.webp",
+            "alt": "古民家での朝のお茶時間"
+          }
+        },
+        "image_6": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "kominka-morning-field.webp",
+            "alt": "朝の畑と里山の景色"
+          }
+        }
+      },
+      "block_order": ["image_1", "image_2", "image_3", "image_4", "image_5", "image_6"],
+      "settings": {}
+    },
+    "access": {
+      "type": "kominka-access",
+      "blocks": {
+        "note_1": {
+          "type": "note",
+          "settings": { "text": "チェックイン時間は事前にご相談ください。" }
+        },
+        "note_2": {
+          "type": "note",
+          "settings": { "text": "古い建物のため、段差や冬季の冷え込みがあります。" }
+        }
+      },
+      "block_order": ["note_1", "note_2"],
+      "settings": {}
+    },
+    "reservation": {
+      "type": "reservation-cta",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq-list",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "予約はどこからできますか。",
+            "answer": "初期実装では外部予約サービスへ遷移します。予約URLはShopifyのページmetafieldまたはテーマエディタで管理します。"
+          }
+        }
+      },
+      "block_order": ["faq_1"],
+      "settings": {
+        "title": "古民家のよくある質問"
+      }
+    }
+  },
+  "order": ["hero", "overview", "gallery", "access", "reservation", "faq"]
+}

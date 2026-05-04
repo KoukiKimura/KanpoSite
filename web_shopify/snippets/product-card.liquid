@@ -1,0 +1,134 @@
+{% liquid
+  assign card_product = product
+  assign selected_variant = card_product.selected_or_first_available_variant
+  assign card_variant = variant | default: 'card'
+  assign card_class = 'product-card product-card--' | append: card_variant
+  assign show_quick_add_setting = show_quick_add
+  assign stock_label = 'products.in_stock' | t
+  assign product_label = card_product.type
+  assign quantity_cap = 9
+  assign is_new_product = false
+  assign new_window_seconds = 5184000
+
+  if show_quick_add_setting == nil
+    assign show_quick_add_setting = true
+  endif
+
+  if card_variant == 'simple'
+    assign show_quick_add_setting = false
+  elsif card_variant == 'list'
+    assign show_quick_add_setting = false
+  endif
+
+  if product_label == blank and card_product.collections.first != blank
+    assign product_label = card_product.collections.first.title
+  endif
+
+  if selected_variant.inventory_management and selected_variant.inventory_policy == 'deny' and selected_variant.inventory_quantity > 0 and selected_variant.inventory_quantity < quantity_cap
+    assign quantity_cap = selected_variant.inventory_quantity
+  endif
+
+  unless card_product.available
+    assign stock_label = 'products.sold_out' | t
+  endunless
+
+  if card_product.tags contains 'new'
+    assign is_new_product = true
+  elsif card_product.published_at != blank
+    assign now_timestamp = 'now' | date: '%s' | plus: 0
+    assign product_timestamp = card_product.published_at | date: '%s' | plus: 0
+    assign published_age = now_timestamp | minus: product_timestamp
+
+    if published_age >= 0 and published_age <= new_window_seconds
+      assign is_new_product = true
+    endif
+  endif
+%}
+
+<article class="{{ card_class }}">
+  <a class="product-card__media image-frame" href="{{ card_product.url }}" aria-label="{{ card_product.title | escape }}">
+    {% if card_product.featured_image != blank %}
+      {% if card_variant == 'simple' %}
+        {% render 'responsive-image',
+          image: card_product.featured_image,
+          alt: card_product.featured_image.alt | default: card_product.title,
+          sizes: '(max-width: 639px) 88px, 112px',
+          width: 360
+        %}
+      {% elsif card_variant == 'list' %}
+        {% render 'responsive-image',
+          image: card_product.featured_image,
+          alt: card_product.featured_image.alt | default: card_product.title,
+          sizes: '(max-width: 639px) 96px, 150px',
+          width: 420
+        %}
+      {% else %}
+        {% render 'responsive-image',
+          image: card_product.featured_image,
+          alt: card_product.featured_image.alt | default: card_product.title,
+          sizes: '(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 33vw',
+          width: 900
+        %}
+      {% endif %}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+    {% if is_new_product %}
+      <span class="product-card__badge">NEW</span>
+    {% endif %}
+  </a>
+
+  <div class="product-card__content">
+    {% if card_variant == 'simple' %}
+      <h3 class="product-card__title">
+        <a href="{{ card_product.url }}">{{ card_product.title }}</a>
+      </h3>
+    {% else %}
+      <div class="product-card__meta">
+        <div>
+          {% if card_variant == 'card' and product_label != blank %}
+            <p class="eyebrow">{{ product_label }}</p>
+          {% endif %}
+          <h3 class="product-card__title">
+            <a href="{{ card_product.url }}">{{ card_product.title }}</a>
+          </h3>
+        </div>
+        <p class="price">{{ card_product.price | money }}</p>
+      </div>
+
+      {% if show_quick_add_setting %}
+        <div class="product-card__purchase">
+          <p class="stock-label{% unless card_product.available %} stock-label--sold-out{% endunless %}">
+            {{ stock_label }}
+          </p>
+
+          {% if card_product.available %}
+            <form class="quick-add" method="post" action="{{ routes.cart_add_url }}" data-product-form>
+              <input type="hidden" name="id" value="{{ selected_variant.id }}">
+              <div class="quick-add__row">
+                <label class="field">
+                  {{ 'products.quantity' | t }}
+                  <select name="quantity" aria-label="{{ 'products.quantity' | t }}">
+                    {% for quantity in (1..quantity_cap) %}
+                      <option value="{{ quantity }}">{{ quantity }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
+                <button class="button" type="submit">{{ 'products.add_to_cart' | t }}</button>
+              </div>
+            </form>
+          {% else %}
+            <button class="button" type="button" disabled>{{ 'products.sold_out' | t }}</button>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% unless card_variant == 'list' %}
+        <a class="link-underline" href="{{ card_product.url }}">
+          {{ 'general.read_more' | t }}
+          <span aria-hidden="true">→</span>
+        </a>
+      {% endunless %}
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,91 @@
+{% liquid
+  assign related_products = blank
+  if product != blank and product.metafields.custom.related_products != blank
+    assign related_products = product.metafields.custom.related_products.value
+  endif
+%}
+
+<section class="section">
+  <div class="shell">
+    <div style="max-width: 760px; margin-bottom: 32px;">
+      <p class="eyebrow">Related</p>
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="product-grid">
+      {% if related_products != blank %}
+        {% for related in related_products limit: section.settings.product_limit %}
+          {% render 'product-card', product: related, show_quick_add: section.settings.show_quick_add %}
+        {% endfor %}
+      {% elsif collection != blank %}
+        {% assign rendered_related_count = 0 %}
+        {% for related in collection.products limit: section.settings.product_limit %}
+          {% unless related.id == product.id %}
+            {% assign rendered_related_count = rendered_related_count | plus: 1 %}
+            {% render 'product-card', product: related, show_quick_add: section.settings.show_quick_add %}
+          {% endunless %}
+        {% endfor %}
+        {% if rendered_related_count == 0 %}
+          {% render 'fallback-product-card',
+            fallback_asset: 'product-botanical-tablets-main.webp',
+            type: '錠剤',
+            title: '草木の養生錠',
+            price: '¥3,800',
+            text: '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。'
+          %}
+          {% render 'fallback-product-card',
+            fallback_asset: 'product-night-soil-tea-main.webp',
+            type: 'お茶',
+            title: '夜のくつろぎ茶',
+            price: '¥2,900',
+            text: '灯りを落としたあとに似合う、静かな香りの夜のお茶です。'
+          %}
+        {% endif %}
+      {% else %}
+        {% render 'fallback-product-card',
+          fallback_asset: 'product-botanical-tablets-main.webp',
+          type: '錠剤',
+          title: '草木の養生錠',
+          price: '¥3,800',
+          text: '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。'
+        %}
+        {% render 'fallback-product-card',
+          fallback_asset: 'product-night-soil-tea-main.webp',
+          type: 'お茶',
+          title: '夜のくつろぎ茶',
+          price: '¥2,900',
+          text: '灯りを落としたあとに似合う、静かな香りの夜のお茶です。'
+        %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "関連商品",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "関連商品"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "表示件数",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "カート追加を表示",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

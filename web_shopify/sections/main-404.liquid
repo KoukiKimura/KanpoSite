@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="shell empty-state">
+    <p class="eyebrow">404</p>
+    <h1 class="heading-serif section-heading">ページが見つかりません</h1>
+    <p class="section-body">URLが変更されたか、ページが存在しない可能性があります。</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+      <a class="button" href="{{ routes.root_url }}">トップへ</a>
+      <a class="button button-secondary" href="{{ routes.all_products_collection_url }}">商品を見る</a>
+      <a class="button button-secondary" href="{{ routes.search_url }}">検索する</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

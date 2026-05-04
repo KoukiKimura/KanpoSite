@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { Product } from '@/lib/dummy-data';
+import { Product, productCollections } from '@/lib/data';
+import PhotoPanel from '@/components/ui/PhotoPanel';
+import AddToCartControls from '@/components/cart/AddToCartControls';
 
 type ProductCardProps = {
   product: Product;
@@ -7,56 +9,53 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product, showDescription = true }: ProductCardProps) {
+  const collection = productCollections.find(
+    (c) => c.handle === product.collectionHandles[0]
+  );
   return (
-    <article className="card-product group flex flex-col">
-      {/* 商品画像プレースホルダー */}
-      <div className="aspect-square image-placeholder w-full overflow-hidden">
-        <div className="w-full h-full bg-brand-cream flex flex-col items-center justify-center gap-2 group-hover:bg-brand-border transition-colors duration-300">
-          <span className="text-4xl opacity-30">🌿</span>
-          <span className="text-xs text-brand-muted tracking-widest">{product.nameEn}</span>
-        </div>
-      </div>
+    <article className="overflow-hidden border border-brand-border bg-white flex flex-col">
+      <Link href={`/products/${product.handle}`} aria-label={`${product.name}の商品詳細を見る`}>
+        <PhotoPanel
+          label={product.name}
+          caption={collection?.title}
+          from={product.palette.from}
+          to={product.palette.to}
+          src={product.imageUrl}
+          alt={product.name}
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+        />
+      </Link>
 
-      {/* 商品情報 */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="mb-2">
-          <span className="text-xs tracking-widest text-accent bg-accent/10 px-2 py-0.5">
-            {product.category}
-          </span>
+      <div className="p-4 md:p-5 space-y-3 flex flex-col flex-1">
+        <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-start">
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-accent">{collection?.title}</p>
+            <h3 className="mt-1 font-serif text-xl text-brand-text">
+              <Link href={`/products/${product.handle}`} className="hover:text-primary transition-colors">
+                {product.name}
+              </Link>
+            </h3>
+          </div>
+          <p className="text-sm tracking-[0.16em] text-brand-muted sm:pt-1">
+            ¥{product.price.toLocaleString()}
+          </p>
         </div>
-
-        <h3
-          className="text-lg font-serif tracking-wide text-brand-text mt-2 mb-1"
-          style={{ fontFamily: "'Noto Serif JP', serif" }}
-        >
-          {product.name}
-        </h3>
-        <p
-          className="text-xs italic tracking-widest text-brand-muted mb-3"
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-        >
-          {product.nameEn}
-        </p>
 
         {showDescription && (
-          <p className="text-sm text-brand-muted leading-relaxed mb-4 flex-1">
-            {product.description}
-          </p>
+          <p className="text-sm text-brand-muted leading-7 flex-1">{product.summary}</p>
         )}
 
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-brand-border">
-          <p className="text-lg font-medium tracking-wide">
-            ¥{product.price.toLocaleString()}
-            <span className="text-xs text-brand-muted ml-1">（税込）</span>
-          </p>
-          <Link
-            href={`/products/${product.slug}`}
-            className="text-xs tracking-widest text-primary border border-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors duration-200"
-          >
-            詳細を見る
-          </Link>
-        </div>
+        <AddToCartControls product={product} />
+
+        <Link
+          href={`/products/${product.handle}`}
+          className="inline-flex items-center gap-2 border-b border-brand-text pb-0.5 text-xs uppercase tracking-[0.22em] text-brand-text"
+        >
+          詳細を見る
+          <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </article>
   );
 }
+

@@ -1,0 +1,76 @@
+<section class="section">
+  {% render 'breadcrumbs' %}
+
+  <div class="shell" style="margin-top: 28px;">
+    <p class="eyebrow">BLOG</p>
+    <h1 class="heading-serif section-heading">BLOG</h1>
+
+    {% if blog.all_tags.size > 0 %}
+      <div class="blog-tags" style="margin-block: 24px;">
+        {% for tag in blog.all_tags %}
+          <a class="blog-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% paginate blog.articles by section.settings.articles_per_page %}
+      {% if blog.articles.size > 0 %}
+        <div class="blog-list">
+          {% for article in blog.articles %}
+            <article class="blog-list-item">
+              <div class="blog-list-item__body">
+                <p class="blog-list-item__date">{{ article.published_at | date: '%Y.%m.%d' }}</p>
+                <h2 class="heading-serif blog-list-item__title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+                {% if article.excerpt_or_content != blank %}
+                  <p class="blog-list-item__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                {% endif %}
+                {% if article.tags.size > 0 %}
+                  <div class="blog-tags">
+                    {% for tag in article.tags %}
+                      <a class="blog-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+              {% if article.image != blank %}
+                <a class="blog-list-item__thumb image-frame" href="{{ article.url }}" aria-label="{{ article.title }}">
+                  {% render 'responsive-image',
+                    image: article.image,
+                    alt: article.title,
+                    sizes: '(max-width: 639px) 96px, 140px',
+                    width: 320
+                  %}
+                </a>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <p class="section-body">BLOG記事はまだ登録されていません。</p>
+        </div>
+      {% endif %}
+
+      {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BLOG一覧",
+  "settings": [
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "1ページの記事数",
+      "min": 6,
+      "max": 18,
+      "step": 3,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

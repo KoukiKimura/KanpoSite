@@ -1,0 +1,35 @@
+{% liquid
+  assign image_object = image
+  assign image_alt = alt | default: image_object.alt | default: shop.name
+  assign image_class = class | default: ''
+  assign image_sizes = sizes | default: '100vw'
+  assign image_loading = loading | default: 'lazy'
+  assign image_widths = widths | default: '360, 540, 720, 960, 1200, 1600, 2000'
+  assign max_width = width | default: 1600
+  assign image_width_attr = width | default: 1600
+  assign image_height_attr = height | default: image_width_attr
+%}
+
+{% if image_object != blank %}
+  {{
+    image_object
+    | image_url: width: max_width
+    | image_tag:
+      alt: image_alt,
+      class: image_class,
+      widths: image_widths,
+      sizes: image_sizes,
+      loading: image_loading
+  }}
+{% elsif fallback_asset != blank %}
+  <img
+    src="{{ fallback_asset | asset_url }}"
+    alt="{{ image_alt | escape }}"
+    class="{{ image_class }}"
+    loading="{{ image_loading }}"
+    width="{{ image_width_attr }}"
+    height="{{ image_height_attr }}"
+  >
+{% else %}
+  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}

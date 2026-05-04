@@ -23,7 +23,7 @@ function getMockBasePath() {
   }
 }
 
-function withMockBasePath(path: string) {
+export function withMockBasePath(path: string) {
   if (!path.startsWith('/')) {
     return path;
   }
@@ -37,6 +37,8 @@ export type MockProduct = {
   category: string;
   name: string;
   priceLabel: string;
+  price: number;
+  stock: number;
   summary: string;
   story: string;
   notes: string[];
@@ -66,28 +68,35 @@ export const mockSite = {
   },
 };
 
+export const mockCartIcon = {
+  src: withMockBasePath('/images/ui/cart-icon.png'),
+  alt: 'カート',
+};
+
 export const mockProducts: MockProduct[] = [
   {
     slug: 'mountain-herb-blend',
     category: 'お茶',
     name: '山のハーブブレンド',
     priceLabel: '¥3,200',
+    price: 3200,
+    stock: 18,
     summary:
       '野に立つ草花の香りを静かにまとめた、朝の湯気に似合う定番のお茶です。',
     story:
       '春から秋にかけて畑で育てた葉と花を手で選り分け、香りの立ち上がりが穏やかになるよう少量ずつ仕上げています。土の匂いが残る古民家の台所で、最初の一杯として飲んでいただきたいお茶です。',
     notes: ['内容量 30g', '朝の時間に合う軽やかな風味', '陶器の急須でゆっくり抽出'],
     mainImage: {
-      src: withMockBasePath('/images/products/mountain-herb-blend/main.png'),
+      src: withMockBasePath('/images/products/mountain-herb-blend/main.webp'),
       alt: '山のハーブブレンドのメイン画像',
     },
     detailImages: [
       {
-        src: withMockBasePath('/images/products/mountain-herb-blend/detail-01.png'),
+        src: withMockBasePath('/images/products/mountain-herb-blend/detail-01.webp'),
         alt: '山のハーブブレンドの茶葉イメージ',
       },
       {
-        src: withMockBasePath('/images/products/mountain-herb-blend/detail-02.png'),
+        src: withMockBasePath('/images/products/mountain-herb-blend/detail-02.webp'),
         alt: '山のハーブブレンドの抽出シーン',
       },
     ],
@@ -113,22 +122,24 @@ export const mockProducts: MockProduct[] = [
     category: '粉薬',
     name: '和漢の養生粉',
     priceLabel: '¥4,200',
+    price: 4200,
+    stock: 7,
     summary:
       '毎日の湯や粥に少量ずつ加えられる、やわらかな香りの和漢粉末です。',
     story:
       '乾かした根と葉を細かく挽き、食事の延長で取り入れられるよう口当たりを整えています。古民家では朝粥や白湯に溶かし、季節の変わり目の養生として使う想定です。',
     notes: ['内容量 45g', '白湯や粥に溶かして使う想定', '香りを強くしすぎない配合'],
     mainImage: {
-      src: withMockBasePath('/images/products/herbal-powder/main.png'),
+      src: withMockBasePath('/images/products/herbal-powder/main.webp'),
       alt: '和漢の養生粉のメイン画像',
     },
     detailImages: [
       {
-        src: withMockBasePath('/images/products/herbal-powder/detail-01.png'),
+        src: withMockBasePath('/images/products/herbal-powder/detail-01.webp'),
         alt: '和漢の養生粉の粉末イメージ',
       },
       {
-        src: withMockBasePath('/images/products/herbal-powder/detail-02.png'),
+        src: withMockBasePath('/images/products/herbal-powder/detail-02.webp'),
         alt: '和漢の養生粉の使用シーン',
       },
     ],
@@ -154,22 +165,24 @@ export const mockProducts: MockProduct[] = [
     category: '養生セット',
     name: '季節の養生セット',
     priceLabel: '¥8,600',
+    price: 8600,
+    stock: 104,
     summary:
       'お茶、粉末、手当ての小物を一箱にまとめた、四季の贈りものです。',
     story:
       '季節の変わり目に合わせて、畑で採れる素材の組み合わせを少しずつ変えています。贈りものとしても、自分の暮らしを整える箱としても、静かな存在感が出るようにまとめています。',
     notes: ['季節ごとに内容が一部変わる想定', '贈答用の包みも用意', '箱を開けた瞬間の見え方を重視'],
     mainImage: {
-      src: withMockBasePath('/images/products/seasonal-care-set/main.png'),
+      src: withMockBasePath('/images/products/seasonal-care-set/main.webp'),
       alt: '季節の養生セットのメイン画像',
     },
     detailImages: [
       {
-        src: withMockBasePath('/images/products/seasonal-care-set/detail-01.png'),
+        src: withMockBasePath('/images/products/seasonal-care-set/detail-01.webp'),
         alt: '季節の養生セットの同梱イメージ',
       },
       {
-        src: withMockBasePath('/images/products/seasonal-care-set/detail-02.png'),
+        src: withMockBasePath('/images/products/seasonal-care-set/detail-02.webp'),
         alt: '季節の養生セットの使用シーン',
       },
     ],
@@ -195,22 +208,24 @@ export const mockProducts: MockProduct[] = [
     category: '錠剤',
     name: '草木の養生錠',
     priceLabel: '¥3,800',
+    price: 3800,
+    stock: 4,
     summary:
       '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。',
     story:
       '畑で育てた葉や根を乾かし、持ち運びやすい形にまとめています。旅先や仕事の合間でも、湯を沸かせない日につづけやすいよう、穏やかな輪郭で仕上げた商品を想定しています。',
     notes: ['内容量 90粒', '携帯しやすい小瓶入り', '毎日少しずつ続ける設計'],
     mainImage: {
-      src: withMockBasePath('/images/products/botanical-tablets/main.png'),
+      src: withMockBasePath('/images/products/botanical-tablets/main.webp'),
       alt: '草木の養生錠のメイン画像',
     },
     detailImages: [
       {
-        src: withMockBasePath('/images/products/botanical-tablets/detail-01.png'),
+        src: withMockBasePath('/images/products/botanical-tablets/detail-01.webp'),
         alt: '草木の養生錠の粒イメージ',
       },
       {
-        src: withMockBasePath('/images/products/botanical-tablets/detail-02.png'),
+        src: withMockBasePath('/images/products/botanical-tablets/detail-02.webp'),
         alt: '草木の養生錠の携帯シーン',
       },
     ],
@@ -236,22 +251,24 @@ export const mockProducts: MockProduct[] = [
     category: 'お茶',
     name: '夜のくつろぎ茶',
     priceLabel: '¥2,900',
+    price: 2900,
+    stock: 0,
     summary:
       '灯りを落としたあとに似合う、静かな香りの夜のお茶です。',
     story:
       '強い香りではなく、湯気の奥に草と木の気配が残るようにまとめています。本を開く前や、湯上がりの部屋で過ごす時間に、呼吸をゆるめる一杯として用意したいお茶です。',
     notes: ['内容量 25g', '夜の読書や湯上がり向け', 'やわらかな香りで後味は軽め'],
     mainImage: {
-      src: withMockBasePath('/images/products/night-soil-tea/main.png'),
+      src: withMockBasePath('/images/products/night-soil-tea/main.webp'),
       alt: '夜のくつろぎ茶のメイン画像',
     },
     detailImages: [
       {
-        src: withMockBasePath('/images/products/night-soil-tea/detail-01.png'),
+        src: withMockBasePath('/images/products/night-soil-tea/detail-01.webp'),
         alt: '夜のくつろぎ茶の茶葉イメージ',
       },
       {
-        src: withMockBasePath('/images/products/night-soil-tea/detail-02.png'),
+        src: withMockBasePath('/images/products/night-soil-tea/detail-02.webp'),
         alt: '夜のくつろぎ茶の飲用シーン',
       },
     ],
@@ -271,19 +288,19 @@ export const mockProducts: MockProduct[] = [
 
 export const mockHomeImages = {
   hero: {
-    src: withMockBasePath('/images/home/hero-satoyama.png'),
+    src: withMockBasePath('/images/home/hero-satoyama.webp'),
     alt: '里山の風景と古民家を見せるトップ画像',
   },
   guestRoom: {
-    src: withMockBasePath('/images/home/kominka-guest-room.png'),
+    src: withMockBasePath('/images/home/kominka-guest-room.webp'),
     alt: '古民家の客室イメージ',
   },
   fieldWalk: {
-    src: withMockBasePath('/images/home/field-walk.png'),
+    src: withMockBasePath('/images/home/field-walk.webp'),
     alt: '畑を歩くシーンのイメージ',
   },
   morningTea: {
-    src: withMockBasePath('/images/home/morning-tea.png'),
+    src: withMockBasePath('/images/home/morning-tea.webp'),
     alt: '朝のお茶時間のイメージ',
   },
 };
@@ -294,45 +311,45 @@ export const mockKominka = {
     '築年数を重ねた古民家で、畑の景色と湯気のある朝を味わう滞在を想定しています。',
   images: {
     hero: {
-      src: withMockBasePath('/images/kominka/hero-stay.png'),
+      src: withMockBasePath('/images/kominka/hero-stay.webp'),
       alt: '古民家滞在ページのメイン画像',
     },
     livingRoom: {
-      src: withMockBasePath('/images/kominka/living-room.png'),
+      src: withMockBasePath('/images/kominka/living-room.webp'),
       alt: '古民家の居間イメージ',
     },
     morningField: {
-      src: withMockBasePath('/images/kominka/morning-field.png'),
+      src: withMockBasePath('/images/kominka/morning-field.webp'),
       alt: '古民家近くの朝の景色イメージ',
     },
   },
   gallery: [
     {
-      src: withMockBasePath('/images/kominka/hero-stay.png'),
+      src: withMockBasePath('/images/kominka/hero-stay.webp'),
       alt: '古民家の外観と庭先の景色',
     },
     {
-      src: withMockBasePath('/images/home/kominka-guest-room.png'),
+      src: withMockBasePath('/images/home/kominka-guest-room.webp'),
       alt: '古民家の客室',
     },
     {
-      src: withMockBasePath('/images/kominka/living-room.png'),
+      src: withMockBasePath('/images/kominka/living-room.webp'),
       alt: '古民家の居間',
     },
     {
-      src: withMockBasePath('/images/home/field-walk.png'),
+      src: withMockBasePath('/images/home/field-walk.webp'),
       alt: '古民家から畑へ向かう散歩道',
     },
     {
-      src: withMockBasePath('/images/home/morning-tea.png'),
+      src: withMockBasePath('/images/home/morning-tea.webp'),
       alt: '古民家での朝のお茶時間',
     },
     {
-      src: withMockBasePath('/images/kominka/morning-field.png'),
+      src: withMockBasePath('/images/kominka/morning-field.webp'),
       alt: '朝の畑と里山の景色',
     },
     {
-      src: withMockBasePath('/images/home/hero-satoyama.png'),
+      src: withMockBasePath('/images/home/hero-satoyama.webp'),
       alt: '里山に佇む古民家の印象',
     },
   ],

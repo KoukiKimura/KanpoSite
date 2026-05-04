@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code | default: 'ja' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_moss | default: '#41543b' }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <title>
+      {{ page_title }}
+      {%- unless page_title contains shop.name -%}
+        | {{ shop.name }}
+      {%- endunless -%}
+    </title>
+
+    {% render 'seo-meta' %}
+
+    {{ content_for_header }}
+
+    <style>
+      :root {
+        --color-background: {{ settings.color_background | default: '#f4efe6' }};
+        --color-paper: {{ settings.color_paper | default: '#fbf8f1' }};
+        --color-ink: {{ settings.color_ink | default: '#1d241c' }};
+        --color-moss: {{ settings.color_moss | default: '#41543b' }};
+        --color-olive: {{ settings.color_olive | default: '#6d7b52' }};
+        --color-earth: {{ settings.color_earth | default: '#8f6949' }};
+        --color-sand: {{ settings.color_sand | default: '#d9c6ad' }};
+        --color-border: {{ settings.color_border | default: '#d8cfbf' }};
+        --color-muted: {{ settings.color_muted | default: '#6f6a5d' }};
+        --color-gold: {{ settings.color_gold | default: '#ad8b57' }};
+      }
+    </style>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body class="template-{{ template.name | handle }}">
+    <a class="skip-link" href="#MainContent">本文へ移動</a>
+
+    {% section 'header' %}
+
+    <main id="MainContent" class="site-main" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    {% render 'structured-data' %}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </body>
+</html>

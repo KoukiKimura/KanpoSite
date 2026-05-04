@@ -1,341 +1,366 @@
-# KanpoSite — プロジェクト構成ガイド
+# KanpoSite - プロジェクト構成ガイド
 
 ## プロジェクト概要
 
-**漢方ブランド 公式サイト（KanpoSite）** — 日本の伝統的な漢方・薬草文化を現代に伝えるブランドの公式サイト。  
-商品販売だけでなく、ブランド背景、畑・栽培環境、古民家体験、読み物コンテンツを一体で発信する情報発信基盤として構築する。
+**KanpoSite** は、漢方オリジナルブランド「山草の恵み」の公式サイトリポジトリです。
+ブランドの世界観、商品導線、畑・古民家の紹介、将来的な読み物・宿泊導線を扱うブランドサイトとして構築します。
 
-- **ホスティング**: ConoHa WING
-- **フロントエンド**: Next.js (15.x) / React (18.x) / TypeScript / Tailwind CSS
-- **出力方式**: Static Export（`output: 'export'`）
-- **CMS**: microCMS（記事、FAQ、古民家、畑、特集情報の管理）
-- **EC**: Shopify（商品、価格、在庫、決済、注文管理）
-- **主目的**: ブランド認知、商品販売、畑紹介、古民家・地域体験の訴求
+| 項目 | 現状 |
+|---|---|
+| ブランド名 | 山草の恵み |
+| サイト種別 | Shopify Online Store |
+| 公開想定 | Shopify |
+| 本実装 | `web_shopify/` |
+| レビュー用モック | `web_mock/` |
+| フロントエンド | Shopify Online Store 2.0 テーマ（Liquid / JSON templates / sections / CSS / JavaScript） |
+| データ管理 | Shopify Products / Collections / Blogs / Pages / Policies を正本にする |
+| API | Shopify Admin API seed補助。独自問い合わせAPIは初期対象外 |
+
+---
+
+## 現在のフォルダ構成
+
+```txt
+KanpoSite/
+├── .github/
+│   └── copilot-instructions.md
+├── api/
+│   └── .gitkeep
+├── docs/
+│   ├── README.md
+│   ├── ロードマップ/
+│   │   ├── 開発ロードマップ_Shopify案.md
+│   │   └── web_mock実装ロードマップ.md
+│   ├── archive/
+│   │   └── オリジナル案/
+│   ├── 要件定義/
+│   │   └── サイト要件定義書_Shopify案.md
+│   ├── サイト設計/
+│   │   ├── サイト基本設計書_Shopify案.md
+│   │   └── サイト詳細設計書_Shopify案.md
+│   ├── レビュー/
+│   └── 運用記録/
+├── env/
+│   ├── .env.deploy
+│   ├── .env.mock.deploy
+│   └── web_mock/
+│       ├── .env.review
+│       └── README.md
+├── sample/
+│   └── .gitkeep
+├── web/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   └── lib/
+│   ├── next.config.mjs
+│   ├── package.json
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
+├── web_mock/
+│   ├── public/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   └── lib/
+│   ├── next.config.mjs
+│   ├── package.json
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
+├── work/
+│   ├── web_mock/
+│   └── 調査メモ・TODO類
+├── AGENT.md
+└── README.md
+```
+
+生成物・依存関係として `web/.next/`、`web/out/`、`web/node_modules/`、`web_mock/.next/`、`web_mock/out/`、`web_mock/node_modules/` が存在する場合があります。編集時の正本は `src/`、設定ファイル、ドキュメントです。
+
+---
+
+## フォルダの役割
+
+| フォルダ | 役割 |
+|---|---|
+| `.github/` | GitHub Copilot 等の開発支援向け設定。現状 `copilot-instructions.md` は空 |
+| `api/` | 将来API予約領域。現状は `.gitkeep` のみ |
+| `docs/` | 要件定義、設計書、レビュー、運用記録、ロードマップ |
+| `env/` | デプロイ・レビュー用の環境設定ファイル置き場。秘密情報はGit管理しない |
+| `sample/` | 参考実装・試作用の予約領域 |
+| `web_shopify/` | 正規Shopifyテーマ実装。Liquid / JSON templates / sections / assets を管理 |
+| `web/` | 旧Next.js実装・検証用。公開正規ではない |
+| `web_mock/` | 依頼者レビュー用の静的モック。画像素材とダミーデータを含む |
+| `work/` | 調査メモ、作業ログ、SEO TODO、画像配置資料など |
+
+`contact-api/` は現在の実フォルダには存在しません。問い合わせAPIを実装する場合は、`api/` 配下で扱うか、新規フォルダを作るかを設計書とREADMEで確定してから追加します。
 
 ---
 
 ## ブランチ運用
 
-現時点の Git ブランチは `main` のみ。今後ブランチ運用を整備する場合は、README の方針に合わせて以下を基本とする。
+現時点の基本ブランチは `main` です。README では将来の運用として以下の構成を想定しています。
 
+```txt
+main
+└── develop
+    └── feature/<topic>
 ```
-main ── 公開基準ブランチ
- └── develop ── 開発統合ブランチ
-      └── feature/<topic> ── 機能開発ブランチ
-```
 
-| ブランチ | 用途 | 備考 |
-|----------|------|------|
-| `main` | 公開基準・納品基準 | 常に安定状態を保つ |
-| `develop` | 開発統合 | 機能を統合して確認する |
-| `feature/<topic>` | 個別機能開発 | 例: `feature/contact-form` |
-
-**運用ルール:**
-- 現状 `main` しかないため、追加運用を始める場合は `develop` と `feature/*` を新設する
-- ユーザー影響のある仕様変更は、コードだけでなく設計書も同時に更新する
-- ルーティング変更や構成変更を行った場合は `README.md` と `Agent.md` も追従させる
-
----
-
-## 前提・命名規約
-
-### ファイル名の基本方針
-- ドキュメント、設計書、作業メモは **日本語ファイル名**
-- 実装コード、ディレクトリ名、ルートセグメント、コンポーネント名は **英語**
-- 画面上の文言は日本語を基本とし、必要に応じて英語サブコピーを添える
-
-**例:**
-
-| 種別 | 命名例 |
-|------|--------|
-| 要件・設計書 | `サイト要件定義書.md`、`サイト基本設計書.md` |
-| 作業メモ | `調査メモ_機能提案.md`、`TODO_SEO対策.md` |
-| 実装コード | `ProductCard.tsx`、`dummy-data.ts`、`page.tsx` |
-
-### このプロジェクト固有の注意
-- プレースホルダー値（`○○`、`準備中`、仮URL、仮住所）は意図的に残っているため、差し替え時は関連ページを横断して更新する
-- 要件定義書と現状実装にルーティング差分がある（下記「画面・ルーティングの現状」参照）。**意図・要件は設計書、実ファイル構成と実ルートはコードを優先して確認する**
-- ホスティングは ConoHa WING（Static Export）のため、SSR / ISR / revalidate は使用できない。動的処理は外部APIまたはクライアントサイドで実装する
-
----
-
-## 採用方針とデータ責務
-
-### システム間の責務分離
-
-| システム | 主な責務 |
+| ブランチ | 用途 |
 |---|---|
-| `Shopify` | 商品主データ、価格、在庫、コレクション、カート、チェックアウト、注文管理 |
-| `microCMS` | ストーリー、お知らせ、FAQ、畑情報、古民家情報、トップ特集枠、SEO補助文言 |
-| `Next.js` | 画面描画、ルーティング、SEO制御、構造化データ、内部リンク、パンくず |
+| `main` | 本番リリース・納品基準 |
+| `develop` | 開発統合 |
+| `feature/<topic>` | 個別機能開発 |
 
-### 運用前提
+運用ルール:
 
-- 商品主データは `Shopify` を正本とし、`microCMS` に重複保持しない
-- 記事、FAQ、古民家、畑、特集情報は `microCMS` を正本とする
-- 運営者は `Shopify` と `microCMS` の管理画面で日常更新を行う
-- 決済フローは `Shopify checkout` に委譲する（独自カート/決済は実装しない）
-
----
-
-## フォルダ構成と役割
-
-| フォルダ | 役割 | 説明 |
-|----------|------|------|
-| `docs/` | 設計書 | 要件定義書、設計書、レビュー、運用記録を配置 |
-| `env/` | 環境設定 | `.env` 等の環境依存ファイルを配置 |
-| `sample/` | サンプル | 参考実装や試作コードの保管場所 |
-| `web/` | フロントエンド | Next.js アプリ本体 |
-| `api/` | バックエンド | 将来の API 実装用領域 |
-| `work/` | 作業用 | 調査メモ、TODO、検討ログなどの一時資料 |
-
-### `web/` 配下の実装構成
-
-```
-web/
-├── src/
-│   ├── app/                 # App Router のページ
-│   ├── components/
-│   │   ├── layout/          # Header / Footer
-│   │   └── ui/              # Button / ProductCard / SectionTitle など
-│   └── lib/                 # ダミーデータ、ユーティリティ
-├── next.config.mjs
-├── tailwind.config.ts
-└── tsconfig.json
-```
-
-**補足:**
-- TypeScript のパスエイリアスとして `@/* -> ./src/*` を使用
-- 現在の商品データは `web/src/lib/dummy-data.ts` に集約されている
-- 共通レイアウトは `web/src/app/layout.tsx` で管理する
+- 現状 `main` しかない場合は、追加ブランチ運用を始めるタイミングで `develop` と `feature/*` を作る
+- ユーザー影響のある仕様変更は、コードだけでなく設計書も同時に更新する
+- ルーティング、フォルダ構成、外部サービス方針を変更した場合は `README.md`、`AGENT.md`、関連する `docs/` を追従させる
 
 ---
 
-## 実装方針
+## 命名・記述ルール
 
-### Static Export 前提（ConoHa WING）
-
-`web/next.config.mjs` は以下の方針で設定済み。
-
-- `output: 'export'`
-- `trailingSlash: true`
-- `images.unoptimized: true`
-
-このため、実装時は次を意識する。
-
-- サーバー常駐前提の機能（ISR、revalidate、Server Actions、Route Handlers）は使用できない
-- 商品データの取得は **ビルド時（SSG）** または **クライアントサイド** で行う
-- 問い合わせフォームは外部サービスAPIまたは別途 API 層で処理する
-- CMS 更新時の反映は **再ビルド + デプロイ** で行う（Webhook → CI/CD パイプライン）
-- `next/image` の自動最適化は使用不可（`images.unoptimized: true`）
-- 画像最適化が必要な場合は、ビルド前処理または外部CDN（Shopify CDN 等）を利用する
-
-### UI・コンポーネント方針
-
-- 共通 UI は `components/ui/` に集約する
-- ヘッダーやフッターなどサイト共通部品は `components/layout/` に置く
-- ページ固有の文脈を超えて再利用できるものだけを共通化する
-- ブランドトーンは「自然・和・上質感・余白重視」を維持する
-
----
-
-## 画面・ルーティングの現状
-
-### 要件定義書の正規ルーティング（目標）
-
-| ルート | 内容 | 主データ |
-|---|---|---|
-| `/` | トップページ | CMS + Shopify |
-| `/about` | ブランド紹介 | CMS |
-| `/concept` | コンセプト | CMS |
-| `/farm` | 畑紹介 | CMS |
-| `/stories` | ストーリー一覧 | CMS |
-| `/stories/[slug]` | ストーリー詳細 | CMS |
-| `/news` | お知らせ一覧 | CMS |
-| `/news/[slug]` | お知らせ詳細 | CMS |
-| `/faq` | FAQ | CMS |
-| `/products` | 商品一覧 | Shopify |
-| `/products/category/[category]` | 商品カテゴリ一覧 | Shopify |
-| `/products/[slug]` | 商品詳細 | Shopify |
-| `/kominka` | 古民家紹介 | CMS |
-| `/kominka/access` | 古民家アクセス | CMS |
-| `/kominka/experience` | 古民家体験 | CMS |
-| `/contact` | お問い合わせ | 固定 + フォーム |
-| `/shipping` | 配送情報 | 固定 |
-| `/returns` | 返品・交換 | 固定 |
-| `/legal` | 特定商取引法に基づく表記 | 固定 |
-| `/privacy` | プライバシーポリシー | 固定 |
-| `/terms` | 利用規約 | 固定 |
-
-### 現在実装されているルート
-
-| ルート | 内容 | 備考 |
-|---|---|---|
-| `/` | トップページ | |
-| `/products` | 商品一覧 | ダミーデータ使用 |
-| `/products/[id]` | 商品詳細 | 要件定義では `/products/[slug]` |
-| `/brand` | ブランド紹介 | 要件定義では `/about` + `/concept` に分離 |
-| `/field` | 畑紹介 | 要件定義では `/farm` |
-| `/guesthouse` | ゲストハウス紹介 | 要件定義では `/kominka` + 下層ページ |
-| `/contact` | お問い合わせ | 送信処理未実装 |
-| `/legal` | 特定商取引法に基づく表記 | |
-| `/privacy` | プライバシーポリシー | |
-| `/terms` | 利用規約 | |
-
-### 未実装ルート（要件定義書で定義済み）
-
-- `/about`, `/concept`, `/farm`, `/kominka/*`
-- `/stories`, `/stories/[slug]`, `/news`, `/news/[slug]`
-- `/faq`, `/products/category/[category]`
-- `/shipping`, `/returns`
-
-### ルーティング更新ルール
-
-- 既存コードを修正する際は、まず現状ルートを壊さないことを優先する
-- ルート方針を要件定義書準拠へ寄せる場合は、Header / Footer / 内部リンク / README / 設計書 / Agent.md を一括更新する
-
----
-
-## デザイン方針
-
-### デザインコンセプト
-
-**「土と草と光 ── 自然と人をつなぐ漢方の美」**
-
-自然素材、山野、畑、和の静けさを感じる UI を基本とする。  
-過剰な装飾よりも、写真、余白、落ち着いたタイポグラフィでブランド価値を伝える。
-
-### キーワード
-
-- ナチュラル
-- オーガニック
-- 和モダン
-- 上質感
-- 信頼感
-
-### 基本デザイン要素
-
-| 要素 | 方針 |
-|------|------|
-| 色 | 深緑(`#2D5016`)、生成り(`#F5F0E8`)、土色(`#6B4C2A`)、墨黒(`#1A1A1A`)を基調にする |
-| 文字 | 日本語は `Noto Sans JP` / `Noto Serif JP`、英字補助は `Cormorant Garamond` |
-| レイアウト | 余白を広く使い、情報を詰め込みすぎない |
-| 動き | フェードイン等の控えめな演出のみ |
+- ドキュメント、設計書、作業メモは日本語ファイル名を基本とする
+- 実装コード、ディレクトリ名、ルートセグメント、コンポーネント名は英語を基本とする
+- 画面上の文言は日本語を基本とし、必要に応じて英語サブコピーを添える
+- プレースホルダー値（`○○`、`準備中`、仮URL、仮住所）は意図的に残っている場合があるため、差し替え時は関連ページを横断して更新する
+- `.env*`、デプロイ先URL、メールアドレス、APIキーなどの扱いは `env/` と各アプリの `.gitignore` を確認してから変更する
 
 ---
 
 ## 技術スタック
 
-### 現在の実装ベース
+正規実装は `web_shopify/` のShopify Online Store 2.0テーマです。`web/` と `web_mock/` は旧実装・レビュー用としてNext.jsを利用します。
 
-- **Next.js**: `15.5.15`
-- **React**: `18.3.x`
-- **TypeScript**: `5.x`
-- **Tailwind CSS**: `3.4.x`
-- **ESLint**: `8.x`
+Shopifyテーマ:
 
-### 将来導入予定
+| 項目 | 現在の方針 |
+|---|---|
+| テーマ | Online Store 2.0 |
+| テンプレート | Liquid / JSON templates / sections |
+| データ正本 | Shopify Products / Collections / Blogs / Pages / Policies |
+| 反映 | Shopify CLI / テーマZIP / Admin API seed補助 |
 
-- **microCMS SDK**: CMS コンテンツ取得
-- **Shopify Storefront API**: 商品データ取得（`@shopify/storefront-api-client` 等）
-- **Google Analytics 4**: アクセス解析
-- **Google Search Console**: SEO 分析
+Next.js系の旧実装・モック:
+
+| パッケージ | 現在の指定 |
+|---|---|
+| `next` | `15.5.15` |
+| `react` / `react-dom` | `^18.3.0` |
+| `typescript` | `^5.4.5` |
+| `tailwindcss` | `^3.4.4` |
+| `eslint` | `^8.57.0` |
+| `eslint-config-next` | `15.5.15` |
+
+主なコマンド:
+
+```bash
+cd web
+npm run dev
+npm run build
+npm run lint
+```
+
+```bash
+cd web_mock
+npm run dev
+npm run build
+npm run lint
+```
+
+`npm run build` は旧Next.js実装・モックの Static Export 用 `out/` を生成します。公開正規のShopifyテーマ反映には `web_shopify/` の手順を使います。
 
 ---
 
-## 関連ドキュメント
+## 旧Next.js / web_mock Static Export 方針
 
-| ドキュメント | パス | 説明 |
+`web/next.config.mjs` と `web_mock/next.config.mjs` は旧Next.js実装・モック用として次の方針です。
+
+- `output: 'export'`
+- `trailingSlash: true`
+- `images.unoptimized: true`
+
+`web_mock/next.config.mjs` は `NEXT_PUBLIC_MOCK_SITE_URL` のパス部分から `basePath` を自動設定します。
+
+実装時の注意:
+
+- 公開サイトでは SSR / ISR / `revalidate` / Server Actions / Route Handlers を前提にしない
+- 動的ルートは `generateStaticParams` で静的生成する
+- `next/image` のサーバー最適化に依存しない
+- データ更新は再ビルド + 再デプロイで反映する
+- 問い合わせフォームの実送信は未実装。実装時は外部APIまたは `api/` 側の方針を先に確定する
+
+---
+
+## `web/` の構成
+
+```txt
+web/
+├── src/
+│   ├── app/
+│   │   ├── about/page.tsx
+│   │   ├── concept/page.tsx
+│   │   ├── contact/page.tsx
+│   │   ├── farm/page.tsx
+│   │   ├── kominka/page.tsx
+│   │   ├── legal/page.tsx
+│   │   ├── privacy/page.tsx
+│   │   ├── products/page.tsx
+│   │   ├── products/[slug]/page.tsx
+│   │   ├── terms/page.tsx
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Footer.tsx
+│   │   │   └── Header.tsx
+│   │   └── ui/
+│   │       ├── Button.tsx
+│   │       ├── ProductCard.tsx
+│   │       └── SectionTitle.tsx
+│   └── lib/
+│       └── dummy-data.ts
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
+```
+
+現在実装されている公開サイトの主なルート:
+
+| ルート | 内容 |
+|---|---|
+| `/` | トップページ |
+| `/about` | ブランド紹介 |
+| `/concept` | コンセプト |
+| `/farm` | 畑紹介 |
+| `/kominka` | 古民家紹介 |
+| `/contact` | お問い合わせ |
+| `/products` | 商品一覧 |
+| `/products/[slug]` | 商品詳細 |
+| `/legal` | 特定商取引法に基づく表記 |
+| `/privacy` | プライバシーポリシー |
+| `/terms` | 利用規約 |
+
+`web/` のデータは旧Next.js実装・検証用です。公開正規のデータ正本はShopify側の商品、コレクション、ブログ、固定ページ、ポリシーです。
+
+---
+
+## `web_mock/` の構成
+
+```txt
+web_mock/
+├── public/
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── robots.txt
+│   └── images/
+│       ├── home/
+│       ├── kominka/
+│       └── products/
+├── src/
+│   ├── app/
+│   │   ├── contact/page.tsx
+│   │   ├── kominka/page.tsx
+│   │   ├── products/page.tsx
+│   │   ├── products/[slug]/page.tsx
+│   │   ├── products/[slug]/ingredients/page.tsx
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── not-found.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── layout/
+│   │   └── ui/
+│   └── lib/
+│       └── mock/
+│           ├── productIngredients.ts
+│           └── site.ts
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
+```
+
+現在実装されているモックの主なルート:
+
+| ルート | 内容 |
+|---|---|
+| `/` | モックトップ |
+| `/products` | 商品一覧 |
+| `/products/[slug]` | 商品詳細 |
+| `/products/[slug]/ingredients` | 商品成分詳細 |
+| `/kominka` | 古民家紹介 |
+| `/contact` | お問い合わせ |
+
+`web_mock/` の方針:
+
+- 依頼者レビュー用の静的モックとして扱う
+- ダミーデータ固定で、実CMS、実EC、実問い合わせAPIには接続しない
+- `robots.txt` は `Disallow: /`、metadata でも `noindex` を付与する
+- 確認URLは `env/web_mock/.env.review` と `NEXT_PUBLIC_MOCK_SITE_URL` で管理する
+- 承認済みUIやコピーを `web/` へ移植する場合は、静的データとルーティングの差分も確認する
+
+---
+
+## データ責務
+
+| 領域 | 現状 | 将来方針 |
 |---|---|---|
-| 要件定義書 | `docs/要件定義/サイト要件定義書.md` | プロジェクトの正本要件（v1.4.0） |
-| 基本設計書 | `docs/サイト設計/サイト基本設計書.md` | 画面設計、導線設計（※要件定義書への追従改訂が必要） |
-| 詳細設計書 | `docs/サイト設計/サイト詳細設計書.md` | セクション構成、コンポーネント仕様（※要件定義書への追従改訂が必要） |
-| レビュー | `docs/レビュー/` | レビュー結果の記録 |
-| 運用記録 | `docs/運用記録/` | 運用上の変更記録 |
-| 作業メモ | `work/` | 調査、TODO、検討資料 |
+| 商品データ | Shopify Products / Collections | `web_shopify/scripts/seed-shopify.mjs` で初期投入・更新補助 |
+| 商品補足情報 | Shopify product metafields | 内容量、原材料、使い方、注意事項、関連商品を管理 |
+| 本文コンテンツ | Shopify Pages / Blogs / Theme sections | 管理画面とテーマ設定で運用 |
+| SEO補助情報 | Shopify Search engine listing / theme SEO snippets | title、description、OGP、canonicalを確認 |
+| 問い合わせ | Shopify標準 contact form | 通知先と受信確認はShopify管理画面で行う |
+| レビュー用URL | `env/` 配下の環境ファイル | 秘密情報を含めず、用途別に管理 |
 
-### 設計上の想定連携
+運用前提:
 
-- 決済: Stripe または Square
-- 地図: Google Maps
-- フォーム保護: Google reCAPTCHA v3
-- 計測: Google Analytics 4
-- SNS: Facebook / Instagram
+- 商品価格、在庫、決済、配送、返品、特商法などのEC運用条件はShopifyを正本にする
+- カート、Checkout、決済、注文管理はShopify標準機能に委譲する
+- 法務ページはShopify Policiesを正本とし、テーマ内リンク・表示と矛盾させない
+- 将来サービス連携を追加する場合は、要件定義書、基本設計書、詳細設計書、README、AGENT.md を同時に更新する
 
 ---
 
-## ドキュメント
+## ドキュメント管理
 
 | ドキュメント | パス |
-|-------------|------|
-| README | `README.md` |
-| docs 概要 | `docs/README.md` |
-| サイト要件定義書 | `docs/要件定義/サイト要件定義書.md` |
-| サイト基本設計書 | `docs/サイト設計/サイト基本設計書.md` |
-| サイト詳細設計書 | `docs/サイト設計/サイト詳細設計書.md` |
-| 機能提案メモ | `work/調査メモ_機能提案.md` |
-| SEO TODO | `work/TODO_SEO対策.md` |
+|---|---|
+| docs 管理ルール | `docs/README.md` |
+| 要件定義書（Shopify案） | `docs/要件定義/サイト要件定義書_Shopify案.md` |
+| 基本設計書（Shopify案） | `docs/サイト設計/サイト基本設計書_Shopify案.md` |
+| 詳細設計書（Shopify案） | `docs/サイト設計/サイト詳細設計書_Shopify案.md` |
+| 開発ロードマップ（Shopify案） | `docs/ロードマップ/開発ロードマップ_Shopify案.md` |
+| オリジナル案アーカイブ | `docs/archive/オリジナル案/README.md` |
+| web_mock 実装ロードマップ | `docs/ロードマップ/web_mock実装ロードマップ.md` |
+| レビュー記録 | `docs/レビュー/` |
+| 運用記録 | `docs/運用記録/` |
+| 調査・作業メモ | `work/` |
 
----
+ドキュメント運用:
 
-## 設計書管理
-
-### フォルダ構成ルール
-
-```
-docs/
-├── README.md
-├── 要件定義/
-├── サイト設計/
-├── レビュー/
-└── 運用記録/
-```
-
-### 管理ルール
-
-- `docs/` 直下には `README.md` 以外を置かない
+- `docs/` 直下には `README.md` 以外を置かない。ロードマップは `docs/ロードマップ/` に配置する
+- 要件定義、設計、ロードマップ、レビュー、運用記録はサブディレクトリに置く
 - 設計書には版数、作成日、最終更新日、ステータスを記載する
-- 軽微修正は更新日のみ変更、大きな仕様変更は版数も更新する
-- ルーティング、ページ追加、外部サービス方針変更時は設計書との整合を確認する
-
-### レビューファイルの命名規則
-
-レビュー結果は `docs/レビュー/` に以下の形式で出力する。
-
-```
-{対象ドキュメント名}_レビュー_{YYYYMMDDHHMMSS}.md
-```
-
-| 要素 | 説明 | 例 |
-|---|---|---|
-| `{対象ドキュメント名}` | レビュー対象のドキュメント名（拡張子なし） | `サイト要件定義書` |
-| `_レビュー_` | 固定の接尾辞 | `_レビュー_` |
-| `{YYYYMMDDHHMMSS}` | レビュー実施日時（14桁、年月日時分秒） | `20260420235500` |
-
-**例:**
-
-```
-docs/レビュー/サイト要件定義書_レビュー_20260420233600.md
-docs/レビュー/サイト要件定義書_レビュー_20260420234800.md
-docs/レビュー/サイト要件定義書_レビュー_20260420235500.md
-```
-
-### 新規ページ・機能追加時の手順
-
-1. ユーザー影響がある変更なら `docs/要件定義/サイト要件定義書.md` を更新する
-2. サイトマップや導線が変わるなら `docs/サイト設計/サイト基本設計書.md` を更新する
-3. セクション構成や画面仕様が変わるなら `docs/サイト設計/サイト詳細設計書.md` を更新する
-4. `web/src/app/` 以下にルートとページを実装する
-5. 必要に応じて `Header` `Footer` `metadata` `dummy-data.ts` を更新する
-6. 構成や運用ルールが変わったら `README.md` と `Agent.md` を更新する
+- レビュー結果は `docs/レビュー/` に `{対象ドキュメント名}_レビュー_{YYYYMMDDHHMMSS}.md` 形式で出力する
+- `work/` は調査メモや一時的な検討資料の置き場。正本化する内容は `docs/` に移す
 
 ---
 
-## 判断基準
+## 実装時の判断基準
 
-- **ブランド・体験の意図**: 要件定義書と設計書を優先
-- **現在の構成・ルート・依存バージョン**: 実コードを優先
-- **差分が見つかった場合**: どちらかに寄せるだけで終わらせず、差分を解消する変更まで含めて扱う
+- ブランド・体験の意図は要件定義書と設計書を優先する
+- 現在の構成、ルート、依存バージョンは実コードを確認する
+- `web_shopify/` は公開正規テーマ、`web_mock/` はレビュー用モック、`web/` は旧Next.js実装・検証用として用途を混ぜない
+- Shopify標準機能、テーマ制約、管理画面の正本データと矛盾する実装は避ける
+- ユーザーが触っている未コミット変更は戻さず、必要な範囲だけ編集する
+- 差分が見つかった場合は片方に寄せるだけで終わらせず、正本に合わせて関連ドキュメントも更新する
 
 ---
 

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import HeroSlider from '@/components/ui/HeroSlider';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 import { mockHomeImages, mockKominka, mockProducts } from '@/lib/mock/site';
 
 const featuredProducts = mockProducts;
@@ -20,8 +21,12 @@ export default function HomePage() {
       <section id="home-story-section" className="mock-section">
         <div id="home-story-inner" className="mock-shell space-y-20">
           <div id="home-farm-story" className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-            <div id="home-farm-story-image" className="mock-image-frame mock-surface-1 min-h-[340px]">
-              <img src={mockHomeImages.fieldWalk.src} alt={mockHomeImages.fieldWalk.alt} />
+            <div id="home-farm-story-image" className="mock-image-frame mock-surface-1 min-h-[220px] md:min-h-[340px]">
+              <ResponsiveImage
+                src={mockHomeImages.fieldWalk.src}
+                alt={mockHomeImages.fieldWalk.alt}
+                sizes="(max-width: 767px) 100vw, 50vw"
+              />
             </div>
             <div id="home-farm-story-copy" className="max-w-md space-y-4">
               <h2 id="home-farm-story-title" className="font-serif text-2xl text-mock-ink md:text-3xl">
@@ -52,15 +57,27 @@ export default function HomePage() {
             </div>
 
             <div id="home-kominka-story-gallery" className="grid gap-5 md:grid-cols-[1.05fr_0.95fr]">
-              <div id="home-kominka-story-image-main" className="mock-image-frame mock-surface-2 min-h-[360px]">
-                <img src={mockHomeImages.guestRoom.src} alt={mockHomeImages.guestRoom.alt} />
+              <div id="home-kominka-story-image-main" className="mock-image-frame mock-surface-2 min-h-[240px] md:min-h-[360px]">
+                <ResponsiveImage
+                  src={mockHomeImages.guestRoom.src}
+                  alt={mockHomeImages.guestRoom.alt}
+                  sizes="(max-width: 767px) 100vw, 40vw"
+                />
               </div>
               <div id="home-kominka-story-image-stack" className="grid gap-5">
-                <div id="home-kominka-story-image-sub-1" className="mock-image-frame mock-surface-3 min-h-[170px]">
-                  <img src={mockHomeImages.morningTea.src} alt={mockHomeImages.morningTea.alt} />
+                <div id="home-kominka-story-image-sub-1" className="mock-image-frame mock-surface-3 min-h-[150px] md:min-h-[170px]">
+                  <ResponsiveImage
+                    src={mockHomeImages.morningTea.src}
+                    alt={mockHomeImages.morningTea.alt}
+                    sizes="(max-width: 767px) 100vw, 30vw"
+                  />
                 </div>
-                <div id="home-kominka-story-image-sub-2" className="mock-image-frame mock-surface-4 min-h-[170px]">
-                  <img src={mockKominka.images.morningField.src} alt={mockKominka.images.morningField.alt} />
+                <div id="home-kominka-story-image-sub-2" className="mock-image-frame mock-surface-4 min-h-[150px] md:min-h-[170px]">
+                  <ResponsiveImage
+                    src={mockKominka.images.morningField.src}
+                    alt={mockKominka.images.morningField.alt}
+                    sizes="(max-width: 767px) 100vw, 30vw"
+                  />
                 </div>
               </div>
             </div>
@@ -69,7 +86,7 @@ export default function HomePage() {
       </section>
 
       <section id="home-products-section" className="border-y border-mock-border bg-[rgba(255,255,255,0.45)]">
-        <div id="home-products-inner" className="mock-shell py-20 md:py-24">
+        <div id="home-products-inner" className="mock-shell py-14 md:py-24">
           <div id="home-products-layout" className="grid gap-10 lg:grid-cols-[0.42fr_1.58fr]">
             <div id="home-products-copy" className="max-w-sm space-y-4">
               <h2 id="home-products-title" className="font-serif text-2xl text-mock-ink md:text-3xl">
@@ -90,11 +107,10 @@ export default function HomePage() {
                 </h3>
                 <div id="home-products-ingredient-links-list" className="space-y-2">
                   {featuredProducts.map((product) => (
-                    <Link
+                    <div
                       id={`home-products-ingredient-link-${product.slug}`}
                       key={product.slug}
-                      href={`/products/${product.slug}/ingredients/#product-ingredients-${product.slug}-list`}
-                      className="block border-t border-mock-border py-4 transition hover:translate-x-1"
+                      className="border-t border-mock-border py-4"
                     >
                       <p
                         id={`home-products-ingredient-link-${product.slug}-category`}
@@ -102,21 +118,23 @@ export default function HomePage() {
                       >
                         {product.category}
                       </p>
-                      <div className="mt-2 flex items-center justify-between gap-4">
-                        <p
+                      <div className="mt-2 flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                        <Link
                           id={`home-products-ingredient-link-${product.slug}-title`}
-                          className="font-serif text-xl text-mock-ink"
+                          href={`/products/${product.slug}`}
+                          className="font-serif text-xl text-mock-ink transition hover:text-mock-earth"
                         >
                           {product.name}
-                        </p>
-                        <span
+                        </Link>
+                        <Link
                           id={`home-products-ingredient-link-${product.slug}-cta`}
+                          href={`/products/${product.slug}/ingredients/#product-ingredients-${product.slug}-list`}
                           className="text-xs uppercase tracking-[0.28em] text-mock-muted"
                         >
                           成分表示
-                        </span>
+                        </Link>
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -125,18 +143,35 @@ export default function HomePage() {
             <div id="home-products-grid" className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
               {featuredProducts.map((product) => (
                 <article id={`home-product-preview-${product.slug}`} key={product.slug} className="mock-card overflow-hidden">
-                  <div
-                    id={`home-product-preview-${product.slug}-image`}
-                    className="mock-image-frame mock-surface-1 min-h-[260px] border-x-0 border-t-0 border-white/0 shadow-none"
+                  <Link
+                    id={`home-product-preview-${product.slug}-image-link`}
+                    href={`/products/${product.slug}`}
+                    aria-label={`${product.name}の商品詳細を見る`}
+                    className="block"
                   >
-                    <img src={product.mainImage.src} alt={product.mainImage.alt} />
-                  </div>
-                  <div id={`home-product-preview-${product.slug}-content`} className="space-y-3 p-6">
+                    <div
+                      id={`home-product-preview-${product.slug}-image`}
+                      className="mock-image-frame mock-surface-1 min-h-[180px] border-x-0 border-t-0 border-white/0 shadow-none md:min-h-[240px] xl:min-h-[260px]"
+                    >
+                      <ResponsiveImage
+                        src={product.mainImage.src}
+                        alt={product.mainImage.alt}
+                        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw"
+                      />
+                    </div>
+                  </Link>
+                  <div id={`home-product-preview-${product.slug}-content`} className="space-y-3 p-4 md:p-6">
                     <p id={`home-product-preview-${product.slug}-category`} className="text-xs uppercase tracking-[0.3em] text-mock-gold">
                       {product.category}
                     </p>
-                    <h3 id={`home-product-preview-${product.slug}-title`} className="font-serif text-2xl text-mock-ink">
-                      {product.name}
+                    <h3 id={`home-product-preview-${product.slug}-title`} className="font-serif text-xl text-mock-ink md:text-2xl">
+                      <Link
+                        id={`home-product-preview-${product.slug}-title-link`}
+                        href={`/products/${product.slug}`}
+                        className="transition hover:text-mock-earth"
+                      >
+                        {product.name}
+                      </Link>
                     </h3>
                     <p id={`home-product-preview-${product.slug}-summary`} className="text-sm leading-7 text-mock-muted">
                       {product.summary}

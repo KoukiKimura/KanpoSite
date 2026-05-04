@@ -1,5 +1,6 @@
 import PageTitleHero from '@/components/ui/PageTitleHero';
 import ProductCard from '@/components/ui/ProductCard';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 import { mockProducts, productCategories } from '@/lib/mock/site';
 
 const productScenes = [
@@ -32,7 +33,7 @@ export default function ProductsPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.14),_transparent_25%),linear-gradient(135deg,_rgba(173,139,87,0.18),_transparent_42%)]" />
         <div
           id="products-overview-layout"
-          className="mock-shell mock-sticky-stage relative grid gap-10 py-12 md:py-16 lg:min-h-[150vh] lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:py-20"
+          className="mock-shell mock-sticky-stage relative grid gap-8 py-10 md:gap-10 md:py-16 lg:min-h-[150vh] lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:py-20"
         >
           <div id="products-overview-copy" className="mock-sticky-copy">
             <div id="products-overview-intro" className="max-w-md space-y-5">
@@ -70,15 +71,27 @@ export default function ProductsPage() {
           </div>
 
           <div id="products-overview-visual" className="mock-sticky-visual space-y-4">
-            <div id="products-overview-visual-main" className="mock-image-frame mock-surface-5 min-h-[380px]">
-              <img src={mockProducts[0].mainImage.src} alt={mockProducts[0].mainImage.alt} />
+            <div id="products-overview-visual-main" className="mock-image-frame mock-surface-5 min-h-[240px] md:min-h-[380px]">
+              <ResponsiveImage
+                src={mockProducts[0].mainImage.src}
+                alt={mockProducts[0].mainImage.alt}
+                sizes="(max-width: 767px) 100vw, 58vw"
+              />
             </div>
             <div id="products-overview-visual-grid" className="grid gap-4 md:grid-cols-2">
-              <div id="products-overview-visual-sub-1" className="mock-image-frame mock-surface-6 min-h-[220px]">
-                <img src={mockProducts[1].mainImage.src} alt={mockProducts[1].mainImage.alt} />
+              <div id="products-overview-visual-sub-1" className="mock-image-frame mock-surface-6 min-h-[170px] md:min-h-[220px]">
+                <ResponsiveImage
+                  src={mockProducts[1].mainImage.src}
+                  alt={mockProducts[1].mainImage.alt}
+                  sizes="(max-width: 767px) 100vw, 29vw"
+                />
               </div>
-              <div id="products-overview-visual-sub-2" className="mock-image-frame mock-surface-7 min-h-[220px]">
-                <img src={mockProducts[3].mainImage.src} alt={mockProducts[3].mainImage.alt} />
+              <div id="products-overview-visual-sub-2" className="mock-image-frame mock-surface-7 min-h-[170px] md:min-h-[220px]">
+                <ResponsiveImage
+                  src={mockProducts[3].mainImage.src}
+                  alt={mockProducts[3].mainImage.alt}
+                  sizes="(max-width: 767px) 100vw, 29vw"
+                />
               </div>
             </div>
           </div>

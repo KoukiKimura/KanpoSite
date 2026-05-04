@@ -1,0 +1,63 @@
+{% liquid
+  assign access_text = section.settings.access_text
+  if page != blank and page.metafields.custom.access_text != blank
+    assign access_text = page.metafields.custom.access_text | metafield_tag
+  endif
+%}
+
+<section class="section section-soft">
+  <div class="shell story-panel">
+    <div>
+      <p class="eyebrow">Access</p>
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+      <div class="rte">{{ access_text }}</div>
+    </div>
+    <div class="card" style="padding: clamp(24px, 4vw, 42px);">
+      <h3 class="heading-serif" style="font-size: 1.8rem;">ご案内</h3>
+      <ul class="note-list">
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "古民家アクセス",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "アクセス"
+    },
+    {
+      "type": "textarea",
+      "id": "access_text",
+      "label": "アクセス本文",
+      "default": "所在地、駐車場、最寄り駅からの案内は、予約確定時に個別にご案内します。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "案内",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "本文",
+          "default": "チェックイン時間は事前にご相談ください。"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "古民家アクセス"
+    }
+  ]
+}
+{% endschema %}

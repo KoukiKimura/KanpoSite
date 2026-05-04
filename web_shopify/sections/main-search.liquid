@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow">Search</p>
+    <h1 class="heading-serif section-heading">{{ 'general.search' | t }}</h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="form-grid" style="max-width: 720px; margin-block: 28px;">
+      <label class="field">
+        検索キーワード
+        <input type="search" name="q" value="{{ search.terms | escape }}">
+      </label>
+      <input type="hidden" name="type" value="product,article,page">
+      <button class="button" type="submit">検索する</button>
+    </form>
+
+    {% if search.performed %}
+      {% paginate search.results by 12 %}
+        {% if search.results_count > 0 %}
+          <div class="blog-grid">
+            {% for item in search.results %}
+              <article class="card" style="padding: 24px;">
+                <p class="eyebrow">{{ item.object_type }}</p>
+                <h2 class="heading-serif" style="font-size: 1.55rem;">
+                  <a href="{{ item.url }}">{{ item.title }}</a>
+                </h2>
+                <div class="rte">{{ item.content | strip_html | truncate: 120 }}</div>
+              </article>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state">
+            <p class="section-body">一致する結果はありませんでした。</p>
+          </div>
+        {% endif %}
+        {% render 'pagination', paginate: paginate %}
+      {% endpaginate %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "検索",
+  "settings": []
+}
+{% endschema %}

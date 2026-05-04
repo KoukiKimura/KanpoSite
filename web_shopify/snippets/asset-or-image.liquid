@@ -1,0 +1,30 @@
+{% liquid
+  assign image_object = image
+  assign image_alt = alt | default: image_object.alt | default: shop.name
+  assign image_class = class | default: ''
+  assign image_loading = loading | default: 'lazy'
+  assign image_width_attr = width | default: 1600
+  assign image_height_attr = height | default: image_width_attr
+%}
+
+{% if image_object != blank %}
+  {% render 'responsive-image',
+    image: image_object,
+    alt: image_alt,
+    class: image_class,
+    sizes: sizes,
+    loading: image_loading,
+    width: width
+  %}
+{% elsif fallback_asset != blank %}
+  <img
+    src="{{ fallback_asset | asset_url }}"
+    alt="{{ image_alt | escape }}"
+    class="{{ image_class }}"
+    loading="{{ image_loading }}"
+    width="{{ image_width_attr }}"
+    height="{{ image_height_attr }}"
+  >
+{% else %}
+  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}

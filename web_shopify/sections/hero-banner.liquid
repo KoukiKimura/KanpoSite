@@ -1,0 +1,204 @@
+{% liquid
+  assign is_page = false
+  assign content_has_text = false
+
+  if section.settings.style == 'page'
+    assign is_page = true
+  endif
+
+  if section.settings.eyebrow != blank or section.settings.title != blank or section.settings.text != blank or section.settings.cta_label != blank
+    assign content_has_text = true
+  endif
+%}
+
+<section
+  class="hero-banner{% if is_page %} hero-banner--page{% endif %}"
+  data-hero-section
+  style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --hero-height-mobile: {{ section.settings.mobile_height }}svh; --hero-height-desktop: {{ section.settings.desktop_height }}svh;"
+>
+  {% if section.blocks.size > 0 %}
+    <div class="hero-banner__media" data-hero-slider>
+      {% for block in section.blocks %}
+        {% liquid
+          assign slide_loading = 'lazy'
+          if forloop.first
+            assign slide_loading = 'eager'
+          endif
+        %}
+        <div class="hero-banner__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide {{ block.shopify_attributes }}>
+          {% render 'asset-or-image',
+            image: block.settings.image,
+            fallback_asset: block.settings.fallback_asset,
+            alt: block.settings.alt,
+            sizes: '100vw',
+            width: 2400,
+            loading: slide_loading
+          %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="hero-banner__single">
+      {% render 'asset-or-image',
+        image: section.settings.image,
+        fallback_asset: section.settings.fallback_asset,
+        alt: section.settings.image_alt,
+        sizes: '100vw',
+        width: 2400,
+        loading: 'eager'
+      %}
+    </div>
+  {% endif %}
+
+  <div class="hero-banner__overlay"></div>
+
+  {% if content_has_text %}
+    <div class="hero-banner__content shell">
+      <div class="hero-banner__copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h1 class="heading-serif hero-banner__title">{{ section.settings.title }}</h1>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="hero-banner__text">{{ section.settings.text }}</div>
+        {% endif %}
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <div class="hero-banner__actions">
+            <a class="button button-light" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 1 %}
+    <div class="hero-banner__controls" aria-hidden="false">
+      <button class="hero-banner__control" type="button" data-hero-prev aria-label="前の画像へ">‹</button>
+      <button class="hero-banner__control" type="button" data-hero-next aria-label="次の画像へ">›</button>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "ヒーローバナー",
+  "tag": "section",
+  "class": "section-hero-banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "表示タイプ",
+      "default": "home",
+      "options": [
+        { "value": "home", "label": "トップ" },
+        { "value": "page", "label": "下層ページ" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "画像"
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "フォールバック画像ファイル名",
+      "default": "home-hero-satoyama.webp"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "画像alt",
+      "default": "里山の風景と古民家"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAラベル"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAリンク"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "暗さ",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "モバイル高さ",
+      "min": 36,
+      "max": 100,
+      "step": 2,
+      "unit": "svh",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "PC高さ",
+      "min": 36,
+      "max": 100,
+      "step": 2,
+      "unit": "svh",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "スライド",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "フォールバック画像ファイル名",
+          "default": "home-hero-satoyama.webp"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "alt",
+          "default": "里山の風景"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ヒーローバナー"
+    }
+  ]
+}
+{% endschema %}

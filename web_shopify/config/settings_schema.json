@@ -1,0 +1,190 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Sansou no Megumi Shopify",
+    "theme_version": "0.1.0",
+    "theme_author": "KanpoSite",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "ブランド",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "ロゴ画像"
+      },
+      {
+        "type": "text",
+        "id": "brand_kicker",
+        "label": "ブランド肩書き",
+        "default": "里山で養う漢方と暮らし"
+      },
+      {
+        "type": "text",
+        "id": "brand_name_ja",
+        "label": "ブランド名",
+        "default": "山草のめぐみ"
+      },
+      {
+        "type": "text",
+        "id": "brand_name_en",
+        "label": "英字ブランド名",
+        "default": "Sansou no Megumi"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_lead",
+        "label": "フッター説明",
+        "default": "里山の古民家で和漢の草木を育て、お茶、粉薬、錠剤へと静かに仕立てています。畑の景色と暮らしの手ざわりが、そのまま伝わる場所でありたいと考えています。"
+      }
+    ]
+  },
+  {
+    "name": "色",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "背景",
+        "default": "#f4efe6"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "紙色",
+        "default": "#fbf8f1"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "本文",
+        "default": "#1d241c"
+      },
+      {
+        "type": "color",
+        "id": "color_moss",
+        "label": "MOSS",
+        "default": "#41543b"
+      },
+      {
+        "type": "color",
+        "id": "color_olive",
+        "label": "OLIVE",
+        "default": "#6d7b52"
+      },
+      {
+        "type": "color",
+        "id": "color_earth",
+        "label": "EARTH",
+        "default": "#8f6949"
+      },
+      {
+        "type": "color",
+        "id": "color_sand",
+        "label": "SAND",
+        "default": "#d9c6ad"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "罫線",
+        "default": "#d8cfbf"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "補助テキスト",
+        "default": "#6f6a5d"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "金茶",
+        "default": "#ad8b57"
+      }
+    ]
+  },
+  {
+    "name": "ナビゲーション",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "ヘッダーメニュー",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu",
+        "label": "フッターメニュー",
+        "default": "footer"
+      }
+    ]
+  },
+  {
+    "name": "連絡先・SNS",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "メールアドレス"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "電話番号"
+      },
+      {
+        "type": "url",
+        "id": "line_url",
+        "label": "LINE URL"
+      },
+      {
+        "type": "url",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      }
+    ]
+  },
+  {
+    "name": "SEO・構造化データ",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "default_og_image",
+        "label": "デフォルトOGP画像"
+      },
+      {
+        "type": "text",
+        "id": "default_og_asset",
+        "label": "デフォルトOGPアセットファイル名",
+        "default": "home-hero-satoyama.webp"
+      },
+      {
+        "type": "text",
+        "id": "default_og_alt",
+        "label": "デフォルトOGP画像alt",
+        "default": "里山と古民家のある山草のめぐみの風景"
+      },
+      {
+        "type": "text",
+        "id": "organization_name",
+        "label": "Organization名",
+        "default": "山草のめぐみ"
+      },
+      {
+        "type": "textarea",
+        "id": "organization_description",
+        "label": "Organization説明",
+        "default": "里山の草木と古民家の暮らしから生まれる養生の商品と滞在を届けるブランドです。"
+      }
+    ]
+  }
+]

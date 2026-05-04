@@ -1,3 +1,18 @@
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+
+let basePath = '';
+
+if (siteUrl) {
+  try {
+    const pathname = new URL(siteUrl).pathname.replace(/\/$/, '');
+    if (pathname && pathname !== '/') {
+      basePath = pathname;
+    }
+  } catch {
+    basePath = '';
+  }
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
@@ -5,6 +20,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  ...(basePath ? { basePath } : {}),
 };
 
 export default nextConfig;

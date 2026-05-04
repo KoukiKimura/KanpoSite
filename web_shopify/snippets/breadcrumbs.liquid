@@ -1,0 +1,31 @@
+{% liquid
+  assign current_template = template.name
+%}
+
+<nav class="breadcrumb shell" aria-label="パンくず">
+  <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
+  <span aria-hidden="true">/</span>
+
+  {% case current_template %}
+    {% when 'collection' %}
+      <span>{{ collection.title }}</span>
+    {% when 'product' %}
+      <a href="{{ routes.all_products_collection_url }}">{{ 'general.products' | t }}</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ product.title }}</span>
+    {% when 'cart' %}
+      <span>{{ 'general.cart' | t }}</span>
+    {% when 'blog' %}
+      <span>{{ blog.title }}</span>
+    {% when 'article' %}
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ article.title }}</span>
+    {% when 'page' %}
+      <span>{{ page.title }}</span>
+    {% when 'search' %}
+      <span>{{ 'general.search' | t }}</span>
+    {% else %}
+      <span>{{ page_title }}</span>
+  {% endcase %}
+</nav>

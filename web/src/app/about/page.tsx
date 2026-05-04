@@ -187,7 +187,7 @@ export default function BrandPage() {
             </p>
           </div>
           <div className="mt-10">
-            <Link href="/field" className="btn-outline-white">
+            <Link href="/farm" className="btn-outline-white">
               畑のことを詳しく見る
             </Link>
           </div>

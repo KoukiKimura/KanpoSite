@@ -1,0 +1,119 @@
+{% liquid
+  assign featured_collection = collections[section.settings.collection]
+  assign product_limit = section.settings.product_limit
+%}
+
+<section class="section section-soft">
+  <div class="shell products-layout">
+    <div class="products-copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+      <div class="section-body">{{ section.settings.text }}</div>
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <p>
+          <a class="button button-secondary" href="{{ section.settings.cta_link }}">
+            {{ section.settings.cta_label }}
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="product-grid product-grid--simple{% if product_limit > 3 %} product-grid--dense{% endif %}">
+      {% if featured_collection != blank and featured_collection.products_count > 0 %}
+        {% for product in featured_collection.products limit: product_limit %}
+          {% render 'product-card', product: product, variant: 'simple', show_quick_add: false %}
+        {% endfor %}
+      {% else %}
+        {% render 'fallback-product-card',
+          variant: 'simple',
+          fallback_asset: 'product-mountain-herb-blend-main.webp',
+          type: 'お茶',
+          title: '山のハーブブレンド',
+          price: '¥3,200',
+          text: '野に立つ草花の香りを静かにまとめた、朝の湯気に似合う定番のお茶です。'
+        %}
+        {% render 'fallback-product-card',
+          variant: 'simple',
+          fallback_asset: 'product-herbal-powder-main.webp',
+          type: '粉薬',
+          title: '和漢の養生粉',
+          price: '¥4,200',
+          text: '毎日の湯や粥に少量ずつ加えられる、やわらかな香りの和漢粉末です。'
+        %}
+        {% render 'fallback-product-card',
+          variant: 'simple',
+          fallback_asset: 'product-seasonal-care-set-main.webp',
+          type: '養生セット',
+          title: '季節の養生セット',
+          price: '¥8,600',
+          text: 'お茶、粉末、手当ての小物を一箱にまとめた、四季の贈りものです。'
+        %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "注目商品",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "商品"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "お茶、粉薬、錠剤、季節の箱物まで。畑で育てた草木を、暮らしの中で続けやすい形に整えています。"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "表示するコレクション"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "表示件数",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "商品カードにカート追加を表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAラベル",
+      "default": "商品一覧へ"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "注目商品"
+    }
+  ]
+}
+{% endschema %}

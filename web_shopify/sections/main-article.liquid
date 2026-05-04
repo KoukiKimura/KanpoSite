@@ -1,0 +1,45 @@
+<article class="section article">
+  {% render 'breadcrumbs' %}
+
+  <div class="shell article__content">
+    <p class="eyebrow">BLOG</p>
+    <p class="blog-list-item__date">{{ article.published_at | date: '%Y.%m.%d' }}</p>
+    <h1 class="heading-serif product-title">{{ article.title }}</h1>
+    {% if article.author != blank %}
+      <p class="text-muted">{{ article.author }}</p>
+    {% endif %}
+  </div>
+
+  {% if article.image != blank %}
+    <div class="shell article__content">
+      <div class="article__hero image-frame">
+        {% render 'responsive-image',
+          image: article.image,
+          alt: article.title,
+          sizes: '(max-width: 859px) 100vw, 760px',
+          width: 900,
+          loading: 'eager'
+        %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="shell article__content">
+    <div class="rte">{{ article.content }}</div>
+
+    {% if article.tags.size > 0 %}
+      <div class="blog-tags" style="margin-top: 32px;">
+        {% for tag in article.tags %}
+          <a class="blog-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "BLOG記事",
+  "settings": []
+}
+{% endschema %}

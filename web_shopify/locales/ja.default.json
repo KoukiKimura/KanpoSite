@@ -1,0 +1,24 @@
+{
+  "general": {
+    "home": "ホーム",
+    "products": "商品",
+    "cart": "カート",
+    "search": "検索",
+    "menu": "メニュー",
+    "close": "閉じる",
+    "read_more": "詳しく見る",
+    "contact": "お問い合わせ"
+  },
+  "cart": {
+    "empty": "カートに商品は入っていません。",
+    "checkout": "レジへ進む",
+    "subtotal": "小計",
+    "update": "更新する"
+  },
+  "products": {
+    "add_to_cart": "カートに入れる",
+    "sold_out": "在庫なし",
+    "in_stock": "在庫あり",
+    "quantity": "数量"
+  }
+}

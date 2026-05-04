@@ -1,0 +1,126 @@
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign quantity_cap = 9
+
+  if selected_variant.inventory_management and selected_variant.inventory_policy == 'deny' and selected_variant.inventory_quantity > 0 and selected_variant.inventory_quantity < quantity_cap
+    assign quantity_cap = selected_variant.inventory_quantity
+  endif
+%}
+
+<section class="section product-detail">
+  {% render 'breadcrumbs' %}
+
+  <div class="shell product-detail__layout" style="margin-top: 28px;">
+    <div class="product-gallery">
+      <div class="product-gallery__main image-frame">
+        {% if product.featured_media != blank %}
+          {% render 'responsive-image',
+            image: product.featured_media.preview_image,
+            alt: product.featured_media.alt | default: product.title,
+            sizes: '(max-width: 859px) 100vw, 54vw',
+            width: 1600,
+            loading: 'eager'
+          %}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+
+      {% if product.media.size > 1 %}
+        <div class="product-gallery__thumbs">
+          {% for media in product.media limit: 6 %}
+            <div class="product-gallery__thumb image-frame">
+              {% render 'responsive-image',
+                image: media.preview_image,
+                alt: media.alt | default: product.title,
+                sizes: '(max-width: 859px) 33vw, 16vw',
+                width: 520
+              %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      {% if product.type != blank %}
+        <p class="eyebrow">{{ product.type }}</p>
+      {% endif %}
+      <h1 class="heading-serif product-title">{{ product.title }}</h1>
+      <p class="product-price" data-current-price>{{ selected_variant.price | money }}</p>
+
+      {% if product.description != blank %}
+        <div class="rte">{{ product.description }}</div>
+      {% endif %}
+
+      <form class="product-form" method="post" action="{{ routes.cart_add_url }}" data-product-form>
+        {% if product.variants.size > 1 %}
+          <label class="field">
+            種類
+            <select name="id" data-variant-select>
+              {% for variant in product.variants %}
+                {% liquid
+                  assign variant_quantity_cap = 9
+                  if variant.inventory_management and variant.inventory_policy == 'deny' and variant.inventory_quantity > 0 and variant.inventory_quantity < variant_quantity_cap
+                    assign variant_quantity_cap = variant.inventory_quantity
+                  endif
+                  assign variant_stock_label = '在庫あり'
+                  unless variant.available
+                    assign variant_stock_label = '在庫なし'
+                  endunless
+                %}
+                <option
+                  value="{{ variant.id }}"
+                  {% if variant.id == selected_variant.id %}selected{% endif %}
+                  data-price="{{ variant.price | money }}"
+                  data-available="{{ variant.available }}"
+                  data-stock-label="{{ variant_stock_label }}"
+                  data-quantity-max="{{ variant_quantity_cap }}"
+                >
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+        {% else %}
+          <input type="hidden" name="id" value="{{ selected_variant.id }}">
+        {% endif %}
+
+        <p class="stock-label{% unless selected_variant.available %} stock-label--sold-out{% endunless %}" data-variant-stock>
+          {% if selected_variant.available %}在庫あり{% else %}在庫なし{% endif %}
+        </p>
+
+        <div class="product-form__row">
+          <label class="field">
+            {{ 'products.quantity' | t }}
+            <input
+              class="quantity-input"
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              max="{{ quantity_cap }}"
+              data-quantity-input
+              {% unless selected_variant.available %}disabled{% endunless %}
+            >
+          </label>
+          <button class="button" type="submit" data-add-button {% unless selected_variant.available %}disabled{% endunless %}>
+            {{ 'products.add_to_cart' | t }}
+          </button>
+        </div>
+      </form>
+
+      <div class="product-actions" style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <a class="button button-secondary" href="/policies/shipping-policy">配送について見る</a>
+        <a class="button button-secondary" href="#product-metafields">成分表示を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "商品詳細",
+  "settings": []
+}
+{% endschema %}

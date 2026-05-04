@@ -1,0 +1,128 @@
+{% liquid
+  assign product_faqs = blank
+  if product != blank and product.metafields.custom.faqs != blank
+    assign product_faqs = product.metafields.custom.faqs.value
+  endif
+%}
+
+<section class="section section-soft">
+  <div class="shell">
+    <div style="max-width: 760px; margin-bottom: 32px;">
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+      {% if section.settings.text != blank %}
+        <p class="section-body">{{ section.settings.text }}</p>
+      {% endif %}
+    </div>
+
+    <div class="faq-list">
+      {% if product_faqs != blank %}
+        {% for item in product_faqs %}
+          <article class="faq-item card">
+            <h3 class="heading-serif" style="font-size: 1.65rem;">{{ item.question.value | default: item.question }}</h3>
+            <div class="rte">{{ item.answer | metafield_tag }}</div>
+          </article>
+        {% endfor %}
+      {% elsif section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <article class="faq-item card" {{ block.shopify_attributes }}>
+            <h3 class="heading-serif" style="font-size: 1.65rem;">{{ block.settings.question }}</h3>
+            <div class="rte">{{ block.settings.answer }}</div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="faq-item card">
+          <h3 class="heading-serif" style="font-size: 1.65rem;">商品や古民家について質問できますか。</h3>
+          <p class="rte">お問い合わせページからご連絡ください。商品・古民家・取材などの内容別に確認できます。</p>
+        </article>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if product_faqs != blank or section.blocks.size > 0 %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% if product_faqs != blank %}
+        {% for item in product_faqs %}
+          {
+            "@type": "Question",
+            "name": {{ item.question.value | default: item.question | strip_html | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ item.answer | metafield_text | strip_html | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | strip_html | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.answer | strip_html | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      {% endif %}
+    ]
+  }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "よくある質問"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "商品や滞在について、事前に確認したいことをまとめます。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "質問",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "質問",
+          "default": "どんな時間に合いますか。"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "回答",
+          "default": "朝の支度前や、畑仕事から戻ったあとのひと息に合うように仕立てています。"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

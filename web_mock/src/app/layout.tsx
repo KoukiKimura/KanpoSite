@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { CartProvider } from '@/components/cart/CartProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { mockSite } from '@/lib/mock/site';
@@ -53,9 +54,11 @@ export default function RootLayout({
   return (
     <html id="site-root" lang="ja" data-theme="current" suppressHydrationWarning>
       <body id="site-body">
-        <Header />
-        <main id="site-main">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main id="site-main">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
