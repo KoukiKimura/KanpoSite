@@ -3,13 +3,13 @@
 | 項目 | 内容 |
 |---|---|
 | ドキュメント名 | サイト基本設計書_Shopify案 |
-| バージョン | 1.0.1 |
+| バージョン | 1.0.6 |
 | 作成日 | 2026-04-27 |
-| 最終更新日 | 2026-04-27 |
-| ステータス | 初版（セルフレビュー済）|
-| 参照要件 | `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.0 |
-| 参照ロードマップ | `docs/ロードマップ/開発ロードマップ_Shopify案.md` v1.2.0 |
-| 参照設計 | `docs/サイト設計/サイト基本設計書.md` v1.5.1（オリジナル案）|
+| 最終更新日 | 2026-05-04 |
+| ステータス | Shopify正規方針・実装反映・SEO/メタデータ補完反映済 |
+| 参照要件 | `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.5 |
+| 参照ロードマップ | `docs/ロードマップ/開発ロードマップ_Shopify案.md` v1.3.3 |
+| 参照設計 | `docs/archive/オリジナル案/サイト設計/サイト基本設計書_オリジナル案.md` v1.5.1（履歴参照）|
 
 ---
 
@@ -17,11 +17,12 @@
 
 ### 1.1 設計前提
 
-- 本設計は `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.0 を上位要件とし、開発進行は `docs/ロードマップ/開発ロードマップ_Shopify案.md` の現行状態に従う
+- 本設計は `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.5 を上位要件とし、開発進行は `docs/ロードマップ/開発ロードマップ_Shopify案.md` の現行状態に従う
 - 公開サイト、商品管理、決済、ブログ、問い合わせ、法務ページを Shopify に集約し、独自の Next.js 公開サイト・ConoHa 静的配信・外部ECリンク運用は採用しない
 - Shopify 案は「ノーコードでワンクリック生成する案」ではなく、「AI 支援で Liquid / CSS / JSON sections を作成し、Shopify CLI でテーマへ反映する半自動開発案」として位置づける
 - 商品・配送・決済・アプリ設定などは人間による管理画面確認を必須とし、完全自動サイト生成は要件に含めない
-- デザインは `web_mock/` のトップ、商品、古民家、問い合わせ、ブログの見た目を可能な範囲で再現することを目標とするが、Shopify テーマ・Checkout・アプリ制約により完全一致は保証しない
+- デザインは `web_mock/` のトップ、商品、カート、古民家、問い合わせ、ブログの見た目を可能な範囲で再現することを目標とするが、Shopify テーマ・Checkout・アプリ制約により完全一致は保証しない
+- テーマカラーは暫定で `MOSS` を基準にする。後続レビューで変更される可能性があるため、テーマ設定・CSS変数で差し替えやすく管理する
 - Shopify CLI、Admin API 利用時の認証情報はローカル環境または CI の秘密情報として管理し、テーマコードやリポジトリに埋め込まない
 - AI 生成コードはそのまま本番反映せず、テーマ構造・Liquid 構文・モバイル表示・アクセシビリティ・SEO・Checkout 導線への影響を確認してから反映する
 
@@ -36,7 +37,7 @@ Shopify Online Store（CDN 配信 / HTTPS）
   ├─ Shopify Blogs / Blog posts
   ├─ Shopify Pages（古民家、法務等）
   ├─ Shopify Policies（配送・返品・特商法）
-  └─ Shopify 標準 contact template（問い合わせ）
+  └─ Shopify contact form + main-page-contact（問い合わせ）
 
 テーマ開発
   ↓
@@ -59,12 +60,12 @@ Shopify 管理画面 / Shopify アプリ
 |---|---|
 | Shopify テーマ | 画面描画、ルーティング（Shopify URL）、HTML 生成、SEO メタデータ、OGP、構造化データ、内部リンク |
 | Shopify Products / Collections | 商品主データ、価格、在庫、カテゴリ、販売状態の正本 |
-| Product metafields / Metaobjects | 商品補足情報（原材料、飲み方、注意事項、内容量、FAQ）、古民家情報（予約URL、写真、アクセス）|
+| Product / Page metafields、Metaobjects | 商品補足情報（原材料、飲み方、注意事項、内容量、FAQ）、古民家情報（予約URL、アクセス、写真）|
 | Shopify Cart / Checkout | カート・チェックアウト・決済・注文処理 |
 | Shopify Blogs | ブログ一覧・詳細。スマホからの投稿・編集対象 |
 | Shopify Pages | 古民家ページ、その他固定ページ |
 | Shopify Policies | 配送・返品・特商法・プライバシー等の法務 |
-| Shopify 標準 contact template | 問い合わせフォーム受付・通知 |
+| Shopify contact form + `main-page-contact` | 問い合わせフォーム受付・通知 |
 | Theme settings / JSON templates | 管理画面から編集できるテーマ設定・セクション構成 |
 
 ### 1.4 Shopify テーマ開発方針
@@ -81,7 +82,7 @@ Shopify 管理画面 / Shopify アプリ
 
 ### 1.5 現行開発フェーズ
 
-2026-04-27 時点では「フェーズ0: Shopify 採用判断」が未着手である。Shopify プラン・決済・配送・モック再現範囲・URL/SEO 方針・AI 活用範囲・完全自動化しない範囲の判断を経て、フェーズ1以降へ進む。
+2026-04-30 時点ではテーマ実装、Shopify CLI反映、Admin API seed、商品・BLOG・メニュー、初期SEO title / description、画像alt、主要metafield定義の補助投入まで対応している。商品表示、BLOG縦リスト、問い合わせ追加項目、共通OGPフォールバックはテーマ実装済みである。残タスクは決済、配送、法務、通知先メール、問い合わせ受信、注文テスト、GA4/Search Console、公開前SEO確認である。
 
 ---
 
@@ -116,7 +117,7 @@ Shopify 管理画面 / Shopify アプリ
 ### 2.1 URL 設計上の注意
 
 - Shopify 標準の URL 構造（`/products/`、`/collections/`、`/blogs/`、`/pages/`）を正規 URL とする
-- オリジナル案 `/products/[slug]` などとは URL が変わるため、既存 URL がある場合はリダイレクト計画を別途作成する
+- 旧Next.js案の `/products/[slug]` などとは URL が変わるため、既存 URL がある場合はリダイレクト計画を別途作成する
 - ブログ URL は初期値として `/blogs/stories` を正規 URL とする。Shopify の `/blogs/` プレフィックスは変更できないため、既存 URL（`/blog` 等）がある場合は Shopify のリダイレクト設定で `/blogs/stories` へ転送する
 - 複数コレクションに同一商品が属する場合は canonical と内部リンクの正規導線を確認する
 
@@ -126,24 +127,24 @@ Shopify 管理画面 / Shopify アプリ
 
 | 画面ID | Shopify URL 例 | 画面名 | 主データ | テンプレート種別 | 優先度 |
 |---|---|---|---|---|---|
-| P01 | `/` | トップページ | Theme sections + Products + Blog posts + Metaobjects | JSON template（index） | 必須 |
+| P01 | `/` | トップページ | Theme sections + Products + Blog posts | JSON template（index） | 必須 |
 | P02 | `/collections/all` | 商品一覧 | Shopify Collections / Products | JSON template（collection）| 必須 |
 | P03 | `/collections/{handle}` | 商品カテゴリ一覧 | Shopify Collections | JSON template（collection）| 必須 |
 | P04 | `/products/{handle}` | 商品詳細 | Shopify Product + metafields | JSON template（product）| 必須 |
 | P05 | `/cart` | カート | Shopify Cart | JSON template（cart）| 必須 |
-| P06 | `/pages/kominka` | 古民家紹介 | Page + metaobject | JSON template（page.kominka）| 必須 |
-| P07 | `/pages/contact` | お問い合わせ | Shopify contact template | JSON template（page.contact）| 必須 |
+| P06 | `/pages/kominka` | 古民家紹介 | Page + page metafields + section settings | JSON template（page.kominka）| 必須 |
+| P07 | `/pages/contact` | お問い合わせ | Shopify contact form + `main-page-contact` | JSON template（page.contact）| 必須 |
 | P08 | `/blogs/stories` | ブログ一覧 | Shopify Blog | JSON template（blog）| 必須 |
 | P09 | `/blogs/stories/{article-handle}` | ブログ詳細 | Shopify Blog post | JSON template（article）| 必須 |
 | P10 | `/policies/*` または `/pages/*` | 法務・配送・返品 | Shopify Policies / Pages | policy / page テンプレート | 必須 |
 | P11 | `/search` | 検索 | Shopify 標準検索 | JSON template（search）| 任意 |
-| P12 | `/pages/about` | ブランド紹介 | Page + metaobject または sections | JSON template（page）| 任意 |
+| P12 | `/pages/about` | ブランド紹介 | Page + sections | JSON template（page）| 任意 |
 | P13 | `/pages/farm` | 畑紹介 | Page + sections | JSON template（page）| 任意 |
-| P14 | `/pages/faq` | FAQ | Page + Metaobjects | JSON template（page）| 任意 |
+| P14 | `/pages/faq` | FAQ | Page + section blocks / Metaobjects | JSON template（page.faq）| 任意 |
 
 補足:
 
-- SEO 補助情報（title / meta description / OGP）は全ページで Shopify の検索エンジンリスティング編集機能またはテーマ設定から設定する
+- SEO 補助情報（title / meta description / OGP）はShopifyの検索エンジンリスティング編集機能、seedスクリプト、テーマ設定から設定する
 - `web_mock/` は依頼者レビュー用の別アプリであり、上表の Shopify 公開サイトとはデータ接続・SEO 対象を分離する
 
 ---
@@ -184,7 +185,7 @@ Shopify 管理画面 / Shopify アプリ
 - お問い合わせ（`/pages/contact`）
 - カートアイコン（カート件数表示 / カートドロワー）
 
-ヘッダーにカート件数またはカートドロワー導線を置く。Shopify 標準テーマのカートアイコン表示を活用する。ブランド紹介（`/pages/about`）・畑紹介（`/pages/farm`）は任意ページであり、スコープ確定後にナビゲーション項目へ追加する。
+ヘッダーにアイコンのみのカート導線を置き、件数バッジを表示する。件数は 99 点を超える場合 `99+` 表示を基本とする。Shopify 標準テーマのカートアイコン表示を活用しつつ、`web_mock/` の見え方を参照する。ブランド紹介（`/pages/about`）・畑紹介（`/pages/farm`）は任意ページであり、スコープ確定後にナビゲーション項目へ追加する。
 
 ### 4.3 フッター導線
 
@@ -224,7 +225,7 @@ Shopify 標準のフィルタ・並び順機能を基本として利用する。
 | 商品カテゴリ | Shopify Collections | 商品一覧、商品カテゴリ一覧 |
 | 商品補足情報 | Product metafields | 商品詳細（原材料、飲み方、注意事項、内容量）|
 | 商品 FAQ | Product metafields または Metaobjects | 商品詳細、FAQ ページ |
-| 古民家情報 | Page + Metaobject | 古民家紹介ページ（予約URL、写真、アクセス）|
+| 古民家情報 | Page + page metafields + section settings | 古民家紹介ページ（予約URL、写真、アクセス）。Metaobjectは拡張時に追加 |
 | ブログ記事 | Shopify Blogs / Blog posts | ブログ一覧、ブログ詳細、トップ最新記事 |
 | トップセクション | Theme settings / sections | トップページ（画像、見出し、CTA）|
 | 法務・配送・返品 | Shopify Policies / Pages | 法務ページ群 |
@@ -237,26 +238,26 @@ Shopify 標準のフィルタ・並び順機能を基本として利用する。
 
 | metafield | namespace / key 例 | 説明 | 型 |
 |---|---|---|---|
-| 原材料 | `custom.ingredients` | 商品の原材料・原料 | テキスト |
-| 飲み方 | `custom.how_to_use` | 飲み方・使い方 | テキスト（rich text）|
-| 注意事項 | `custom.caution` | 注意事項・アレルギー | テキスト |
-| 内容量 | `custom.quantity` | 内容量・規格 | テキスト |
-| 関連商品 | `custom.related_products` | 関連商品リスト | Product list（`list.product_reference`）|
+| 原材料 | `custom.ingredients` | 商品の原材料・原料 | `multi_line_text_field` |
+| 飲み方 | `custom.how_to_use` | 飲み方・使い方 | `multi_line_text_field` |
+| 注意事項 | `custom.caution` | 注意事項・アレルギー | `multi_line_text_field` |
+| 内容量 | `custom.quantity` | 内容量・規格 | `single_line_text_field` |
+| 関連商品 | `custom.related_products` | 関連商品リスト。未設定時は同一コレクションまたはfallback商品を表示 | Product list（`list.product_reference`）|
 
 商品 FAQ は再利用性を重視する場合 Metaobjects として定義し、商品詳細ページから参照する。
 
-### 5.3 古民家 Metaobject 定義方針
+### 5.3 古民家データ定義方針
 
-古民家情報は Shopify Metaobject（`kominka_info` 等）として定義し、固定ページテンプレートから参照する。
+古民家情報の初期実装は Shopify Page、Page metafields、section settings で管理し、固定ページテンプレートから参照する。Metaobject（`kominka_info` 等）は写真・FAQ・施設情報を複数件管理する拡張時に追加する。
 
 | フィールド名 | 型 | 説明 |
 |---|---|---|
-| reservation_url | url | 外部予約サービスへの URL |
-| access_text | テキスト | アクセス・住所・駐車場 |
-| gallery_images | ファイルリスト（`list.file_reference`）| 施設写真 |
-| notes | テキスト（rich text）| 注意事項・利用案内 |
+| `custom.reservation_url` | `url` | 外部予約サービスへの URL。未設定時はお問い合わせ導線へフォールバック |
+| `custom.access_text` | `multi_line_text_field` | アクセス・住所・駐車場 |
+| gallery images | section blocks / image settings | `page.kominka.json` とテーマエディタで管理する施設写真 |
+| FAQ | section blocks / Metaobjects | 初期はsection blocks、拡張時はMetaobject |
 
-予約 URL はページ本文へ直書きせず、Metaobject のフィールドとして管理し、管理画面から更新できるようにする。
+予約 URL はページ本文へ直書きせず、Page metafieldまたはsection settingとして管理し、管理画面から更新できるようにする。
 
 ### 5.4 データ取得タイミング
 
@@ -276,32 +277,41 @@ Shopify テーマは sections / blocks / snippets / JSON templates の組み合�
 
 ### 6.1 カスタム Section 一覧
 
-本表はテーマベースに対して新規追加または大幅改修が必要な主なカスタム Section を示す。Shopify テーマが標準で提供する Section（`main-product`、`main-collection`、`cart-items` 等）は含まない。`hero-banner` は複数ページで共通利用する汎用 Section である。
+本表は `web_shopify/sections/` で管理する主なSectionを示す。テーマベースの標準sectionをそのまま使うのではなく、現行テーマでは `main-*` 系もプロジェクト側で管理する。
 
 | Section 名 | 用途 | テーマエディタ対応 |
 |---|---|---|
 | `hero-banner` | ヒーロー画像・見出し・CTA（トップ / 商品一覧 / 古民家 / ブログ）| ○ |
 | `featured-products` | 注目商品リスト（トップ）| ○ |
-| `product-card` | 商品カード（商品一覧 / トップ注目商品）| ○ |
 | `brand-intro` | ブランド紹介テキスト・画像（トップ）| ○ |
 | `kominka-cta` | トップページ 古民家誘導（画像・見出し・リンク）| ○ |
+| `page-kominka-overview` | 古民家ページ本文・概要 | ○ |
 | `kominka-gallery` | 古民家写真ギャラリー | ○ |
 | `kominka-access` | 古民家アクセス情報 | ○ |
 | `reservation-cta` | 外部予約リンク CTA | ○ |
 | `latest-blog` | 最新ブログ記事一覧（トップ）| ○ |
-| `blog-card` | ブログカード（ブログ一覧）| ○ |
+| `main-collection` | 商品一覧、フィルタ、並び順、ページネーション | ○ |
+| `main-product` | 商品詳細、数量、在庫、カート追加 | △ |
+| `main-cart` | カート明細、数量変更、Checkout導線 | △ |
+| `main-blog` | BLOG一覧の縦リスト表示 | ○ |
+| `main-article` | BLOG詳細本文・画像・タグ表示 | - |
+| `main-page-contact` | 問い合わせフォーム、電話番号、問い合わせ種別、同意チェック | ○ |
+| `main-list-collections` | コレクション一覧 | - |
 | `faq-list` | FAQ 一覧表示 | ○ |
 | `contact-cta` | お問い合わせ誘導 CTA（各ページ下部）| ○ |
 | `product-metafields` | 商品詳細の補足情報表示（原材料・飲み方等）| △ |
-| `breadcrumb` | パンくず表示 | - |
+| `related-products` | 関連商品一覧 | △ |
+| `main-search` / `main-404` | 検索結果・404ページ | - |
 
 凡例: ○ = テーマエディタから全設定を編集可能 / △ = テーマエディタから一部設定のみ編集可能 / - = テーマエディタ非対応（開発者がコードで直接管理）
+
+商品カードは `snippets/product-card.liquid` で共通化し、商品画像クリックで商品詳細へ遷移できる構造を基本とする。商品一覧とトップページでは枠を持たない画像中心のグリッドにし、一覧は画像・商品名・価格・NEWバッジ、トップは画像・商品名のみを表示する。数量指定、在庫あり / なし表示、カート追加ボタンは商品詳細とカート画面に集約する。パンくず、画像出力、ページネーション、構造化データはSnippetで管理する。
 
 ### 6.2 テーマ設計方針
 
 | 項目 | 方針 |
 |---|---|
-| ブランドカラー | `web_mock/` を参照し、テーマ CSS 変数で定義する |
+| ブランドカラー | `web_mock/` を参照し、テーマ CSS 変数で定義する。初期基準は `MOSS`、後続変更可能 |
 | 書体 | `web_mock/` を参照し、フォント読み込みをテーマ assets に含める |
 | 余白・スペーシング | `web_mock/` のレイアウトを基準に Section schema で調整可能にする |
 | ボタンスタイル | Primary / Secondary ボタンをテーマ CSS で定義する |
@@ -313,13 +323,13 @@ Shopify テーマは sections / blocks / snippets / JSON templates の組み合�
 | テンプレート | ファイル名例 | 主な Section 構成 |
 |---|---|---|
 | トップページ | `templates/index.json` | hero-banner, brand-intro, featured-products, kominka-cta, latest-blog, contact-cta |
-| 商品一覧 | `templates/collection.json` | hero-banner, product-grid |
-| 商品詳細 | `templates/product.json` | product-media, product-info, product-metafields, faq-list, related-products |
-| カート | `templates/cart.json` | cart-items, cart-footer |
-| 古民家 | `templates/page.kominka.json` | hero-banner, kominka-gallery, kominka-access, reservation-cta, faq-list |
-| 問い合わせ | `templates/page.contact.json` | Shopify 標準 contact フォーム（カスタム section 追加不要）|
-| ブログ一覧 | `templates/blog.json` | hero-banner, blog-grid |
-| ブログ詳細 | `templates/article.json` | hero-banner, article-content, related-products, contact-cta |
+| 商品一覧 | `templates/collection.json` | hero-banner, main-collection |
+| 商品詳細 | `templates/product.json` | main-product, product-metafields, faq-list, related-products |
+| カート | `templates/cart.json` | main-cart |
+| 古民家 | `templates/page.kominka.json` | hero-banner, page-kominka-overview, kominka-gallery, kominka-access, reservation-cta, faq-list |
+| 問い合わせ | `templates/page.contact.json` | main-page-contact |
+| ブログ一覧 | `templates/blog.json` | hero-banner, main-blog |
+| ブログ詳細 | `templates/article.json` | main-article, contact-cta |
 
 ---
 
@@ -337,7 +347,7 @@ Shopify テーマは sections / blocks / snippets / JSON templates の組み合�
 | Shopify Metafields / Metaobjects | Shopify 標準 | 商品補足情報・古民家情報の構造化データ |
 | Shopify Blogs | Shopify 標準 | ブログ投稿・管理 |
 | Shopify Payments 等 | 確認後確定 | 決済処理 |
-| GA4 | `gtag.js` またはテーマ設定 | アクセス計測 |
+| GA4 | Google & YouTubeチャネル / Customer Events等のShopify標準連携 | アクセス計測。テーマ直埋めは標準連携が使えない場合のみ |
 
 ### 7.1 モック構成方針（開発中）
 
@@ -353,9 +363,9 @@ Shopify テーマは sections / blocks / snippets / JSON templates の組み合�
 
 | 項目 | 方針 |
 |---|---|
-| 実装基盤 | Shopify 標準 contact template |
-| 入力項目 | 氏名、メールアドレス、本文（標準）|
-| 追加項目 | 問い合わせ種別・電話番号等が必要な場合はテーマコード改修またはフォームアプリを検討 |
+| 実装基盤 | Shopify 標準 `{% form 'contact' %}` + `main-page-contact` section |
+| 入力項目 | 氏名、メールアドレス、電話番号、問い合わせ種別、本文、プライバシー同意 |
+| 追加項目 | 問い合わせ種別はsection blockで管理。添付ファイル等が必要な場合はフォームアプリを検討 |
 | 送信先 | Shopify ストア通知設定（差出人メール）で管理 |
 | スパム対策 | 初期は Shopify 標準の範囲で運用。高度なスパム対策は初期スコープ外 |
 | CRM 連携・添付ファイル | 初期スコープ外 |
@@ -415,8 +425,8 @@ Git リポジトリ
 
 | 項目 | 実装方針 |
 |---|---|
-| title / meta description | Shopify 検索エンジンリスティング編集機能を全ページで利用する |
-| OGP | テーマ側で `og:title`、`og:description`、`og:image` を出力する |
+| title / meta description | Shopify 検索エンジンリスティング編集機能を全ページで利用する。初期商品・コレクション・ページ・BLOG・記事はseedで `global.title_tag` / `global.description_tag` を補助投入する |
+| OGP | テーマ側で `og:title`、`og:description`、`og:image`、`og:image:alt`、Twitterカードを出力する。個別画像がない場合はテーマassetへフォールバックする |
 | sitemap | Shopify が `/sitemap.xml` を自動生成する |
 | robots.txt | Shopify が自動生成。カスタマイズが必要な場合は `robots.txt.liquid` テンプレートを作成して上書きする |
 | canonical | Shopify 標準 URL を正規とし、テーマ側で正規 URL を出力する |
@@ -443,7 +453,7 @@ Git リポジトリ
 | 表示速度 | CDN 配信・レスポンシブテーマで有利 | 重いアプリ・過剰な JS を避ける |
 | URL 構造 | `/products/`、`/collections/`、`/blogs/` 等が固定で自由度が低い | Shopify 標準 URL を受け入れ、旧 URL がある場合はリダイレクト |
 | 重複コンテンツ | 複数コレクション・バリエーションで重複が起きやすい | canonical 確認・コレクション設計・内部リンク整理で対処 |
-| コンテンツ SEO | ブログ機能は本格メディア SEO には制約がある | 初期は商品 SEO・コレクション SEO を優先。SEO 重視の場合はオリジナル案と比較検討 |
+| コンテンツ SEO | ブログ機能は本格メディア SEO には制約がある | 初期は商品 SEO・コレクション SEO を優先し、将来必要な場合のみヘッドレス構成を再検討 |
 
 ### 9.4 セキュリティ実装方針
 
@@ -458,7 +468,7 @@ Git リポジトリ
 
 ### 9.5 GA4 計測方針
 
-GA4 は Shopify テーマ設定または `gtag.js` をテーマ assets に含めて導入する。Cookie とアクセス解析の利用方針はプライバシーポリシーページに明記する。
+GA4 は Google & YouTubeチャネル / Customer Events等のShopify標準連携を第一候補にする。テーマへ `gtag.js` を直接埋め込む方式は、標準連携が使えない場合のみ採用し、ECイベントの二重計測を避ける。Cookie とアクセス解析の利用方針はプライバシーポリシーページに明記する。
 
 | イベント | 発火タイミング |
 |---|---|
@@ -475,7 +485,7 @@ GA4 は Shopify テーマ設定または `gtag.js` をテーマ assets に含め
 - 商品画像・ブログ画像・古民家画像は Shopify CDN のレスポンシブ画像変換（`image_url` フィルタ）を活用し、表示サイズに対して過大な画像を避ける
 - 商品画像には説明的なファイル名と alt テキストを設定する（登録時に確認）
 - ブログのアイキャッチ画像にも適切な alt テキストを設定する
-- OGP 画像は Shopify の検索エンジンリスティング画像設定または Theme settings で管理する
+- OGP 画像は商品・記事画像、Theme settings の `default_og_image`、テーマasset `home-hero-satoyama.webp` の順で補完する
 - 重いアプリや外部スクリプトの過剰導入を避け、ページ読み込み速度を維持する
 
 ### 9.7 薬機法・景品表示法への対応方針
@@ -491,8 +501,8 @@ GA4 は Shopify テーマ設定または `gtag.js` をテーマ assets に含め
 
 | フェーズ | 目的 | 主な作業 | 完了条件 |
 |---|---|---|---|
-| フェーズ0: Shopify 採用判断 | Shopify 案の前提を確認 | プラン・決済・配送・モック再現範囲・URL/SEO 方針・AI 活用範囲・完全自動化しない範囲を判断 | Shopify 案 Go / Hold を記録 |
-| フェーズ1: ストア初期設定 | Shopify 運用土台を作る | ストア作成・基本情報・決済・配送・法務・ドメイン・metafields / metaobjects 定義 | 商品・決済・配送・法務・ドメインが設定可能な状態 |
+| フェーズ0: Shopify 正規化判断 | Shopify 正規方針の前提を確認 | プラン・決済・配送・モック再現範囲・URL/SEO 方針・AI 活用範囲・完全自動化しない範囲を判断 | Shopify 正規方針として記録 |
+| フェーズ1: ストア初期設定 | Shopify 運用土台を作る | ストア作成・基本情報・決済・配送・法務・ドメイン・metafields 定義。Metaobjectsは拡張時 | 商品・決済・配送・法務・ドメインが設定可能な状態 |
 | フェーズ2: AI 支援テーマ基盤構築 | モック再現用のテーマ土台を作る | Shopify CLI 環境構築・Header / Footer・ブランドカラー / 書体・共通 Section・AI レビュー手順 | プレビューで基本レイアウトが確認できる |
 | フェーズ3: 主要ページ実装 | トップ・商品・カート・古民家・問い合わせ・ブログを実装 | 各 JSON template・Section・Snippet を実装し、`web_mock/` を可能な範囲で再現 | 必須ページと Checkout 導線が Shopify 上で閲覧・編集可能 |
 | フェーズ4: データ投入・運用確認 | 商品・ブログ・古民家情報を登録 | 商品データ・metafields・コレクション・ブログ・古民家情報を登録。スマホ投稿・注文テストを確認 | スマホでブログ更新・商品編集・問い合わせ・注文テストが確認できる |
@@ -519,8 +529,8 @@ GA4 は Shopify テーマ設定または `gtag.js` をテーマ assets に含め
 ## 12. 制約・注意点
 
 - モックデザインは「できるだけ再現」とし、Shopify テーマ・Checkout・アプリ制約により完全一致は保証しない
-- Shopify 標準の URL 構造に寄せるため、オリジナル案の URL 設計とは異なる。既存 URL がある場合はリダイレクト計画を別途作成する
-- Shopify は基本 SEO に強い一方、URL 構造とブログ機能の自由度は低い。SEO 重視の場合はオリジナル案またはヘッドレス構成との比較判断を行う
+- Shopify 標準の URL 構造に寄せるため、旧Next.js案の URL 設計とは異なる。既存 URL がある場合はリダイレクト計画を別途作成する
+- Shopify は基本 SEO に強い一方、URL 構造とブログ機能の自由度は低い。SEO 強化が必要な場合は、Shopify内改善またはヘッドレス構成を将来拡張として検討する
 - 問い合わせフォームの件名・詳細な送信仕様は Shopify 標準では制約があるため、追加要件がある場合はアプリ選定が必要
 - 商品・ブログ・古民家情報を Shopify に集約するため、将来オリジナルサイトへ戻す場合はデータ移行設計が必要
 - カート・Checkout・決済・注文通知・配送・税・ポリシー・ドメイン・SSL は公開前に本番相当条件で確認する
@@ -531,9 +541,13 @@ GA4 は Shopify テーマ設定または `gtag.js` をテーマ assets に含め
 
 | 日付 | バージョン | 更新者 | 内容 |
 |---|---|---|---|
-| 2026-04-27 | 1.0.0 | Codex | Shopify 案として初版作成。要件定義書 v1.2.0・ロードマップ v1.2.0・オリジナル案基本設計書 v1.5.1 を参照し、Shopify 上で完結するサイト設計を定義 |
+| 2026-04-27 | 1.0.0 | Codex | Shopify 案として初版作成。要件定義書 v1.2.0・ロードマップ v1.2.0・旧Next.js案基本設計書 v1.5.1 を参照し、Shopify 上で完結するサイト設計を定義 |
 | 2026-04-27 | 1.0.1 | Codex | セルフレビュー（4回）を実施。Section 一覧・JSON テンプレート構成・URL 設計・metafield 型・robots.txt・構造化データ・セキュリティヘッダー等の表記を修正 |
-| 2026-04-27 | 1.0.1 | Codex | セルフレビュー（4回）を実施。Section 一覧・JSON テンプレート構成・URL 設計・metafield 型タrobots.txt・構造化データ・セキュリティヘッダー等の表記を修正 |
+| 2026-04-28 | 1.0.2 | Codex | `web_mock/` の商品画像遷移、数量指定、在庫表示、カートアイコン件数バッジ、暫定テーマカラー `MOSS` を反映 |
+| 2026-04-29 | 1.0.3 | Codex | 実装済みの商品一覧/トップ表示、NEWバッジ、BLOG/問い合わせ運用、CLI/seed反映を同期 |
+| 2026-04-29 | 1.0.4 | Codex | 上位要件 v1.2.3 に合わせ、実装済みSection構成、問い合わせ追加項目、BLOG縦リスト、履歴重複を修正 |
+| 2026-04-30 | 1.0.5 | Codex | Shopify実装との差分を再帰確認し、SEOメタデータseed、OGPフォールバック、画像alt、関連商品フォールバック、古民家page metafield運用を反映 |
+| 2026-05-04 | 1.0.6 | Codex | Shopifyを正規方針とし、オリジナル案をアーカイブ参照へ変更 |
 
 ---
 
