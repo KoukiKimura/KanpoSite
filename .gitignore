@@ -3,6 +3,9 @@ work/*
 env/.env.deploy
 env/.env.mock.deploy
 env/web_mock/.env.review
+env/shopify/.env
+env/shopify/.env.*
+!env/shopify/.env.example
 web_mock/.env.production
 web_mock/.env.*
 web_mock/.env
