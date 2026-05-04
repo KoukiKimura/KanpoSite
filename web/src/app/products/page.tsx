@@ -1,24 +1,18 @@
-'use client';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import ProductsClientFilter from '@/components/ui/ProductsClientFilter';
 
-import { useState } from 'react';
-import { products, categories, type Category } from '@/lib/dummy-data';
-import ProductCard from '@/components/ui/ProductCard';
-import SectionTitle from '@/components/ui/SectionTitle';
+export const metadata: Metadata = {
+  title: '商品一覧',
+  description:
+    '山草の恵みの商品一覧。茶葉・セット商品など、自然の生薬を使ったオリジナル漢方茶をご覧ください。',
+  openGraph: {
+    title: '商品一覧 | 山草の恵み',
+    description: '自然の生薬を使ったオリジナル漢方茶。茶葉・セット商品を取り揃えています。',
+  },
+};
 
 export default function ProductsPage() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
-
-  const filtered =
-    activeCategory === 'all'
-      ? products
-      : products.filter((p) => p.category === activeCategory);
-
-  const categoryLabels: Record<Category, string> = {
-    all: 'すべて',
-    茶葉: '茶葉',
-    セット: 'セット',
-  };
-
   return (
     <>
       {/* ページヘッダー */}
@@ -40,43 +34,8 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      {/* 商品一覧 */}
-      <section className="section-padding bg-brand-bg">
-        <div className="container-site">
-          {/* カテゴリーフィルター */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 text-sm tracking-widest border transition-colors duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-transparent text-brand-text border-brand-border hover:border-primary hover:text-primary'
-                }`}
-              >
-                {categoryLabels[cat]}
-                <span className="ml-2 text-xs opacity-60">
-                  ({cat === 'all' ? products.length : products.filter((p) => p.category === cat).length})
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* 商品グリッド */}
-          {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {filtered.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 text-brand-muted">
-              <p className="text-lg">該当する商品がありません</p>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* 商品一覧（クライアントフィルター） */}
+      <ProductsClientFilter />
 
       {/* 下部CTA */}
       <section className="py-16 bg-brand-cream text-center">
@@ -85,9 +44,9 @@ export default function ProductsPage() {
             商品についてご不明な点がございましたら、<br />
             お気軽にお問い合わせください。
           </p>
-          <a href="/contact" className="btn-outline">
+          <Link href="/contact" className="btn-outline">
             お問い合わせ
-          </a>
+          </Link>
         </div>
       </section>
     </>

@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useCart } from '@/components/cart/CartProvider';
 
 const navLinks = [
   { href: '/', label: 'トップ' },
   { href: '/products', label: '商品' },
+  { href: '/blog', label: 'ブログ' },
   { href: '/about', label: 'ブランド' },
-  { href: '/farm', label: '畑' },
   { href: '/kominka', label: '古民家' },
   { href: '/contact', label: 'お問い合わせ' },
 ];
@@ -15,25 +16,19 @@ const navLinks = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { totalQuantity, hydrated } = useCart();
+  const cartCount = totalQuantity > 99 ? '99+' : String(totalQuantity);
+  const showBadge = hydrated && totalQuantity > 0;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // メニューが開いているときはスクロールを無効化
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [isMenuOpen]);
 
   return (
@@ -48,10 +43,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* ロゴ */}
           <Link href="/" className="flex flex-col items-start group" onClick={() => setIsMenuOpen(false)}>
-            <span
-              className="text-xl lg:text-2xl tracking-widest text-primary font-serif leading-tight"
-              style={{ fontFamily: "'Noto Serif JP', serif" }}
-            >
+            <span className="text-xl lg:text-2xl tracking-widest text-primary font-serif leading-tight" style={{ fontFamily: "'Noto Serif JP', serif" }}>
               山草の恵み
             </span>
             <span className="text-xs tracking-[0.2em] text-accent italic" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
@@ -66,47 +58,62 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            {/* カートアイコン */}
+            <Link
+              href="/cart"
+              className="relative flex items-center justify-center w-9 h-9 hover:opacity-70 transition-opacity duration-200"
+              aria-label={`カート${showBadge ? `（${cartCount}点）` : ''}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/ui/cart-icon.png" alt="" className="h-5 w-5 object-contain" />
+              {showBadge && (
+                <span className="absolute -right-2 -top-2 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-semibold leading-none text-white">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </nav>
 
           {/* ハンバーガーメニュー（モバイル） */}
-          <button
-            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
-            aria-expanded={isMenuOpen}
-          >
-            <span
-              className={`block w-6 h-px bg-brand-text transition-transform duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-brand-text transition-opacity duration-300 ${
-                isMenuOpen ? 'opacity-0' : ''
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-brand-text transition-transform duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''
-              }`}
-            />
-          </button>
+          <div className="flex lg:hidden items-center gap-3">
+            {/* モバイルカートアイコン */}
+            <Link
+              href="/cart"
+              className="relative flex items-center justify-center w-10 h-10 hover:opacity-70 transition-opacity duration-200"
+              aria-label={`カート${showBadge ? `（${cartCount}点）` : ''}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/ui/cart-icon.png" alt="" className="h-5 w-5 object-contain" />
+              {showBadge && (
+                <span className="absolute -right-1.5 -top-1.5 flex min-h-4 min-w-4 items-center justify-center rounded-full bg-accent px-0.5 text-[9px] font-semibold leading-none text-white">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
+            <button
+              className="flex flex-col justify-center items-center w-10 h-10 gap-1.5 group"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+              aria-expanded={isMenuOpen}
+            >
+              <span className={`block w-6 h-px bg-brand-text transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
+              <span className={`block w-6 h-px bg-brand-text transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-6 h-px bg-brand-text transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* モバイルメニュー */}
-      <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
+      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
         <nav className="bg-brand-bg/95 backdrop-blur-md border-t border-brand-border px-6 py-6">
           <ul className="flex flex-col gap-0">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block py-4 text-sm tracking-widest text-brand-text hover:text-primary transition-colors duration-200 border-b border-brand-border last:border-0"
+                  className="block py-4 text-sm tracking-widest text-brand-text hover:text-primary transition-colors duration-200 border-b border-brand-border"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
@@ -119,3 +126,4 @@ export default function Header() {
     </header>
   );
 }
+
