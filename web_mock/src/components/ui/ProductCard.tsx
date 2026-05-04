@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import AddToCartControls from '@/components/cart/AddToCartControls';
 import type { MockProduct } from '@/lib/mock/site';
 import PhotoPanel from '@/components/ui/PhotoPanel';
 
@@ -9,14 +12,21 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <article id={`product-card-${product.slug}`} className="overflow-hidden border border-mock-border bg-mock-paper">
-      <PhotoPanel
-        label={product.name}
-        caption={product.category}
-        from={product.palette.from}
-        to={product.palette.to}
-        src={product.mainImage.src}
-        alt={product.mainImage.alt}
-      />
+      <Link
+        id={`product-card-${product.slug}-image-link`}
+        href={`/products/${product.slug}`}
+        aria-label={`${product.name}の商品詳細を見る`}
+        className="block"
+      >
+        <PhotoPanel
+          label={product.name}
+          caption={product.category}
+          from={product.palette.from}
+          to={product.palette.to}
+          src={product.mainImage.src}
+          alt={product.mainImage.alt}
+        />
+      </Link>
       <div id={`product-card-${product.slug}-content`} className="space-y-3 p-4 md:space-y-4 md:p-6">
         <div id={`product-card-${product.slug}-meta`} className="flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4">
           <div id={`product-card-${product.slug}-heading`}>
@@ -34,6 +44,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p id={`product-card-${product.slug}-price`} className="text-sm tracking-[0.16em] text-mock-muted sm:pt-1 sm:tracking-[0.2em]">{product.priceLabel}</p>
         </div>
         <p id={`product-card-${product.slug}-summary`} className="text-sm leading-7 text-mock-muted">{product.summary}</p>
+        <AddToCartControls product={product} idBase={`product-card-${product.slug}-cart`} />
         <Link
           id={`product-card-${product.slug}-link`}
           href={`/products/${product.slug}`}

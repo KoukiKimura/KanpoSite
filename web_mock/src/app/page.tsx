@@ -143,16 +143,23 @@ export default function HomePage() {
             <div id="home-products-grid" className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
               {featuredProducts.map((product) => (
                 <article id={`home-product-preview-${product.slug}`} key={product.slug} className="mock-card overflow-hidden">
-                  <div
-                    id={`home-product-preview-${product.slug}-image`}
-                    className="mock-image-frame mock-surface-1 min-h-[180px] border-x-0 border-t-0 border-white/0 shadow-none md:min-h-[240px] xl:min-h-[260px]"
+                  <Link
+                    id={`home-product-preview-${product.slug}-image-link`}
+                    href={`/products/${product.slug}`}
+                    aria-label={`${product.name}の商品詳細を見る`}
+                    className="block"
                   >
-                    <ResponsiveImage
-                      src={product.mainImage.src}
-                      alt={product.mainImage.alt}
-                      sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw"
-                    />
-                  </div>
+                    <div
+                      id={`home-product-preview-${product.slug}-image`}
+                      className="mock-image-frame mock-surface-1 min-h-[180px] border-x-0 border-t-0 border-white/0 shadow-none md:min-h-[240px] xl:min-h-[260px]"
+                    >
+                      <ResponsiveImage
+                        src={product.mainImage.src}
+                        alt={product.mainImage.alt}
+                        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw"
+                      />
+                    </div>
+                  </Link>
                   <div id={`home-product-preview-${product.slug}-content`} className="space-y-3 p-4 md:p-6">
                     <p id={`home-product-preview-${product.slug}-category`} className="text-xs uppercase tracking-[0.3em] text-mock-gold">
                       {product.category}

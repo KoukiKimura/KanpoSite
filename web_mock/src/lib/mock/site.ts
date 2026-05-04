@@ -23,7 +23,7 @@ function getMockBasePath() {
   }
 }
 
-function withMockBasePath(path: string) {
+export function withMockBasePath(path: string) {
   if (!path.startsWith('/')) {
     return path;
   }
@@ -37,6 +37,8 @@ export type MockProduct = {
   category: string;
   name: string;
   priceLabel: string;
+  price: number;
+  stock: number;
   summary: string;
   story: string;
   notes: string[];
@@ -66,12 +68,19 @@ export const mockSite = {
   },
 };
 
+export const mockCartIcon = {
+  src: withMockBasePath('/images/ui/cart-icon.png'),
+  alt: 'カート',
+};
+
 export const mockProducts: MockProduct[] = [
   {
     slug: 'mountain-herb-blend',
     category: 'お茶',
     name: '山のハーブブレンド',
     priceLabel: '¥3,200',
+    price: 3200,
+    stock: 18,
     summary:
       '野に立つ草花の香りを静かにまとめた、朝の湯気に似合う定番のお茶です。',
     story:
@@ -113,6 +122,8 @@ export const mockProducts: MockProduct[] = [
     category: '粉薬',
     name: '和漢の養生粉',
     priceLabel: '¥4,200',
+    price: 4200,
+    stock: 7,
     summary:
       '毎日の湯や粥に少量ずつ加えられる、やわらかな香りの和漢粉末です。',
     story:
@@ -154,6 +165,8 @@ export const mockProducts: MockProduct[] = [
     category: '養生セット',
     name: '季節の養生セット',
     priceLabel: '¥8,600',
+    price: 8600,
+    stock: 104,
     summary:
       'お茶、粉末、手当ての小物を一箱にまとめた、四季の贈りものです。',
     story:
@@ -195,6 +208,8 @@ export const mockProducts: MockProduct[] = [
     category: '錠剤',
     name: '草木の養生錠',
     priceLabel: '¥3,800',
+    price: 3800,
+    stock: 4,
     summary:
       '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。',
     story:
@@ -236,6 +251,8 @@ export const mockProducts: MockProduct[] = [
     category: 'お茶',
     name: '夜のくつろぎ茶',
     priceLabel: '¥2,900',
+    price: 2900,
+    stock: 0,
     summary:
       '灯りを落としたあとに似合う、静かな香りの夜のお茶です。',
     story:

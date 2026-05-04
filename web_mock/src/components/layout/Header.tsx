@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { mockSite } from '@/lib/mock/site';
+import { useCart } from '@/components/cart/CartProvider';
+import { mockCartIcon, mockSite } from '@/lib/mock/site';
 
 const navItems = [
   { href: '/', label: 'トップ' },
@@ -13,7 +14,7 @@ const navItems = [
 ];
 
 const themeOptions = [
-  { key: 'current', label: 'Moss' },
+  { key: 'current', label: 'MOSS' },
   { key: 'white', label: 'White' },
   { key: 'washi', label: 'Washi' },
 ] as const;
@@ -27,7 +28,10 @@ export default function Header() {
   const isHome = pathname === '/';
   const [activeTheme, setActiveTheme] = useState<ThemeKey>('current');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { totalQuantity } = useCart();
   const isLightTheme = activeTheme !== 'current';
+  const cartCountLabel = totalQuantity > 99 ? '99+' : String(totalQuantity);
+  const showCartCount = totalQuantity > 0;
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
@@ -124,9 +128,30 @@ export default function Header() {
           </span>
         </button>
 
+        <Link
+          id="site-mobile-cart-link"
+          href="/cart"
+          aria-label="カートを見る"
+          className={`absolute right-4 top-4 z-[80] flex h-10 w-10 items-center justify-center border transition md:hidden ${
+            isLightTheme
+              ? 'border-mock-border bg-mock-paper text-mock-ink hover:bg-mock-background'
+              : 'border-white/18 bg-white/90 text-mock-ink hover:bg-white'
+          }`}
+        >
+          <img src={mockCartIcon.src} alt="" className="h-5 w-5 object-contain" />
+          {showCartCount ? (
+            <span
+              id="site-mobile-cart-count"
+              className="absolute -right-2 -top-2 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-mock-earth px-1 text-[10px] font-semibold leading-none text-white"
+            >
+              {cartCountLabel}
+            </span>
+          ) : null}
+        </Link>
+
         <div
           id="site-theme-switcher-wrap"
-          className="hidden w-full md:block lg:absolute lg:right-10 lg:top-5 lg:flex lg:w-auto lg:justify-end"
+          className="hidden w-full flex-col items-center gap-2 md:flex lg:absolute lg:right-10 lg:top-5 lg:w-auto lg:items-end"
         >
           <div
             id="site-theme-switcher"
@@ -162,6 +187,26 @@ export default function Header() {
               </button>
             ))}
           </div>
+          <Link
+            id="site-cart-link"
+            href="/cart"
+            aria-label="カートを見る"
+            className={`relative flex h-11 w-11 items-center justify-center border transition ${
+              isLightTheme
+                ? 'border-mock-border bg-mock-paper text-mock-ink hover:bg-mock-background'
+                : 'border-white/18 bg-white/90 text-mock-ink hover:bg-white'
+            }`}
+          >
+            <img src={mockCartIcon.src} alt="" className="h-5 w-5 object-contain" />
+            {showCartCount ? (
+              <span
+                id="site-cart-count"
+                className="absolute -right-2 -top-2 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-mock-earth px-1 text-[10px] font-semibold leading-none text-white"
+              >
+                {cartCountLabel}
+              </span>
+            ) : null}
+          </Link>
         </div>
 
         <div id="site-brand" className="flex w-full flex-col items-center justify-center gap-4 text-center">
