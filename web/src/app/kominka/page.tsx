@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SectionTitle from '@/components/ui/SectionTitle';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -12,10 +13,17 @@ export default function KominkaPage() {
   return (
     <>
       {/* ヒーローセクション */}
-      <div
-        className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 text-white overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #3D3010 0%, #5C4A20 50%, #6B500F 100%)' }}
-      >
+      <div className="relative min-h-[46vh] flex items-center justify-center overflow-hidden">
+        <ResponsiveImage
+          src="/images/kominka/hero-stay.webp"
+          alt="古民家の宿"
+          pictureClassName="absolute inset-0 block h-full w-full"
+          className="h-full w-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(12,12,12,0.28),rgba(12,12,12,0.46))]" />
         {/* 近日公開オーバーレイ */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
           <div className="border border-white/30 px-8 py-3 text-center">
@@ -27,23 +35,22 @@ export default function KominkaPage() {
             </p>
           </div>
         </div>
-
-        <div className="relative container-site text-center">
+        <div className="relative z-10 container-site text-center text-white py-20 lg:py-32">
           <p
             className="text-xs tracking-[0.4em] text-white/50 uppercase mb-4"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            Guesthouse
+            Kominka
           </p>
           <h1
             className="heading-xl text-white mb-5"
             style={{ fontFamily: "'Noto Serif JP', serif" }}
           >
-            ゲストハウス
+            古民家
           </h1>
           <div className="w-12 h-px bg-accent mx-auto my-6" />
           <p className="text-white/70 max-w-lg mx-auto text-base leading-loose">
-            古民家を改修した宿で、漢方と自然に触れる体験を。<br />
+            朝は畑の空気を吸い、夜は木の香りの中で休む。<br />
             <span className="text-accent font-medium">近日公開予定です。</span>
           </p>
         </div>
@@ -53,20 +60,35 @@ export default function KominkaPage() {
       <section className="section-padding bg-brand-bg">
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* 画像プレースホルダー */}
-            <div className="sticky top-24">
-              <div className="aspect-[4/3] bg-brand-cream border border-brand-border flex items-center justify-center mb-3">
-                <div className="text-center text-brand-muted">
-                  <span className="text-7xl block mb-3">🏡</span>
-                  <p className="text-xs tracking-widest">古民家外観写真（準備中）</p>
-                </div>
+            {/* 古民家画像 */}
+            <div className="sticky top-24 space-y-3">
+              <div className="relative overflow-hidden min-h-[280px] md:min-h-[420px]">
+                <ResponsiveImage
+                  src="/images/kominka/hero-stay.webp"
+                  alt="古民家の宿"
+                  pictureClassName="absolute inset-0 block h-full w-full"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 1023px) 100vw, 50vw"
+                />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="aspect-square bg-brand-cream border border-brand-border flex items-center justify-center">
-                  <span className="text-3xl opacity-20">🌿</span>
+                <div className="relative overflow-hidden min-h-[150px]">
+                  <ResponsiveImage
+                    src="/images/kominka/living-room.webp"
+                    alt="居間"
+                    pictureClassName="absolute inset-0 block h-full w-full"
+                    className="h-full w-full object-cover"
+                    sizes="25vw"
+                  />
                 </div>
-                <div className="aspect-square bg-brand-cream border border-brand-border flex items-center justify-center">
-                  <span className="text-3xl opacity-20">🏮</span>
+                <div className="relative overflow-hidden min-h-[150px]">
+                  <ResponsiveImage
+                    src="/images/kominka/morning-field.webp"
+                    alt="朝の畑"
+                    pictureClassName="absolute inset-0 block h-full w-full"
+                    className="h-full w-full object-cover"
+                    sizes="25vw"
+                  />
                 </div>
               </div>
             </div>
@@ -130,17 +152,15 @@ export default function KominkaPage() {
                   ※ 予約機能は将来実装予定（現在はFacebookよりお問い合わせください）
                 </p>
                 {/* FacebookボタンのURLはプレースホルダー */}
-                <a
-                  href="https://www.facebook.com/PLACEHOLDER"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center gap-2"
+                <span
+                  aria-disabled="true"
+                  className="btn-secondary inline-flex items-center gap-2 opacity-60 cursor-not-allowed select-none"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                   </svg>
                   Facebookでお問い合わせ
-                </a>
+                </span>
                 <p className="text-xs text-brand-muted/50 mt-2">
                   ※ FacebookページのURLは準備中のプレースホルダーです
                 </p>

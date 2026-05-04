@@ -1,86 +1,28 @@
 import Link from 'next/link';
-import { getFeaturedProducts } from '@/lib/dummy-data';
+import { getFeaturedProducts, getNewsPosts, formatDate } from '@/lib/data';
+import { getLatestNotionBlogPosts } from '@/lib/notion/queries';
 import ProductCard from '@/components/ui/ProductCard';
 import SectionTitle from '@/components/ui/SectionTitle';
+import HeroSlider from '@/components/ui/HeroSlider';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
-const newsItems = [
-  {
-    date: '2024年7月1日',
-    category: 'お知らせ',
-    title: 'ウェブサイトをリニューアルしました',
-  },
-  {
-    date: '2024年6月15日',
-    category: '新商品',
-    title: '夏季限定「清涼草茶」を7月より発売予定',
-  },
-  {
-    date: '2024年5月20日',
-    category: 'イベント',
-    title: '畑の見学会を開催しました（レポートは近日公開）',
-  },
-];
-
-export default function HomePage() {
+export default async function HomePage() {
   const featuredProducts = getFeaturedProducts().slice(0, 3);
+  const latestPosts = await getLatestNotionBlogPosts(3);
+  const newsPosts = getNewsPosts(3);
+
+  const heroSlides = [
+    { src: '/images/home/hero-satoyama.webp', alt: '里山の風景' },
+    { src: '/images/home/kominka-guest-room.webp', alt: '古民家のゲストルーム' },
+    { src: '/images/home/field-walk.webp', alt: '畑を歩く' },
+    { src: '/images/home/morning-tea.webp', alt: '朝のお茶' },
+    { src: '/images/products/mountain-herb-blend/main.webp', alt: '山のハーブブレンド' },
+  ];
 
   return (
     <>
       {/* ヒーローセクション */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* 背景グラデーション */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(135deg, #1E3610 0%, #2D5016 40%, #3D6B1F 65%, #6B500F 85%, #8B6914 100%)',
-          }}
-        />
-        {/* テクスチャオーバーレイ */}
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
-
-        <div className="relative container-site text-center text-white py-32 lg:py-48">
-          <p
-            className="text-xs lg:text-sm tracking-[0.4em] text-white/60 mb-8 uppercase"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            Sansou no Megumi — Natural Herbal Medicine
-          </p>
-          <h1
-            className="heading-xl text-white mb-6"
-            style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
-          >
-            自然の力を、<br className="sm:hidden" />日常へ。
-          </h1>
-          <div className="w-16 h-px bg-accent mx-auto my-8" />
-          <p className="text-base lg:text-lg text-white/80 max-w-lg mx-auto leading-loose tracking-wide mb-12">
-            山と草と、受け継いだ知恵。<br />
-            漢方の伝統を現代の暮らしに届ける、<br />
-            山草の恵みの生薬茶。
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/products"
-              className="btn-outline-white w-full sm:w-auto"
-            >
-              商品を見る
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm tracking-widest text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
-            >
-              ブランドについて
-              <span className="text-accent">→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* 下部スクロール矢印 */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-          <span className="text-xs tracking-widest uppercase" style={{ fontFamily: "'Cormorant Garamond', serif" }}>scroll</span>
-          <div className="w-px h-10 bg-white/30 animate-pulse" />
-        </div>
-      </section>
+      <HeroSlider slides={heroSlides} />
 
       {/* ブランド紹介セクション */}
       <section className="section-padding bg-brand-cream">
@@ -161,74 +103,170 @@ export default function HomePage() {
                 ストーリー全文を読む
               </Link>
             </div>
-            {/* 画像プレースホルダー */}
-            <div className="aspect-[4/3] bg-primary/50 flex items-center justify-center border border-white/10">
-              <div className="text-center text-white/30">
-                <span className="text-6xl block mb-3">🌾</span>
-                <p className="text-xs tracking-widest">ブランドイメージ写真</p>
-              </div>
+            {/* 農園イメージ */}
+            <div className="relative overflow-hidden min-h-[300px] md:min-h-[400px]">
+              <ResponsiveImage
+                src="/images/home/field-walk.webp"
+                alt="農園を歩く"
+                pictureClassName="absolute inset-0 block h-full w-full"
+                className="h-full w-full object-cover"
+                sizes="(max-width: 1023px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* 畑紹介セクション */}
-      <section className="relative py-32 lg:py-48 overflow-hidden">
-        {/* 背景 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-cream to-brand-bg" />
-        <div className="relative container-site text-center">
-          <SectionTitle
-            title="私たちの畑"
-            titleEn="Our Field"
-            subtitle="標高○○メートルの山間に広がる、私たちの生薬畑。土と対話しながら、丁寧に育てています。"
-          />
-          {/* 畑の画像プレースホルダー */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12 max-w-4xl mx-auto">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="aspect-square bg-brand-cream border border-brand-border flex items-center justify-center text-brand-muted"
-              >
-                <span className="text-3xl opacity-30">🌿</span>
+      <section className="section-padding bg-brand-cream">
+        <div className="container-site">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-center">
+            <div>
+              <SectionTitle
+                title="農園の風景"
+                titleEn="Our Field"
+                align="left"
+                subtitle="古民家の庭先から続く畑で、季節の草木を育てています。受け継いだ家の時間と土の気配をそのままに、香りのやわらかな和漢素材へ整えています。"
+              />
+              <Link href="/farm" className="btn-outline">
+                畑のことをもっと知る
+              </Link>
+            </div>
+            {/* 畑の画像グリッド */}
+            <div className="grid gap-3 md:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative overflow-hidden min-h-[240px] md:min-h-[360px]">
+                <ResponsiveImage
+                  src="/images/home/field-walk.webp"
+                  alt="畑を歩く"
+                  pictureClassName="absolute inset-0 block h-full w-full"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 767px) 100vw, 40vw"
+                />
               </div>
-            ))}
+              <div className="grid gap-3">
+                <div className="relative overflow-hidden min-h-[150px] md:min-h-[170px]">
+                  <ResponsiveImage
+                    src="/images/home/morning-tea.webp"
+                    alt="朝のお茶"
+                    pictureClassName="absolute inset-0 block h-full w-full"
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 767px) 100vw, 30vw"
+                  />
+                </div>
+                <div className="relative overflow-hidden min-h-[150px] md:min-h-[170px]">
+                  <ResponsiveImage
+                    src="/images/products/mountain-herb-blend/main.webp"
+                    alt="山のハーブブレンド"
+                    pictureClassName="absolute inset-0 block h-full w-full"
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 767px) 100vw, 30vw"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <Link href="/farm" className="btn-outline">
-            畑のことをもっと知る
-          </Link>
         </div>
       </section>
 
       {/* ゲストハウスセクション */}
-      <section className="section-padding bg-brand-cream">
+      <section className="section-padding bg-brand-bg">
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* 画像プレースホルダー */}
-            <div className="aspect-[4/3] bg-brand-border flex items-center justify-center order-2 lg:order-1">
-              <div className="text-center text-brand-muted">
-                <span className="text-6xl block mb-3">🏡</span>
-                <p className="text-xs tracking-widest">ゲストハウス写真</p>
+            {/* 古民家画像 */}
+            <div className="grid gap-3 md:grid-cols-2 order-2 lg:order-1">
+              <div className="relative overflow-hidden min-h-[240px] md:min-h-[360px] md:col-span-2">
+                <ResponsiveImage
+                  src="/images/kominka/hero-stay.webp"
+                  alt="古民家の宿"
+                  pictureClassName="absolute inset-0 block h-full w-full"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                />
+              </div>
+              <div className="relative overflow-hidden min-h-[180px]">
+                <ResponsiveImage
+                  src="/images/kominka/living-room.webp"
+                  alt="居間"
+                  pictureClassName="absolute inset-0 block h-full w-full"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 767px) 50vw, 25vw"
+                />
+              </div>
+              <div className="relative overflow-hidden min-h-[180px]">
+                <ResponsiveImage
+                  src="/images/kominka/morning-field.webp"
+                  alt="朝の畑"
+                  pictureClassName="absolute inset-0 block h-full w-full"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 767px) 50vw, 25vw"
+                />
               </div>
             </div>
             <div className="order-1 lg:order-2">
               <SectionTitle
-                title="ゲストハウス"
-                titleEn="Guesthouse"
+                title="古民家での滞在"
+                titleEn="Kominka Stay"
                 align="left"
-                subtitle="古民家を改修した宿で、漢方と自然に触れる体験を。近日公開予定です。"
+                subtitle="土間から縁側へ、縁側から畑の景色へ。古い家に残る静けさをそのまま宿にした、余白の多い一棟です。"
               />
               <div className="space-y-4 text-brand-muted leading-loose text-sm mb-8">
                 <p>
-                  築○○年の古民家を丁寧に改修し、宿泊施設として準備を進めています。
-                  生薬畑の見学や、漢方茶を楽しむ体験と合わせて、
-                  自然の中でゆったりとした時間をお過ごしいただけます。
+                  朝は畑の空気を吸い、夜は木の香りの中で休む。古民家を改修した宿で、
+                  漢方と自然に触れる体験をお届けします。
                 </p>
-                <p className="text-accent font-medium">現在、準備中です。近日公開予定。</p>
+                <p className="text-accent font-medium">近日公開予定。</p>
               </div>
-              <Link href="/guesthouse" className="btn-outline">
-                詳しく見る
+              <Link href="/kominka" className="btn-outline">
+                古民家を見る →
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 最新ブログ記事セクション */}
+      <section className="section-padding bg-brand-cream">
+        <div className="container-site">
+          <SectionTitle
+            title="最新記事"
+            titleEn="Latest Articles"
+            subtitle="漢方茶のレシピ、畑だより、読み物など最新の記事をお届けします。"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {latestPosts.map((post) => (
+              <article key={post.slug} className="card-product group flex flex-col bg-white">
+                <div className="aspect-video bg-brand-cream flex items-center justify-center overflow-hidden">
+                  <span className="text-4xl opacity-20">📝</span>
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <time dateTime={post.publishedAt} className="text-xs text-brand-muted tracking-wide mb-2 block">
+                    {formatDate(post.publishedAt)}
+                  </time>
+                  <h3
+                    className="text-base font-serif tracking-wide text-brand-text mb-2 line-clamp-2"
+                    style={{ fontFamily: "'Noto Serif JP', serif" }}
+                  >
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-brand-muted leading-relaxed mb-4 flex-1 line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-auto pt-4 border-t border-brand-border">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="text-xs tracking-widest text-primary border border-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors duration-200 inline-block"
+                    >
+                      続きを読む
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link href="/blog" className="btn-outline">
+              ブログ一覧を見る
+            </Link>
           </div>
         </div>
       </section>
@@ -238,18 +276,30 @@ export default function HomePage() {
         <div className="container-site max-w-3xl mx-auto">
           <SectionTitle title="お知らせ" titleEn="News" />
           <ul className="divide-y divide-brand-border">
-            {newsItems.map((item, i) => (
-              <li key={i} className="py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+            {newsPosts.map((item) => (
+              <li key={item.slug} className="py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
                 <div className="flex items-center gap-3 flex-shrink-0">
-                  <span className="text-xs text-brand-muted tracking-wide">{item.date}</span>
+                  <time dateTime={item.publishedAt} className="text-xs text-brand-muted tracking-wide">
+                    {formatDate(item.publishedAt)}
+                  </time>
                   <span className="text-xs tracking-widest text-accent bg-accent/10 px-2 py-0.5">
-                    {item.category}
+                    お知らせ
                   </span>
                 </div>
-                <p className="text-sm text-brand-text tracking-wide">{item.title}</p>
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="text-sm text-brand-text tracking-wide hover:text-primary transition-colors"
+                >
+                  {item.title}
+                </Link>
               </li>
             ))}
           </ul>
+          <div className="text-center mt-8">
+            <Link href="/blog/category/news" className="text-sm tracking-widest text-primary hover:text-primary-dark transition-colors">
+              お知らせ一覧 →
+            </Link>
+          </div>
         </div>
       </section>
 
