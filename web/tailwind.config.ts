@@ -40,6 +40,15 @@ const config: Config = {
       maxWidth: {
         '8xl': '90rem',
       },
+      keyframes: {
+        heroZoom: {
+          from: { transform: 'scale(1)' },
+          to: { transform: 'scale(1.08)' },
+        },
+      },
+      animation: {
+        'hero-zoom': 'heroZoom 5.2s ease-out both',
+      },
     },
   },
   plugins: [],
