@@ -1,0 +1,58 @@
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow">Collections</p>
+    <h1 class="heading-serif section-heading">コレクション</h1>
+
+    {% assign visible_collection_count = 0 %}
+    <div class="blog-grid" style="margin-top: 32px;">
+      {% for collection in collections %}
+        {% unless collection.handle == 'frontpage' %}
+          {% assign visible_collection_count = visible_collection_count | plus: 1 %}
+          <article class="blog-card card">
+            <a class="blog-card__media image-frame" href="{{ collection.url }}">
+              {% if collection.image != blank %}
+                {% render 'responsive-image',
+                  image: collection.image,
+                  alt: collection.title,
+                  sizes: '(max-width: 639px) 100vw, 33vw',
+                  width: 900
+                %}
+              {% elsif collection.products.first.featured_image != blank %}
+                {% render 'responsive-image',
+                  image: collection.products.first.featured_image,
+                  alt: collection.title,
+                  sizes: '(max-width: 639px) 100vw, 33vw',
+                  width: 900
+                %}
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </a>
+            <div class="blog-card__content">
+              <h2 class="heading-serif" style="font-size: 1.6rem;">
+                <a href="{{ collection.url }}">{{ collection.title }}</a>
+              </h2>
+              {% if collection.description != blank %}
+                <div class="rte">{{ collection.description | strip_html | truncate: 120 }}</div>
+              {% endif %}
+              <a class="link-underline" href="{{ collection.url }}">見る <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        {% endunless %}
+      {% endfor %}
+    </div>
+
+    {% if visible_collection_count == 0 %}
+      <div class="empty-state" style="margin-top: 32px;">
+        <p class="section-body">コレクションがまだ登録されていません。</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "コレクション一覧",
+  "settings": []
+}
+{% endschema %}

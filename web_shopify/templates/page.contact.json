@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page-contact",
+      "blocks": {
+        "topic_1": {
+          "type": "topic",
+          "settings": { "topic": "商品について" }
+        },
+        "topic_2": {
+          "type": "topic",
+          "settings": { "topic": "古民家について" }
+        },
+        "topic_3": {
+          "type": "topic",
+          "settings": { "topic": "取材・掲載について" }
+        },
+        "topic_4": {
+          "type": "topic",
+          "settings": { "topic": "その他" }
+        }
+      },
+      "block_order": ["topic_1", "topic_2", "topic_3", "topic_4"],
+      "settings": {
+        "show_phone": true,
+        "show_privacy": true
+      }
+    }
+  },
+  "order": ["main"]
+}

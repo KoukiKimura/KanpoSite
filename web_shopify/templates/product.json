@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "metafields": {
+      "type": "product-metafields",
+      "settings": {
+        "title": "原材料と使い方",
+        "text": "ShopifyのProduct metafieldsから、商品ごとの補足情報を表示します。"
+      }
+    },
+    "faq": {
+      "type": "faq-list",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "どんな時間に合いますか。",
+            "answer": "朝の支度前や、畑仕事から戻ったあとのひと息に合うように仕立てています。"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "味わいの特徴は何ですか。",
+            "answer": "草の青さを残しながら、花の香りがやわらかく立つように調整しています。"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "title": "お届け前によくいただくご質問",
+        "text": "はじめて取り入れる方にも使い方の雰囲気が伝わるよう、案内で使う内容をまとめます。"
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "title": "関連商品",
+        "product_limit": 4,
+        "show_quick_add": true
+      }
+    }
+  },
+  "order": ["main", "metafields", "faq", "related"]
+}

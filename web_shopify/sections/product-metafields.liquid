@@ -1,0 +1,71 @@
+{% liquid
+  assign quantity = product.metafields.custom.quantity
+  assign ingredients = product.metafields.custom.ingredients
+  assign how_to_use = product.metafields.custom.how_to_use
+  assign caution = product.metafields.custom.caution
+%}
+
+{% if product != blank %}
+  <section id="product-metafields" class="section">
+    <div class="shell">
+      <div style="max-width: 760px; margin-bottom: 32px;">
+        <p class="eyebrow">Ingredients</p>
+        <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+        <p class="section-body">{{ section.settings.text }}</p>
+      </div>
+
+      <div class="meta-grid">
+        {% if quantity != blank %}
+          <div class="meta-row">
+            <p class="eyebrow">内容量</p>
+            <div class="rte">{{ quantity | metafield_tag }}</div>
+          </div>
+        {% endif %}
+        {% if ingredients != blank %}
+          <div class="meta-row">
+            <p class="eyebrow">原材料</p>
+            <div class="rte">{{ ingredients | metafield_tag }}</div>
+          </div>
+        {% endif %}
+        {% if how_to_use != blank %}
+          <div class="meta-row">
+            <p class="eyebrow">飲み方・使い方</p>
+            <div class="rte">{{ how_to_use | metafield_tag }}</div>
+          </div>
+        {% endif %}
+        {% if caution != blank %}
+          <div class="meta-row">
+            <p class="eyebrow">注意事項</p>
+            <div class="rte">{{ caution | metafield_tag }}</div>
+          </div>
+        {% endif %}
+
+        {% if quantity == blank and ingredients == blank and how_to_use == blank and caution == blank %}
+          <div class="card" style="padding: 28px;">
+            <p class="section-body">商品metafieldsを登録すると、内容量・原材料・飲み方・注意事項がここに表示されます。</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "商品補足情報",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "原材料と使い方"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "ShopifyのProduct metafieldsから、商品ごとの補足情報を表示します。"
+    }
+  ]
+}
+{% endschema %}

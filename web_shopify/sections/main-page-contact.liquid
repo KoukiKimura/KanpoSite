@@ -1,0 +1,117 @@
+<section class="section">
+  <div class="shell contact-layout">
+    <aside class="card contact-panel">
+      <p class="eyebrow">Contact</p>
+      <h1 class="heading-serif section-heading">{{ page.title | default: 'お問い合わせ' }}</h1>
+      <p class="section-body">{{ section.settings.lead }}</p>
+      <ul class="note-list">
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>{{ block.settings.topic }}</li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <div class="card contact-panel">
+      {% form 'contact', class: 'form-grid' %}
+        {% if form.posted_successfully? %}
+          <p class="form-message">お問い合わせを受け付けました。</p>
+        {% endif %}
+
+        {% if form.errors %}
+          <div class="form-message">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="form-row">
+          <label class="field">
+            お名前
+            <input type="text" name="contact[name]" autocomplete="name" value="{% if form.name %}{{ form.name | escape }}{% endif %}" required>
+          </label>
+          <label class="field">
+            メールアドレス
+            <input type="email" name="contact[email]" autocomplete="email" value="{% if form.email %}{{ form.email | escape }}{% endif %}" required>
+          </label>
+        </div>
+
+        {% if section.settings.show_phone %}
+          <label class="field">
+            電話番号
+            <input type="tel" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone | escape }}{% endif %}">
+          </label>
+        {% endif %}
+
+        <label class="field">
+          お問い合わせ種別
+          <select name="contact[お問い合わせ種別]">
+            {% for block in section.blocks %}
+              <option value="{{ block.settings.topic | escape }}">{{ block.settings.topic }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label class="field">
+          本文
+          <textarea name="contact[body]" required>{% if form.body %}{{ form.body | escape }}{% endif %}</textarea>
+        </label>
+
+        <p class="form-message">{{ section.settings.note }}</p>
+
+        {% if section.settings.show_privacy %}
+          <label class="facet-choice" style="width: fit-content;">
+            <input type="checkbox" name="contact[プライバシーポリシー同意]" value="同意済み" required>
+            プライバシーポリシーに同意する
+          </label>
+        {% endif %}
+
+        <button class="button" type="submit">送信する</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "お問い合わせフォーム",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "リード文",
+      "default": "商品のこと、古民家のこと、取材や訪問のことなど、気になることがあればこちらからご連絡ください。"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "補足",
+      "default": "返信には数日いただく場合があります。お急ぎの確認が必要な場合は、候補日程とあわせてご記入ください。"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "電話番号を表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_privacy",
+      "label": "プライバシー同意を表示",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "topic",
+      "name": "問い合わせ種別",
+      "settings": [
+        {
+          "type": "text",
+          "id": "topic",
+          "label": "種別",
+          "default": "商品について"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "home-field-walk.webp",
+        "image_alt": "里山の風景",
+        "eyebrow": "Page",
+        "title": "",
+        "overlay_opacity": 28,
+        "mobile_height": 38,
+        "desktop_height": 42
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "contact_cta": {
+      "type": "contact-cta",
+      "settings": {
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["hero", "main", "contact_cta"]
+}

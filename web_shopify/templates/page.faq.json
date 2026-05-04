@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "faq-list",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "問い合わせはどこからできますか。",
+            "answer": "お問い合わせページから送信できます。送信先はShopifyのストア通知設定で管理します。"
+          }
+        }
+      },
+      "block_order": ["faq_1"],
+      "settings": {
+        "title": "よくある質問"
+      }
+    },
+    "contact_cta": {
+      "type": "contact-cta",
+      "settings": {
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["main", "contact_cta"]
+}

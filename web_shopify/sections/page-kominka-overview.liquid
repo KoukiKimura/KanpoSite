@@ -1,0 +1,132 @@
+<section class="section section-dark">
+  <div class="shell kominka-layout">
+    <div class="sticky-copy">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+        <div class="section-body" style="color: rgba(255,255,255,0.76);">{{ section.settings.text }}</div>
+      </div>
+
+      <div>
+        <h3 class="heading-serif" style="font-size: 1.8rem;">滞在の流れ</h3>
+        <div class="schedule-list">
+          {% for block in section.blocks %}
+            {% if block.type == 'schedule' %}
+              <p {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-area">
+      <div class="image-frame" style="min-height: 430px;">
+        {% render 'asset-or-image',
+          image: section.settings.main_image,
+          fallback_asset: section.settings.main_fallback_asset,
+          alt: section.settings.title,
+          sizes: '(max-width: 859px) 100vw, 58vw',
+          width: 1600
+        %}
+      </div>
+      <div class="story-panel__gallery" style="margin-top: 16px;">
+        <div class="image-frame" style="min-height: 220px;">
+          {% render 'asset-or-image',
+            image: section.settings.sub_image_1,
+            fallback_asset: section.settings.sub_fallback_asset_1,
+            alt: section.settings.title,
+            sizes: '(max-width: 859px) 100vw, 29vw',
+            width: 900
+          %}
+        </div>
+        <div class="image-frame" style="min-height: 220px;">
+          {% render 'asset-or-image',
+            image: section.settings.sub_image_2,
+            fallback_asset: section.settings.sub_fallback_asset_2,
+            alt: section.settings.title,
+            sizes: '(max-width: 859px) 100vw, 29vw',
+            width: 900
+          %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "古民家概要",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Kominka"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "古民家"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "朝は畑の空気を吸い、夜は木の香りの中で休む。古い家に残る静けさをそのまま受け取れる、一棟の宿です。"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "メイン画像"
+    },
+    {
+      "type": "text",
+      "id": "main_fallback_asset",
+      "label": "メインフォールバック画像",
+      "default": "kominka-hero-stay.webp"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_image_1",
+      "label": "サブ画像1"
+    },
+    {
+      "type": "text",
+      "id": "sub_fallback_asset_1",
+      "label": "サブフォールバック画像1",
+      "default": "kominka-living-room.webp"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_image_2",
+      "label": "サブ画像2"
+    },
+    {
+      "type": "text",
+      "id": "sub_fallback_asset_2",
+      "label": "サブフォールバック画像2",
+      "default": "kominka-morning-field.webp"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "schedule",
+      "name": "滞在の流れ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "項目",
+          "default": "15:00 チェックイン"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "古民家概要"
+    }
+  ]
+}
+{% endschema %}

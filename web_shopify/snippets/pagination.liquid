@@ -1,0 +1,19 @@
+{% if paginate.pages > 1 %}
+  <nav class="pagination" role="navigation" aria-label="ページ送り">
+    {% if paginate.previous %}
+      <a href="{{ paginate.previous.url }}">前へ</a>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+      {% if part.is_link %}
+        <a href="{{ part.url }}">{{ part.title }}</a>
+      {% else %}
+        <span{% if part.title == paginate.current_page %} class="current"{% endif %}>{{ part.title }}</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+      <a href="{{ paginate.next.url }}">次へ</a>
+    {% endif %}
+  </nav>
+{% endif %}

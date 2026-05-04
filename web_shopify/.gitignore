@@ -1,0 +1,7 @@
+.shopify/
+node_modules/
+.env
+.env.*
+*.zip
+*.log
+shopify.theme.toml

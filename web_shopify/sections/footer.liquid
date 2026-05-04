@@ -1,0 +1,67 @@
+{% liquid
+  assign footer_menu = linklists[settings.footer_menu]
+%}
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner shell">
+    <div>
+      <p class="eyebrow">{{ settings.brand_name_ja }}</p>
+      <h2 class="footer__title">{{ settings.brand_name_ja }}</h2>
+      <p>{{ settings.footer_lead }}</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">古民家と畑</p>
+      <p>築年数を重ねた家の時間と、季節ごとに変わる畑の景色。その両方を行き来しながら、日々に寄り添う養生を届けます。</p>
+      <p>{{ settings.brand_name_en }}</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">お問い合わせ</p>
+      {% if settings.contact_email != blank %}
+        <p>
+          メール:
+          <a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a>
+        </p>
+      {% endif %}
+      {% if settings.contact_phone != blank %}
+        <p>
+          電話:
+          <a href="tel:{{ settings.contact_phone }}">{{ settings.contact_phone }}</a>
+        </p>
+      {% endif %}
+
+      <nav class="footer__links" aria-label="フッターナビゲーション">
+        {% if footer_menu.links.size > 0 %}
+          {% for link in footer_menu.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="/policies/shipping-policy">配送情報</a>
+          <a href="/policies/refund-policy">返品・交換</a>
+          <a href="/policies/legal-notice">特定商取引法に基づく表記</a>
+          <a href="/policies/privacy-policy">プライバシーポリシー</a>
+        {% endif %}
+      </nav>
+
+      <div class="social-links">
+        {% if settings.line_url != blank %}
+          <a class="social-link" href="{{ settings.line_url }}" target="_blank" rel="noopener noreferrer">Line</a>
+        {% endif %}
+        {% if settings.facebook_url != blank %}
+          <a class="social-link" href="{{ settings.facebook_url }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+        {% endif %}
+        {% if settings.instagram_url != blank %}
+          <a class="social-link" href="{{ settings.instagram_url }}" target="_blank" rel="noopener noreferrer">Instagram</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "フッター",
+  "settings": []
+}
+{% endschema %}

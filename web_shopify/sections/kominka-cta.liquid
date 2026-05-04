@@ -1,0 +1,78 @@
+<section class="section section-dark">
+  <div class="shell story-panel">
+    <div class="story-panel__copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="heading-serif story-panel__title">{{ section.settings.title }}</h2>
+      <div class="story-panel__body" style="color: rgba(255,255,255,0.78);">{{ section.settings.text }}</div>
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <p>
+          <a class="button button-light" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        </p>
+      {% endif %}
+    </div>
+    <div class="image-frame" style="min-height: 420px;">
+      {% render 'asset-or-image',
+        image: section.settings.image,
+        fallback_asset: section.settings.fallback_asset,
+        alt: section.settings.title,
+        sizes: '(max-width: 859px) 100vw, 50vw',
+        width: 1400
+      %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "古民家CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Kominka"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "古民家滞在"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "築年数を重ねた古民家で、畑の景色と湯気のある朝を味わう滞在へ案内します。予約は外部サービスへ誘導します。"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "画像"
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "フォールバック画像",
+      "default": "kominka-hero-stay.webp"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAラベル",
+      "default": "古民家を見る"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "古民家CTA"
+    }
+  ]
+}
+{% endschema %}

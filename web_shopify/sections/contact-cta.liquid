@@ -1,0 +1,56 @@
+<section class="section-tight cta-band">
+  <div class="shell cta-band__inner">
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+      <div class="section-body" style="color: rgba(255,255,255,0.76);">{{ section.settings.text }}</div>
+    </div>
+    {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+      <a class="button button-light" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "お問い合わせCTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "気になることがあればご連絡ください"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "商品、古民家、取材や訪問についての確認を受け付けます。"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAラベル",
+      "default": "お問い合わせへ"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "お問い合わせCTA"
+    }
+  ]
+}
+{% endschema %}

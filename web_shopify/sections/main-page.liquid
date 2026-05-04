@@ -1,0 +1,15 @@
+<section class="section">
+  {% render 'breadcrumbs' %}
+  <div class="shell" style="margin-top: 28px; max-width: 920px;">
+    <p class="eyebrow">Page</p>
+    <h1 class="heading-serif section-heading">{{ page.title }}</h1>
+    <div class="rte" style="margin-top: 24px;">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "固定ページ本文",
+  "settings": []
+}
+{% endschema %}

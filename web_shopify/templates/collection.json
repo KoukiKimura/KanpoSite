@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "product-mountain-herb-blend-main.webp",
+        "image_alt": "商品のイメージ",
+        "eyebrow": "Products",
+        "title": "商品",
+        "text": "畑で育てた草木を、お茶、粉薬、錠剤、養生セットへ。香りや口当たりを整え、毎日の暮らしに取り入れやすい形にしています。",
+        "overlay_opacity": 28,
+        "mobile_height": 42,
+        "desktop_height": 46
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 12,
+        "show_filters": true,
+        "show_quick_add": false
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

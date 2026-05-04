@@ -1,0 +1,85 @@
+<section class="section">
+  <div class="shell">
+    <div style="margin-bottom: 28px;">
+      <p class="eyebrow">Cart</p>
+      <h1 class="heading-serif section-heading">{{ 'general.cart' | t }}</h1>
+      <p class="section-body">追加した商品の数量を確認できます。</p>
+    </div>
+
+    {% if cart.item_count == 0 %}
+      <div class="empty-state">
+        <p class="section-body">{{ 'cart.empty' | t }}</p>
+        <a class="button" href="{{ routes.all_products_collection_url }}">商品一覧へ <span aria-hidden="true">→</span></a>
+      </div>
+    {% else %}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-layout">
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <article class="cart-item card">
+              <a class="cart-item__media image-frame" href="{{ item.url }}">
+                {% if item.image != blank %}
+                  {% render 'responsive-image',
+                    image: item.image,
+                    alt: item.image.alt | default: item.product.title,
+                    sizes: '(max-width: 859px) 100vw, 180px',
+                    width: 520
+                  %}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </a>
+
+              <div>
+                {% if item.product.type != blank %}
+                  <p class="eyebrow">{{ item.product.type }}</p>
+                {% endif %}
+                <h2 class="heading-serif" style="font-size: 1.65rem;">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h2>
+                <p class="price">{{ item.final_price | money }}</p>
+                {% unless item.product.has_only_default_variant %}
+                  <p class="text-muted">{{ item.variant.title }}</p>
+                {% endunless %}
+
+                <div class="quick-add__row" style="margin-top: 18px;">
+                  <label class="field">
+                    {{ 'products.quantity' | t }}
+                    <input class="quantity-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                  </label>
+                  <a class="button button-secondary" href="{{ item.url_to_remove }}">削除</a>
+                </div>
+              </div>
+
+              <div>
+                <p class="eyebrow">小計</p>
+                <p class="price">{{ item.final_line_price | money }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        <aside class="cart-summary card">
+          <h2 class="heading-serif" style="font-size: 2rem;">注文内容</h2>
+          <div class="cart-summary__row">
+            <span class="text-muted">商品点数</span>
+            <span>{{ cart.item_count }}点</span>
+          </div>
+          <div class="cart-summary__row">
+            <span class="text-muted">{{ 'cart.subtotal' | t }}</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <p class="section-body">税・送料はチェックアウトで確定します。</p>
+          <button class="button button-secondary" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          <button class="button" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        </aside>
+      </form>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "カート",
+  "settings": []
+}
+{% endschema %}

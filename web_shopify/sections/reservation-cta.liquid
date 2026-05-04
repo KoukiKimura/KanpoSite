@@ -1,0 +1,71 @@
+{% liquid
+  assign reservation_url = section.settings.reservation_url
+  if page != blank and page.metafields.custom.reservation_url != blank
+    assign reservation_url = page.metafields.custom.reservation_url.value
+  endif
+%}
+
+<section class="section-tight cta-band">
+  <div class="shell cta-band__inner">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="heading-serif section-heading">{{ section.settings.title }}</h2>
+      <p class="section-body" style="color: rgba(255,255,255,0.76);">{{ section.settings.text }}</p>
+    </div>
+    {% if reservation_url != blank %}
+      <a class="button button-light" href="{{ reservation_url }}" target="_blank" rel="noopener noreferrer">
+        {{ section.settings.cta_label }}
+      </a>
+    {% else %}
+      <a class="button button-light" href="/pages/contact">{{ section.settings.fallback_cta_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "外部予約CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Reservation"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "古民家の予約"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "本文",
+      "default": "予約は外部サービスへ遷移します。URLはページmetafieldまたはテーマエディタで管理します。"
+    },
+    {
+      "type": "url",
+      "id": "reservation_url",
+      "label": "外部予約URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "予約CTA",
+      "default": "予約ページへ"
+    },
+    {
+      "type": "text",
+      "id": "fallback_cta_label",
+      "label": "予約URL未設定時CTA",
+      "default": "お問い合わせへ"
+    }
+  ],
+  "presets": [
+    {
+      "name": "外部予約CTA"
+    }
+  ]
+}
+{% endschema %}

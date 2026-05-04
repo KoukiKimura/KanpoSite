@@ -1,0 +1,115 @@
+{% liquid
+  assign products_per_page = section.settings.products_per_page
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+%}
+
+<section class="section">
+  {% render 'breadcrumbs' %}
+
+  <div class="shell" style="margin-top: 28px;">
+    <div class="collection-toolbar">
+      <div>
+        <p class="eyebrow">Collection</p>
+        <h1 class="heading-serif section-heading">{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div class="rte" style="max-width: 720px;">{{ collection.description }}</div>
+        {% endif %}
+      </div>
+
+      <form class="facets" method="get">
+        <label class="field" style="max-width: 320px;">
+          並び順
+          <select name="sort_by" class="select-input" onchange="this.form.submit()">
+            {% for option in collection.sort_options %}
+              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        {% if section.settings.show_filters and collection.filters.size > 0 %}
+          {% for filter in collection.filters %}
+            <details>
+              <summary>{{ filter.label }}</summary>
+
+              {% case filter.type %}
+                {% when 'list' %}
+                  <div class="facet-list">
+                    {% for filter_value in filter.values %}
+                      <label class="facet-choice">
+                        <input
+                          type="checkbox"
+                          name="{{ filter_value.param_name }}"
+                          value="{{ filter_value.value }}"
+                          {% if filter_value.active %}checked{% endif %}
+                          {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
+                        >
+                        {{ filter_value.label }} ({{ filter_value.count }})
+                      </label>
+                    {% endfor %}
+                  </div>
+                {% when 'price_range' %}
+                  <div class="facet-list">
+                    <label class="field">
+                      最小
+                      <input class="text-input" name="{{ filter.min_value.param_name }}" type="number" min="0" value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}">
+                    </label>
+                    <label class="field">
+                      最大
+                      <input class="text-input" name="{{ filter.max_value.param_name }}" type="number" min="0" value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}">
+                    </label>
+                  </div>
+              {% endcase %}
+            </details>
+          {% endfor %}
+          <button class="button button-secondary" type="submit">絞り込む</button>
+        {% endif %}
+      </form>
+    </div>
+
+    {% paginate collection.products by products_per_page %}
+      {% if collection.products.size > 0 %}
+        <div class="product-list">
+          {% for product in collection.products %}
+            {% render 'product-card', product: product, variant: 'list', show_quick_add: section.settings.show_quick_add %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <h2 class="heading-serif section-heading">商品が登録されていません</h2>
+          <p class="section-body">Shopify管理画面で商品を公開し、このコレクションへ紐付けると表示されます。</p>
+        </div>
+      {% endif %}
+
+      {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "コレクション商品一覧",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "1ページの商品数",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "フィルターを表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "商品カードにカート追加を表示",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

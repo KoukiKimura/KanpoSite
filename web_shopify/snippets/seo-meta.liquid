@@ -1,0 +1,61 @@
+{% liquid
+  assign meta_description = page_description | default: shop.description | default: settings.organization_description
+  assign og_title = page_title | default: shop.name
+  assign og_url = canonical_url
+  assign og_type = 'website'
+  assign og_image = page_image | default: settings.default_og_image
+  assign og_image_alt = og_title
+  assign default_og_asset = settings.default_og_asset | default: 'home-hero-satoyama.webp'
+  assign default_og_alt = settings.default_og_alt | default: settings.organization_name | default: shop.name
+  assign og_image_url = ''
+
+  if request.page_type == 'product'
+    assign og_type = 'product'
+    assign og_image = product.featured_image | default: og_image
+    assign og_image_alt = product.featured_image.alt | default: product.title
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+    assign og_image = article.image | default: og_image
+    assign og_image_alt = article.image.alt | default: article.title
+  elsif page_image != blank
+    assign og_image_alt = page_image.alt | default: og_title
+  endif
+
+  if og_image != blank
+    assign og_image_url = og_image | image_url: width: 1200 | prepend: 'https:'
+  elsif default_og_asset != blank
+    assign og_image_url = default_og_asset | asset_url | prepend: 'https:'
+    assign og_image_alt = default_og_alt
+  endif
+%}
+
+{% if meta_description != blank %}
+  <meta name="description" content="{{ meta_description | strip_html | escape }}">
+{% endif %}
+
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+{% if meta_description != blank %}
+  <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
+{% endif %}
+{% if og_image_url != blank %}
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:secure_url" content="{{ og_image_url }}">
+  {% if og_image_alt != blank %}
+    <meta property="og:image:alt" content="{{ og_image_alt | escape }}">
+  {% endif %}
+{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+{% if meta_description != blank %}
+  <meta name="twitter:description" content="{{ meta_description | strip_html | escape }}">
+{% endif %}
+{% if og_image_url != blank %}
+  <meta name="twitter:image" content="{{ og_image_url }}">
+  {% if og_image_alt != blank %}
+    <meta name="twitter:image:alt" content="{{ og_image_alt | escape }}">
+  {% endif %}
+{% endif %}

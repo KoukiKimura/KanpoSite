@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "home-hero-satoyama.webp",
+            "alt": "里山の風景と古民家を見せるトップ画像"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "home-kominka-guest-room.webp",
+            "alt": "古民家の客室イメージ"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "home-field-walk.webp",
+            "alt": "畑を歩くシーンのイメージ"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "home-morning-tea.webp",
+            "alt": "朝のお茶時間のイメージ"
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "product-mountain-herb-blend-main.webp",
+            "alt": "山のハーブブレンドの商品イメージ"
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
+      "settings": {
+        "style": "home",
+        "overlay_opacity": 22,
+        "mobile_height": 82,
+        "desktop_height": 100
+      }
+    },
+    "brand_intro": {
+      "type": "brand-intro",
+      "settings": {
+        "second_cta_link": "/pages/kominka"
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "collection": "featured-products",
+        "cta_link": "/collections/all",
+        "product_limit": 5,
+        "show_quick_add": false
+      }
+    },
+    "kominka_cta": {
+      "type": "kominka-cta",
+      "settings": {
+        "cta_link": "/pages/kominka"
+      }
+    },
+    "latest_blog": {
+      "type": "latest-blog",
+      "settings": {
+        "blog": "stories",
+        "article_limit": 3
+      }
+    },
+    "contact_cta": {
+      "type": "contact-cta",
+      "settings": {
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["hero", "brand_intro", "featured_products", "kominka_cta", "latest_blog", "contact_cta"]
+}

@@ -1,0 +1,89 @@
+{% liquid
+  assign main_menu = linklists[settings.main_menu]
+  assign cart_count_label = cart.item_count
+
+  if cart.item_count > 99
+    assign cart_count_label = '99+'
+  endif
+%}
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner shell">
+    <details class="mobile-drawer" data-mobile-drawer>
+      <summary class="drawer-toggle" aria-label="{{ 'general.menu' | t }}">
+        <span class="drawer-toggle__bar" aria-hidden="true"></span>
+      </summary>
+      <div class="mobile-drawer__overlay" data-drawer-overlay aria-hidden="true"></div>
+      <div class="mobile-drawer__panel" role="dialog" aria-label="{{ 'general.menu' | t }}">
+        <div class="mobile-drawer__brand">
+          <p class="site-header__kicker">{{ settings.brand_kicker }}</p>
+          <p class="site-header__name">{{ settings.brand_name_ja }}</p>
+          <p class="site-header__en">{{ settings.brand_name_en }}</p>
+        </div>
+        <nav class="mobile-drawer__nav" aria-label="{{ 'general.menu' | t }}">
+          {% if main_menu.links.size > 0 %}
+            {% for link in main_menu.links %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+          {% else %}
+            <a href="{{ routes.root_url }}">トップ</a>
+            <a href="{{ routes.all_products_collection_url }}">商品</a>
+            <a href="/pages/kominka">古民家</a>
+            <a href="/blogs/stories">BLOG</a>
+            <a href="/pages/contact">お問い合わせ</a>
+          {% endif %}
+        </nav>
+      </div>
+    </details>
+
+    <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {% if settings.logo != blank %}
+        {% render 'responsive-image',
+          image: settings.logo,
+          alt: settings.brand_name_ja | default: shop.name,
+          class: 'site-header__logo',
+          width: 240,
+          sizes: '240px',
+          loading: 'eager'
+        %}
+      {% else %}
+        <p class="site-header__kicker">{{ settings.brand_kicker }}</p>
+        <p class="site-header__name">{{ settings.brand_name_ja }}</p>
+        <p class="site-header__en">{{ settings.brand_name_en }}</p>
+      {% endif %}
+    </a>
+
+    <nav class="site-nav" aria-label="グローバルナビゲーション">
+      {% if main_menu.links.size > 0 %}
+        {% for link in main_menu.links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">トップ</a>
+        <a href="{{ routes.all_products_collection_url }}">商品</a>
+        <a href="/pages/kominka">古民家</a>
+        <a href="/blogs/stories">BLOG</a>
+        <a href="/pages/contact">お問い合わせ</a>
+      {% endif %}
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        <span aria-hidden="true">⌕</span>
+      </a>
+      <a class="icon-button cart-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}">
+        {% render 'icon-cart' %}
+        {% if cart.item_count > 0 %}
+          <span class="cart-count">{{ cart_count_label }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "ヘッダー",
+  "settings": []
+}
+{% endschema %}

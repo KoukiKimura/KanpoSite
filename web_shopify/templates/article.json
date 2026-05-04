@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {}
+    },
+    "contact_cta": {
+      "type": "contact-cta",
+      "settings": {
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["main", "contact_cta"]
+}

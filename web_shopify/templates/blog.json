@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "home-morning-tea.webp",
+        "image_alt": "BLOG",
+        "eyebrow": "BLOG",
+        "title": "BLOG",
+        "text": "",
+        "overlay_opacity": 30,
+        "mobile_height": 36,
+        "desktop_height": 36
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "articles_per_page": 12
+      }
+    }
+  },
+  "order": ["hero", "main"]
+}

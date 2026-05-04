@@ -1,0 +1,158 @@
+<section class="section">
+  <div class="shell story-grid">
+    <div class="story-panel">
+      <div class="image-frame" style="min-height: 340px;">
+        {% render 'asset-or-image',
+          image: section.settings.first_image,
+          fallback_asset: section.settings.first_fallback_asset,
+          alt: section.settings.first_title,
+          sizes: '(max-width: 859px) 100vw, 50vw',
+          width: 1400
+        %}
+      </div>
+      <div class="story-panel__copy">
+        <h2 class="heading-serif story-panel__title">{{ section.settings.first_title }}</h2>
+        <div class="story-panel__body">{{ section.settings.first_text }}</div>
+      </div>
+    </div>
+
+    <div class="story-panel story-panel--reverse">
+      <div class="story-panel__copy">
+        <h2 class="heading-serif story-panel__title">{{ section.settings.second_title }}</h2>
+        <div class="story-panel__body">{{ section.settings.second_text }}</div>
+        {% if section.settings.second_cta_label != blank and section.settings.second_cta_link != blank %}
+          <p>
+            <a class="button button-secondary" href="{{ section.settings.second_cta_link }}">
+              {{ section.settings.second_cta_label }}
+              <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        {% endif %}
+      </div>
+
+      <div class="story-panel__gallery">
+        <div class="image-frame" style="min-height: 360px;">
+          {% render 'asset-or-image',
+            image: section.settings.second_main_image,
+            fallback_asset: section.settings.second_main_fallback_asset,
+            alt: section.settings.second_title,
+            sizes: '(max-width: 859px) 100vw, 40vw',
+            width: 1200
+          %}
+        </div>
+        <div class="story-panel__stack">
+          <div class="image-frame" style="min-height: 170px;">
+            {% render 'asset-or-image',
+              image: section.settings.second_sub_image_1,
+              fallback_asset: section.settings.second_sub_fallback_asset_1,
+              alt: section.settings.second_title,
+              sizes: '(max-width: 859px) 100vw, 30vw',
+              width: 900
+            %}
+          </div>
+          <div class="image-frame" style="min-height: 170px;">
+            {% render 'asset-or-image',
+              image: section.settings.second_sub_image_2,
+              fallback_asset: section.settings.second_sub_fallback_asset_2,
+              alt: section.settings.second_title,
+              sizes: '(max-width: 859px) 100vw, 30vw',
+              width: 900
+            %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ブランド導入",
+  "settings": [
+    {
+      "type": "text",
+      "id": "first_title",
+      "label": "1つ目の見出し",
+      "default": "農園の風景"
+    },
+    {
+      "type": "textarea",
+      "id": "first_text",
+      "label": "1つ目の本文",
+      "default": "古民家の庭先から続く畑で、季節の草木を育てています。受け継いだ家の時間と土の気配をそのままに、香りのやわらかな和漢素材へ整えています。"
+    },
+    {
+      "type": "image_picker",
+      "id": "first_image",
+      "label": "1つ目の画像"
+    },
+    {
+      "type": "text",
+      "id": "first_fallback_asset",
+      "label": "1つ目のフォールバック画像",
+      "default": "home-field-walk.webp"
+    },
+    {
+      "type": "text",
+      "id": "second_title",
+      "label": "2つ目の見出し",
+      "default": "古民家の導線"
+    },
+    {
+      "type": "textarea",
+      "id": "second_text",
+      "label": "2つ目の本文",
+      "default": "土間から縁側へ、縁側から畑の景色へ。派手に整えすぎず、この家に残っていた静けさをそのまま宿にした、余白の多い一棟です。"
+    },
+    {
+      "type": "text",
+      "id": "second_cta_label",
+      "label": "CTAラベル",
+      "default": "古民家を見る"
+    },
+    {
+      "type": "url",
+      "id": "second_cta_link",
+      "label": "CTAリンク"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_main_image",
+      "label": "2つ目メイン画像"
+    },
+    {
+      "type": "text",
+      "id": "second_main_fallback_asset",
+      "label": "2つ目メインフォールバック画像",
+      "default": "home-kominka-guest-room.webp"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_sub_image_1",
+      "label": "2つ目サブ画像1"
+    },
+    {
+      "type": "text",
+      "id": "second_sub_fallback_asset_1",
+      "label": "2つ目サブフォールバック画像1",
+      "default": "home-morning-tea.webp"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_sub_image_2",
+      "label": "2つ目サブ画像2"
+    },
+    {
+      "type": "text",
+      "id": "second_sub_fallback_asset_2",
+      "label": "2つ目サブフォールバック画像2",
+      "default": "kominka-morning-field.webp"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ブランド導入"
+    }
+  ]
+}
+{% endschema %}
