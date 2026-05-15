@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー',
-  description: '山草の恵みのプライバシーポリシーです。',
+  description: '四国ボタニカのプライバシーポリシーです。',
 };
 
 export default function PrivacyPage() {
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
               </h2>
               <div className="w-8 h-px bg-accent mb-4" />
               <p className="text-sm leading-loose">
-                山草の恵み（以下「当社」）は、お客様の個人情報の保護を重要な責務と考え、
+                四国ボタニカ（以下「当社」）は、お客様の個人情報の保護を重要な責務と考え、
                 個人情報の保護に関する法律（個人情報保護法）およびその他関連法令を遵守します。
                 お客様の個人情報を適切に管理し、目的外の利用を行いません。
               </p>
@@ -141,8 +141,8 @@ export default function PrivacyPage() {
                 個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。
               </p>
               <div className="mt-3 p-4 bg-brand-cream border border-brand-border text-sm text-brand-muted">
-                <p>山草の恵み プライバシー担当</p>
-                <p>メール: info@sansou-megumi.jp（仮）</p>
+                <p>四国ボタニカ プライバシー担当</p>
+                <p>メール: info@shikoku-botanica.jp（仮）</p>
               </div>
             </div>
 

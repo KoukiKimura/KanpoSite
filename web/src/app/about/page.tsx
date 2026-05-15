@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'ブランド紹介',
   description:
-    '山草の恵みのブランド紹介。創業の想い、理念、漢方への向き合い方についてご紹介します。',
+    '四国ボタニカのブランド紹介。四国の植物・薬草への向き合い方、理念、世界観をご紹介します。',
 };
 
 const philosophies = [
@@ -54,8 +54,8 @@ export default function BrandPage() {
           </h1>
           <div className="w-12 h-px bg-accent mx-auto my-6" />
           <p className="text-white/70 max-w-lg mx-auto text-base leading-loose">
-            山と草と、受け継いだ知恵。<br />
-            なぜ私たちが漢方茶を作るのか、その想いをお伝えします。
+            四国の草木と、受け継いだ知恵。<br />
+            Botanica の名に込めた植物への想いをお伝えします。
           </p>
         </div>
         {/* 背景装飾プレースホルダー */}
@@ -70,24 +70,24 @@ export default function BrandPage() {
           <SectionTitle
             title="ブランドコンセプト"
             titleEn="Brand Concept"
-            subtitle="山草の恵みが大切にしていること"
+            subtitle="四国ボタニカが大切にしていること"
           />
           <div className="prose-brand text-brand-muted">
             <p>
-              「山草の恵み（Sansou no Megumi）」という名前には、山と草が与えてくれる恵みへの感謝が込められています。
-              私たちは、特定の山間地で土から丁寧に育てた生薬だけを使い、
-              漢方の伝統処方に基づいたお茶をお届けしています。
+              「四国ボタニカ（Shikoku Botanica）」という名前には、イタリア語の botanica が持つ
+              「植物・植物学」の響きと、四国の草木への敬意を込めています。
+              私たちは、土から丁寧に育てた薬草や生薬を、日々の一杯として届けています。
             </p>
             <p>
               現代の食生活や生活習慣の変化により、多くの方が体の不調を抱えています。
               疲れやすい、眠れない、冷える、胃が重い——そんな日常の小さな悩みに、
-              漢方は静かに、でも確かに応えてきました。
+              植物と漢方の知恵は、静かに、でも確かに応えてきました。
             </p>
             <p>
-              私たちが目指すのは、「特別なとき」のための漢方ではなく、
-              毎朝のお茶のような、「当たり前の習慣」としての漢方です。
+              私たちが目指すのは、「特別なとき」だけの植物の知恵ではなく、
+              毎朝のお茶のような、「当たり前の習慣」としての植物との関わりです。
               難しい知識がなくても、薬局に行かなくても、自分の体と向き合う時間を持てる——
-              そんな日常を、山草の恵みはサポートしたいと思っています。
+              そんな日常を、四国ボタニカはサポートしたいと思っています。
             </p>
           </div>
         </div>
@@ -123,8 +123,8 @@ export default function BrandPage() {
                 </p>
                 <p>
                   都会での薬膳レストラン勤務を経て、故郷の山里に戻り、
-                  自分で畑を起こしたのが山草の恵みの始まりです。
-                  漢方の知恵を「飲むお茶」という形で、より多くの方に届けたいと思いました。
+                  自分で畑を起こしたのが四国ボタニカの始まりです。
+                  四国の植物の知恵を「飲むお茶」という形で、より多くの方に届けたいと思いました。
                 </p>
                 <p className="text-brand-text font-medium">
                   ——代表 ○○○○
@@ -141,7 +141,7 @@ export default function BrandPage() {
           <SectionTitle
             title="私たちのこだわり"
             titleEn="Our Commitment"
-            subtitle="山草の恵みが守り続ける4つの約束"
+            subtitle="四国ボタニカが守り続ける4つの約束"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {philosophies.map((item) => (
@@ -182,8 +182,8 @@ export default function BrandPage() {
             </p>
             <p>
               収穫のタイミングも、乾燥の方法も、ブレンドの割合も——
-              漢方の古典と、長年の試行錯誤の末に導き出した独自の基準で行っています。
-              機械には任せられない、手仕事の積み重ねが、山草の恵みの品質を支えています。
+              植物の性質、漢方の古典、長年の試行錯誤の末に導き出した独自の基準で行っています。
+              機械には任せられない、手仕事の積み重ねが、四国ボタニカの品質を支えています。
             </p>
           </div>
           <div className="mt-10">
@@ -198,7 +198,7 @@ export default function BrandPage() {
       <section className="py-16 bg-brand-cream text-center">
         <div className="container-site">
           <p className="text-sm text-brand-muted mb-6">
-            山草の恵みの商品を、ぜひ試してみてください。
+            四国ボタニカの商品を、ぜひ試してみてください。
           </p>
           <Link href="/products" className="btn-primary">
             商品を見る

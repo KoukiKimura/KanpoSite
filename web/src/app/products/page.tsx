@@ -5,10 +5,10 @@ import ProductsClientFilter from '@/components/ui/ProductsClientFilter';
 export const metadata: Metadata = {
   title: '商品一覧',
   description:
-    '山草の恵みの商品一覧。茶葉・セット商品など、自然の生薬を使ったオリジナル漢方茶をご覧ください。',
+    '四国ボタニカの商品一覧。四国の植物・薬草の背景を大切にした茶葉、粉末、錠剤、セット商品をご覧ください。',
   openGraph: {
-    title: '商品一覧 | 山草の恵み',
-    description: '自然の生薬を使ったオリジナル漢方茶。茶葉・セット商品を取り揃えています。',
+    title: '商品一覧 | 四国ボタニカ',
+    description: '四国の植物・薬草の背景を大切にした商品。茶葉、粉末、錠剤、セット商品を取り揃えています。',
   },
 };
 

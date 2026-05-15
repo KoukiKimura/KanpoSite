@@ -6,15 +6,15 @@ import { CartProvider } from '@/components/cart/CartProvider';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | 山草の恵み',
-    default: '山草の恵み — 自然の力を、日常へ。',
+    template: '%s | 四国ボタニカ',
+    default: '四国ボタニカ — 四国の植物の知恵を、日常へ。',
   },
   description:
-    '山草の恵みは、自然の生薬を丁寧に育て、日本の漢方の知恵を現代の日常へお届けするブランドです。',
-  keywords: ['漢方', '生薬', '健康茶', '自然素材', '山草の恵み', 'Sansou no Megumi'],
+    '四国ボタニカは、イタリア語の botanica（植物・植物学）にちなみ、四国の植物・薬草の知恵を日常へ届けるブランドです。',
+  keywords: ['四国ボタニカ', 'Shikoku Botanica', 'botanica', '植物', '薬草', 'イヌトウキ', '漢方'],
   openGraph: {
-    title: '山草の恵み',
-    description: '自然の力を、日常へ。漢方の知恵を活かした生薬茶のブランド。',
+    title: '四国ボタニカ',
+    description: '四国の植物の知恵を、日常へ。薬草と生薬の背景を大切にしたボタニカルブランド。',
     locale: 'ja_JP',
     type: 'website',
   },

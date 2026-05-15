@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '配送について',
-  description: '山草の恵みの配送条件、送料、発送目安についてご案内します。',
+  description: '四国ボタニカの配送条件、送料、発送目安についてご案内します。',
 };
 
 export default function ShippingPage() {

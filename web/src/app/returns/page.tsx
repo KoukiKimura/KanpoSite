@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '返品・交換について',
-  description: '山草の恵みの返品・交換条件、連絡方法についてご案内します。',
+  description: '四国ボタニカの返品・交換条件、連絡方法についてご案内します。',
 };
 
 export default function ReturnsPage() {

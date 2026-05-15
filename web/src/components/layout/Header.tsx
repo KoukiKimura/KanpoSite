@@ -44,10 +44,10 @@ export default function Header() {
           {/* ロゴ */}
           <Link href="/" className="flex flex-col items-start group" onClick={() => setIsMenuOpen(false)}>
             <span className="text-xl lg:text-2xl tracking-widest text-primary font-serif leading-tight" style={{ fontFamily: "'Noto Serif JP', serif" }}>
-              山草の恵み
+              四国ボタニカ
             </span>
             <span className="text-xs tracking-[0.2em] text-accent italic" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-              Sansou no Megumi
+              Shikoku Botanica
             </span>
           </Link>
 

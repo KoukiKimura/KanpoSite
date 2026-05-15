@@ -6,7 +6,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: '古民家',
   description:
-    '山草の恵みの古民家。漢方と自然を体感する体験施設。近日公開予定。',
+    '四国ボタニカの古民家。四国の植物と自然を体感する滞在施設。近日公開予定。',
 };
 
 export default function KominkaPage() {

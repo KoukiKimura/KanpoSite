@@ -30,7 +30,7 @@ type CartContextValue = {
   getItemQuantity: (handle: string) => number;
 };
 
-const CART_STORAGE_KEY = 'sansou_cart';
+const CART_STORAGE_KEY = 'shikoku_botanica_cart';
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 function getProductByHandle(handle: string): Product | undefined {

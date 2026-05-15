@@ -78,7 +78,7 @@ export default function ContactClient() {
 
               {/* TODO: 送信機能は将来実装予定（現在はメールにて受付） */}
               <p className="text-xs text-accent bg-accent/10 px-4 py-3 mb-8 border border-accent/20">
-                ※ 現在、フォームの送信機能は準備中です。お問い合わせはメール（info@sansou-megumi.jp）にて受け付けております。
+                ※ 現在、フォームの送信機能は準備中です。お問い合わせはメール（info@shikoku-botanica.jp）にて受け付けております。
               </p>
 
               {submitted ? (
@@ -89,7 +89,7 @@ export default function ContactClient() {
                   </h3>
                   <p className="text-sm text-brand-muted leading-loose">
                     恐れ入りますが、現在フォームからの送信はできません。<br />
-                    <a href="mailto:info@sansou-megumi.jp" className="text-primary underline hover:no-underline">info@sansou-megumi.jp</a> へ直接メールをお送りください。
+                    <a href="mailto:info@shikoku-botanica.jp" className="text-primary underline hover:no-underline">info@shikoku-botanica.jp</a> へ直接メールをお送りください。
                   </p>
                   <button
                     className="mt-6 text-sm text-primary underline hover:no-underline"
@@ -178,7 +178,7 @@ export default function ContactClient() {
               <div className="space-y-6 text-sm text-brand-muted leading-loose">
                 <div>
                   <p className="text-xs tracking-widest text-brand-text mb-1">メール</p>
-                  <p>info@sansou-megumi.jp（仮）</p>
+                  <p>info@shikoku-botanica.jp（仮）</p>
                 </div>
                 <div>
                   <p className="text-xs tracking-widest text-brand-text mb-1">電話番号</p>

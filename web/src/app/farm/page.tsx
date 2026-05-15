@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '畑のこと',
-  description: '山草の恵みの生薬畑について。土づくりから収穫まで、丁寧な栽培の様子をご紹介します。',
+  description: '四国ボタニカの生薬畑について。四国の植物・薬草を土づくりから収穫まで丁寧に育てる様子をご紹介します。',
 };
 
 const seasons = [
@@ -76,7 +76,7 @@ export default function FieldPage() {
           />
           <div className="prose-brand text-brand-muted space-y-4">
             <p>
-              山草の恵みの生薬畑は、○○県の山あいに位置しています。
+              四国ボタニカの生薬畑は、四国の山あいに位置しています。
               澄んだ空気と清らかな湧き水、寒暖差のある気候が、
               薬効豊かな生薬の栽培に適した環境を作り出しています。
             </p>

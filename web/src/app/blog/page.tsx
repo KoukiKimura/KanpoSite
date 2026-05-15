@@ -5,9 +5,9 @@ import { blogCategories, formatDate } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'ブログ',
-  description: '山草の恵みのブログ。漢方茶のレシピ、畑だより、読み物、お知らせをお届けします。',
+  description: '四国ボタニカのブログ。四国の植物、薬草、畑だより、読み物、お知らせをお届けします。',
   openGraph: {
-    title: 'ブログ | 山草の恵み',
+    title: 'ブログ | 四国ボタニカ',
     description: '漢方茶のレシピ、畑だより、読み物、お知らせをお届けします。',
   },
 };

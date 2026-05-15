@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'コンセプト',
   description:
-    '山草の恵みのコンセプト。漢方と自然に向き合う理念、価値観、世界観をご紹介します。',
+    '四国ボタニカのコンセプト。四国の植物・薬草と自然に向き合う理念、価値観、世界観をご紹介します。',
 };
 
 export default function ConceptPage() {

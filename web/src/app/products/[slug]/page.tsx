@@ -7,16 +7,16 @@ import PhotoPanel from '@/components/ui/PhotoPanel';
 import AddToCartControls from '@/components/cart/AddToCartControls';
 
 type Props = {
-  params: Promise<{ handle: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return products.map((p) => ({ handle: p.handle }));
+  return products.map((p) => ({ slug: p.handle }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const { slug } = await params;
+  const product = getProductByHandle(slug);
   if (!product) return { title: '商品が見つかりません' };
   return {
     title: product.name,
@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductDetailPage({ params }: Props) {
-  const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const { slug } = await params;
+  const product = getProductByHandle(slug);
 
   if (!product) {
     notFound();

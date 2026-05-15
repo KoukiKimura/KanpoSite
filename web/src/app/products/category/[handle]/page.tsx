@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${collection.title} | 商品カテゴリ`,
     description: collection.description,
     openGraph: {
-      title: `${collection.title} | 山草の恵み`,
+      title: `${collection.title} | 四国ボタニカ`,
       description: collection.description,
     },
   };

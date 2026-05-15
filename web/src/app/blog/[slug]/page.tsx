@@ -30,14 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt || undefined,
       openGraph: {
-        title: `${post.title} | 山草の恵み`,
+        title: `${post.title} | 四国ボタニカ`,
         description: post.excerpt || undefined,
         type: 'article',
         publishedTime: post.publishedAt,
       },
     };
   } catch {
-    return { title: '山草の恵み ブログ' };
+    return { title: '四国ボタニカ ブログ' };
   }
 }
 

@@ -21,9 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!cat) return { title: 'カテゴリが見つかりません' };
   return {
     title: `${cat.label} | ブログ`,
-    description: `山草の恵みのブログ — ${cat.label}の記事一覧です。`,
+    description: `四国ボタニカのブログ — ${cat.label}の記事一覧です。`,
     openGraph: {
-      title: `${cat.label} | 山草の恵み`,
+      title: `${cat.label} | 四国ボタニカ`,
       description: `${cat.label}に関する記事をお届けします。`,
     },
   };

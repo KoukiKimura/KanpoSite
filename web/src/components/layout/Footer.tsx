@@ -35,23 +35,23 @@ export default function Footer() {
                 className="text-2xl tracking-widest text-white font-serif leading-tight"
                 style={{ fontFamily: "'Noto Serif JP', serif" }}
               >
-                山草の恵み
+                四国ボタニカ
               </p>
               <p
                 className="text-xs tracking-[0.2em] text-accent-light italic mt-1"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
               >
-                Sansou no Megumi
+                Shikoku Botanica
               </p>
             </Link>
             <p className="text-sm text-white/70 leading-relaxed mt-4">
-              自然の恵みを大切に、<br />
+              四国の植物の知恵を、<br />
               丁寧に育てた生薬で<br />
-              日々の健康をお届けします。
+              日々の一杯へ届けます。
             </p>
             <div className="mt-6 text-xs text-white/50 space-y-1">
               <p>〒000-0000 ○○県○○市○○町0-0-0</p>
-              <p>Email: info@sansou-megumi.jp（仮）</p>
+              <p>Email: info@shikoku-botanica.jp（仮）</p>
               <p>Tel: 000-000-0000（仮）</p>
             </div>
           </div>
@@ -113,10 +113,10 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-site py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/40 tracking-wide">
-            &copy; {currentYear} 山草の恵み. All Rights Reserved.
+            &copy; {currentYear} 四国ボタニカ. All Rights Reserved.
           </p>
           <p className="text-xs text-white/30 italic" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            Sansou no Megumi — Natural Herbal Medicine
+            Shikoku Botanica — Plants of Shikoku
           </p>
         </div>
       </div>

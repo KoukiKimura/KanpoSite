@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '利用規約',
-  description: '山草の恵みの利用規約です。',
+  description: '四国ボタニカの利用規約です。',
 };
 
 export default function TermsPage() {
@@ -26,7 +26,7 @@ export default function TermsPage() {
       <section className="section-padding bg-brand-bg">
         <div className="container-site max-w-3xl mx-auto">
           <p className="text-sm text-brand-muted mb-10 leading-loose">
-            本利用規約（以下「本規約」）は、山草の恵み（以下「当社」）が運営するウェブサイト
+            本利用規約（以下「本規約」）は、四国ボタニカ（以下「当社」）が運営するウェブサイト
             および提供するサービスのご利用条件を定めるものです。
             サービスをご利用いただく前に、本規約を必ずお読みください。
           </p>

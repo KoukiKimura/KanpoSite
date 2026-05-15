@@ -2,18 +2,18 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '特定商取引法に基づく表記',
-  description: '山草の恵みの特定商取引法に基づく表記ページです。',
+  description: '四国ボタニカの特定商取引法に基づく表記ページです。',
 };
 
 const legalItems = [
-  { label: '販売業者', value: '山草の恵み（Sansou no Megumi）' },
+  { label: '販売業者', value: '四国ボタニカ（Shikoku Botanica）' },
   { label: '運営統括責任者', value: '○○○○（準備中）' },
   { label: '所在地', value: '〒000-0000 ○○県○○市○○町0-0-0（準備中）' },
   { label: '電話番号', value: '000-000-0000（準備中）\n受付時間: 平日 10:00〜17:00' },
-  { label: 'メールアドレス', value: 'info@sansou-megumi.jp（準備中）' },
+  { label: 'メールアドレス', value: 'info@shikoku-botanica.jp（準備中）' },
   {
     label: '販売URL',
-    value: 'https://sansou-megumi.jp（準備中）',
+    value: 'https://shikoku-botanica.jp（準備中）',
   },
   {
     label: '販売価格',

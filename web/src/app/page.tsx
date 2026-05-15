@@ -37,13 +37,13 @@ export default async function HomePage() {
             className="heading-md text-brand-text mb-6"
             style={{ fontFamily: "'Noto Serif JP', serif" }}
           >
-            土から育む、本物の漢方
+            四国の植物の知恵を、日常へ
           </h2>
           <div className="w-12 h-px bg-accent mx-auto mb-8" />
           <p className="text-brand-muted leading-loose text-base mb-6">
-            山草の恵みは、自分たちの畑で丁寧に育てた生薬だけを使います。
-            農薬に頼らず、土の力を信じて。季節と対話しながら育てた草たちが、
-            あなたの毎日に静かな活力を届けます。
+            四国ボタニカは、イタリア語の botanica が持つ「植物・植物学」の響きに、
+            四国の草木への敬意を重ねたブランドです。土の力を信じ、季節と対話しながら育てた草木を、
+            日々の一杯として届けます。
           </p>
           <p className="text-brand-muted leading-loose text-base mb-10">
             漢方の知恵は、何千年もの時間をかけて人々が自然と向き合い、
@@ -62,7 +62,7 @@ export default async function HomePage() {
           <SectionTitle
             title="おすすめ商品"
             titleEn="Featured Products"
-            subtitle="自然の恵みを凝縮した、山草の恵みの代表的な生薬茶をご紹介します。"
+            subtitle="四国の植物・薬草の背景を大切にした、四国ボタニカの代表的な商品をご紹介します。"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {featuredProducts.map((product) => (
@@ -96,7 +96,7 @@ export default async function HomePage() {
                 </p>
                 <p>
                   大学で東洋医学を学び、漢方の深さを知るにつれ、祖父の仕事の尊さを改めて実感しました。
-                  その思いを形にしたのが、山草の恵みです。
+                  その思いを、四国の植物と暮らしをつなぐ形にしたのが、四国ボタニカです。
                 </p>
               </div>
               <Link href="/about" className="btn-outline-white mt-8 inline-flex">
