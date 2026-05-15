@@ -3,19 +3,21 @@
 | 項目 | 内容 |
 |---|---|
 | ドキュメント名 | サイト詳細設計書_Shopify案 |
-| バージョン | 1.1.5 |
+| バージョン | 1.1.6 |
 | 作成日 | 2026-04-27 |
-| 最終更新日 | 2026-05-04 |
-| ステータス | Shopify正規方針・実装反映・SEO/メタデータ補完反映済み |
-| 参照要件 | `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.5 |
-| 参照基本設計 | `docs/サイト設計/サイト基本設計書_Shopify案.md` v1.0.6 |
-| 参照ロードマップ | `docs/ロードマップ/開発ロードマップ_Shopify案.md` v1.3.3 |
+| 最終更新日 | 2026-05-07 |
+| ステータス | Shopify正規方針・実装反映・SEO/メタデータ・ブランド名称反映済み |
+| 参照要件 | `docs/要件定義/サイト要件定義書_Shopify案.md` v1.2.6 |
+| 参照基本設計 | `docs/サイト設計/サイト基本設計書_Shopify案.md` v1.0.7 |
+| 参照ロードマップ | `docs/ロードマップ/開発ロードマップ_Shopify案.md` v1.3.4 |
 
 ---
 
 ## 1. 詳細設計前提
 
 - 公開サイト、商品管理、決済、ブログ、問い合わせ、法務ページは Shopify に集約する
+- サイト名 / ブランド名は `四国ボタニカ` とする。英字表記が必要な箇所は、イタリア語 botanica（植物・植物学）由来の推定に基づく `Shikoku Botanica` を暫定採用し、正式綴り確認後に差し替える
+- OGP、Organization説明、ヘッダー・フッター、seedのSEO title / descriptionでは、四国の植物・薬草の知恵を扱うボタニカルブランドとして説明する
 - 独自の Next.js 公開サイト・ConoHa 静的配信・外部 EC リンク運用は採用しない
 - テーマは Online Store 2.0 対応テーマ（Dawn / Horizon 系 / 有料テーマから選定）をベースとし、Liquid / JSON templates / sections / snippets / assets をカスタマイズする
 - テーマはローカルで作成・検証し、初回はZIPアップロード、以後の更新はShopify CLI `theme push` を正規運用とする。反映前に `shopify theme check --path .` を実行し、ライブテーマへ反映する場合はTheme Access tokenと `--allow-live` を使う
@@ -1067,6 +1069,7 @@ Shopify 案ではサーバーサイドアプリ（Next.js、PHP 等）を持た�
 | 2026-04-29 | 1.1.3 | Codex | 上位要件・基本設計との再帰レビューを実施し、実ファイル構成、main系Section、BLOG縦リスト、問い合わせ追加項目を修正 |
 | 2026-04-30 | 1.1.4 | Codex | Shopify実装との差分を再帰確認し、SEOメタデータseed、OGP/Twitterカード補完、画像alt、関連商品フォールバック、主要metafield定義、古民家page metafield運用、REST/GraphQL併用seed方針を反映 |
 | 2026-05-04 | 1.1.5 | Codex | Shopifyを正規方針とし、オリジナル案をアーカイブ参照へ変更 |
+| 2026-05-07 | 1.1.6 | Codex | サイト名を四国ボタニカへ変更し、暫定英字表記 `Shikoku Botanica`、Organization説明、SEO文脈の前提を追加 |
 
 ---
 

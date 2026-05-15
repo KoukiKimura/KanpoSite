@@ -4,8 +4,11 @@
 
 ## ファイル
 
-- `.env.local`: 実値入りのローカル秘密ファイル
-- `.env.example`: 共有用テンプレート
+| ファイル | 用途 |
+|---|---|
+| `.env` | **本番環境**用シークレット。実値入り。Git管理しない |
+| `.env.local` | **検証環境**用シークレット。実値入り。Git管理しない |
+| `.env.example` | 共有用テンプレート。値は空欄のままGit管理する |
 
 ## 主な変数
 
@@ -32,3 +35,39 @@ Theme Accessのパスワードは、Shopify CLIが参照する `SHOPIFY_CLI_THEM
 - テーマ反映: `SHOPIFY_STORE_DOMAIN`、`SHOPIFY_THEME_ID`、`SHOPIFY_CLI_THEME_TOKEN` を使って `shopify theme push` を実行します。
 - データ投入: `SHOPIFY_DEV_CLIENT_ID` と `SHOPIFY_DEV_CLIENT_SECRET` で実行時にAdmin API access tokenを取得し、`web_shopify/scripts/seed-shopify.mjs` を実行します。商品・コレクション・固定ページ・BLOG・メニューに加え、主要metafield定義、SEO title / description、商品・記事・コレクション画像altの初期投入を補助します。
 - `SHOPIFY_STORE_DOMAIN` はAPI/Theme Access用の `{store}.myshopify.com` ドメインを指定します。ストアフロントのプライマリ表示ドメインとは異なる場合があります。
+
+## 環境切り替え
+
+`shopify theme push` などを実行する際は、使用する環境ファイルを明示して操作します。
+
+| 操作対象 | 使用ファイル |
+|---|---|
+| 本番環境 | `.env` |
+| 検証環境 | `.env.local` |
+
+スクリプト・CLIコマンド実行前に、`SHOPIFY_STORE_DOMAIN` と `SHOPIFY_THEME_ID` が意図した環境のものであることを確認してください。
+
+### theme push
+
+```bash
+# 検証環境（デフォルト）
+cd web_shopify
+$env:SHOPIFY_CLI_THEME_TOKEN="<検証トークン>"; shopify theme push --store=<検証ドメイン> --theme=<検証THEME_ID>
+
+# 本番環境
+$env:SHOPIFY_CLI_THEME_TOKEN="<本番トークン>"; shopify theme push --store=7jcarb-ee.myshopify.com --theme=182392586527
+```
+
+### seed / update-policies / set-product-category
+
+`--env=production` を付けると `env/shopify/.env`（本番）を読み込みます。省略時は `.env.local`（検証）を使います。
+
+```bash
+# 検証環境（デフォルト）
+node web_shopify/scripts/seed-shopify.mjs
+
+# 本番環境
+node web_shopify/scripts/seed-shopify.mjs --env=production
+node web_shopify/scripts/update-policies.mjs --env=production
+node web_shopify/scripts/set-product-category.mjs --env=production
+```
