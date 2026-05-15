@@ -1,0 +1,78 @@
+{
+  "product": [
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611561629",
+      "namespace": "custom",
+      "key": "quantity",
+      "name": "内容量",
+      "type": {
+        "name": "single_line_text_field"
+      },
+      "description": "商品の内容量・規格を表示します。"
+    },
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611594397",
+      "namespace": "custom",
+      "key": "ingredients",
+      "name": "原材料",
+      "type": {
+        "name": "multi_line_text_field"
+      },
+      "description": "商品詳細に表示する原材料です。"
+    },
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611627165",
+      "namespace": "custom",
+      "key": "how_to_use",
+      "name": "飲み方・使い方",
+      "type": {
+        "name": "multi_line_text_field"
+      },
+      "description": "商品詳細に表示する飲み方・使い方です。"
+    },
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611659933",
+      "namespace": "custom",
+      "key": "caution",
+      "name": "注意事項",
+      "type": {
+        "name": "multi_line_text_field"
+      },
+      "description": "商品詳細に表示する注意事項です。"
+    },
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611692701",
+      "namespace": "custom",
+      "key": "related_products",
+      "name": "関連商品",
+      "type": {
+        "name": "list.product_reference"
+      },
+      "description": "商品詳細に表示する関連商品です。"
+    }
+  ],
+  "page": [
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611725469",
+      "namespace": "custom",
+      "key": "access_text",
+      "name": "アクセス案内",
+      "type": {
+        "name": "multi_line_text_field"
+      },
+      "description": "古民家ページのアクセス案内です。"
+    },
+    {
+      "id": "gid://shopify/MetafieldDefinition/200611758237",
+      "namespace": "custom",
+      "key": "reservation_url",
+      "name": "予約URL",
+      "type": {
+        "name": "url"
+      },
+      "description": "古民家予約用の外部URLです。"
+    }
+  ],
+  "article": [],
+  "collection": []
+}

@@ -1,0 +1,27 @@
+{
+  "fetchedAt": "2026-05-15T12:27:23.553Z",
+  "store": "cqs1ru-bs.myshopify.com",
+  "environment": "local",
+  "files": [
+    "shop.json",
+    "products.json",
+    "products.csv",
+    "collections.json",
+    "pages.json",
+    "blogs.json",
+    "menus.json",
+    "policies.json",
+    "redirects.json",
+    "metafield-definitions.json",
+    "metaobject-definitions.json",
+    "metaobject-instances.json",
+    "files.json",
+    "shipping-zones.json",
+    "locations.json",
+    "markets.json",
+    "script-tags.json",
+    "notifications.json",
+    "discounts.json",
+    "themes.json"
+  ]
+}

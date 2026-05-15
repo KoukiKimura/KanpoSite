@@ -1,0 +1,318 @@
+[
+  {
+    "id": 343805886621,
+    "handle": "tea",
+    "title": "お茶",
+    "updated_at": "2026-05-07T22:49:23+09:00",
+    "body_html": "<p>日々の一杯として案内するイヌトウキ茶です。</p>",
+    "published_at": "2026-04-28T21:44:36+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343805886621",
+    "image": {
+      "created_at": "2026-05-05T12:18:29+09:00",
+      "alt": "イヌトウキ茶の商品",
+      "width": 302,
+      "height": 504,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-touki-dt_166b6aad-9aa4-4f79-b94a-d544acee63e7.jpg?v=1777951109"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34853448515741,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "お茶 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343805886621,
+        "created_at": "2026-05-05T03:26:41+09:00",
+        "updated_at": "2026-05-07T22:49:22+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853448515741"
+      },
+      {
+        "id": 34853449203869,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ茶の茶葉、茶葉ティーバッグ、ドクダミとトウキのお茶を掲載します。",
+        "description": null,
+        "owner_id": 343805886621,
+        "created_at": "2026-05-05T03:26:41+09:00",
+        "updated_at": "2026-05-05T12:18:32+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853449203869"
+      }
+    ]
+  },
+  {
+    "id": 343749394589,
+    "handle": "frontpage",
+    "title": "ホームページ",
+    "updated_at": "2026-04-28T21:43:55+09:00",
+    "body_html": null,
+    "published_at": "2026-04-26T21:15:21+09:00",
+    "sort_order": "most-relevant",
+    "template_suffix": null,
+    "published_scope": "global",
+    "admin_graphql_api_id": "gid://shopify/Collection/343749394589",
+    "_type": "custom_collections",
+    "metafields": []
+  },
+  {
+    "id": 343987880093,
+    "handle": "pills",
+    "title": "丸剤",
+    "updated_at": "2026-05-07T22:49:29+09:00",
+    "body_html": "<p>粒状で取り入れやすい当帰茶の丸剤です。</p>",
+    "published_at": "2026-05-05T12:18:40+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343987880093",
+    "image": {
+      "created_at": "2026-05-05T12:18:40+09:00",
+      "alt": "イヌトウキ茶 丸剤の商品",
+      "width": 150,
+      "height": 232,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-product-touki-pills.jpg?v=1777951120"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34860650594461,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "丸剤 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343987880093,
+        "created_at": "2026-05-05T12:18:42+09:00",
+        "updated_at": "2026-05-07T22:49:28+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34860650594461"
+      },
+      {
+        "id": 34860651970717,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ茶の丸剤タイプを掲載します。粒状で扱いやすい商品です。",
+        "description": null,
+        "owner_id": 343987880093,
+        "created_at": "2026-05-05T12:18:43+09:00",
+        "updated_at": "2026-05-07T18:14:12+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34860651970717"
+      }
+    ]
+  },
+  {
+    "id": 343805853853,
+    "handle": "featured-products",
+    "title": "注目商品",
+    "updated_at": "2026-05-07T22:49:21+09:00",
+    "body_html": "<p>当帰の素材感や産地の背景を伝える商品です。</p>",
+    "published_at": "2026-04-28T21:44:33+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343805853853",
+    "image": {
+      "created_at": "2026-05-07T22:49:18+09:00",
+      "alt": "四国ボタニカのイヌトウキ関連商品",
+      "width": 302,
+      "height": 504,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-touki-dt_7b878be2-8eaa-45a0-aca9-012ca67b444f.jpg?v=1778161759"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34853444518045,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "注目商品 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343805853853,
+        "created_at": "2026-05-05T03:26:36+09:00",
+        "updated_at": "2026-05-07T22:49:20+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853444518045"
+      },
+      {
+        "id": 34853446680733,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ茶、ドクダミとトウキのお茶、当帰粉末、イヌトウキ苗をまとめた四国ボタニカの注目商品一覧です。",
+        "description": null,
+        "owner_id": 343805853853,
+        "created_at": "2026-05-05T03:26:37+09:00",
+        "updated_at": "2026-05-07T22:49:21+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853446680733"
+      }
+    ]
+  },
+  {
+    "id": 343805919389,
+    "handle": "powder",
+    "title": "粉末",
+    "updated_at": "2026-05-07T22:49:25+09:00",
+    "body_html": "<p>飲みものや食事に少量ずつ加えやすい粉末商品です。</p>",
+    "published_at": "2026-04-28T21:44:38+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343805919389",
+    "image": {
+      "created_at": "2026-05-05T12:18:33+09:00",
+      "alt": "イヌトウキ茶 粉末の商品",
+      "width": 247,
+      "height": 377,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-touki-p_f840bea0-69f0-487c-a18a-3ecb2b319926.jpg?v=1777951114"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34853449826461,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "粉末 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343805919389,
+        "created_at": "2026-05-05T03:26:44+09:00",
+        "updated_at": "2026-05-07T22:49:24+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853449826461"
+      },
+      {
+        "id": 34853451399325,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ茶の粉末と当帰粉末を掲載します。飲みものや食事に少量ずつ加えやすい商品です。",
+        "description": null,
+        "owner_id": 343805919389,
+        "created_at": "2026-05-05T03:26:45+09:00",
+        "updated_at": "2026-05-07T18:14:08+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853451399325"
+      }
+    ]
+  },
+  {
+    "id": 343980671133,
+    "handle": "seedlings",
+    "title": "苗",
+    "updated_at": "2026-05-07T22:49:31+09:00",
+    "body_html": "<p>予約・問い合わせ品として案内するイヌトウキ苗です。</p>",
+    "published_at": "2026-05-05T03:26:47+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343980671133",
+    "image": {
+      "created_at": "2026-05-05T03:26:47+09:00",
+      "alt": "イヌトウキ苗",
+      "width": 960,
+      "height": 540,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-inutouki-2022.jpg?v=1777919207"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34853460934813,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "苗 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343980671133,
+        "created_at": "2026-05-05T03:26:49+09:00",
+        "updated_at": "2026-05-07T22:49:30+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853460934813"
+      },
+      {
+        "id": 34853462540445,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "Angelica shikokiana Makino のイヌトウキ苗を予約・問い合わせ品として掲載します。",
+        "description": null,
+        "owner_id": 343980671133,
+        "created_at": "2026-05-05T03:26:50+09:00",
+        "updated_at": "2026-05-05T03:26:50+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853462540445"
+      }
+    ]
+  },
+  {
+    "id": 343805952157,
+    "handle": "tablets",
+    "title": "錠剤",
+    "updated_at": "2026-05-07T22:49:27+09:00",
+    "body_html": "<p>水またはお湯とともに取り入れやすい当帰茶の錠剤です。</p>",
+    "published_at": "2026-04-28T21:44:39+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343805952157",
+    "image": {
+      "created_at": "2026-05-05T12:18:37+09:00",
+      "alt": "イヌトウキ茶 錠剤の商品",
+      "width": 150,
+      "height": 238,
+      "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/collections/srs-product-touki-tablets.jpg?v=1777951117"
+    },
+    "_type": "custom_collections",
+    "metafields": [
+      {
+        "id": 34860647612573,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "錠剤 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 343805952157,
+        "created_at": "2026-05-05T12:18:39+09:00",
+        "updated_at": "2026-05-07T22:49:26+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34860647612573"
+      },
+      {
+        "id": 34860649250973,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ茶の錠剤タイプを掲載します。水またはお湯とともに取り入れやすい商品です。",
+        "description": null,
+        "owner_id": 343805952157,
+        "created_at": "2026-05-05T12:18:39+09:00",
+        "updated_at": "2026-05-07T18:14:10+09:00",
+        "owner_resource": "collection",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34860649250973"
+      }
+    ]
+  },
+  {
+    "id": 343805984925,
+    "handle": "care-set",
+    "title": "養生セット",
+    "updated_at": "2026-04-28T21:44:40+09:00",
+    "body_html": "<p>季節の整え方を一箱にまとめたセットです。</p>",
+    "published_at": "2026-04-28T21:44:40+09:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/343805984925",
+    "_type": "custom_collections",
+    "metafields": []
+  }
+]

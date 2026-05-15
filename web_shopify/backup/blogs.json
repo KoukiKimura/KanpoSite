@@ -1,0 +1,233 @@
+[
+  {
+    "id": 99437674653,
+    "handle": "stories",
+    "title": "BLOG",
+    "updated_at": "2026-05-07T22:49:57+09:00",
+    "commentable": "no",
+    "feedburner": null,
+    "feedburner_location": null,
+    "created_at": "2026-04-28T21:44:44+09:00",
+    "template_suffix": null,
+    "tags": "product, story, kominka",
+    "admin_graphql_api_id": "gid://shopify/Blog/99437674653",
+    "articles": [
+      {
+        "id": 575748079773,
+        "title": "ドクダミとトウキのお茶を淹れる",
+        "created_at": "2026-05-05T03:27:07+09:00",
+        "body_html": "<p>ドクダミとトウキのお茶は、湯を注いで好みの濃さまで抽出します。香りを強く出しすぎず、日々続けられる薄さから始めるのがおすすめです。</p>",
+        "blog_id": 99437674653,
+        "author": "四国ボタニカ",
+        "user_id": null,
+        "published_at": "2026-05-05T03:27:07+09:00",
+        "updated_at": "2026-05-07T22:49:54+09:00",
+        "summary_html": "<p>ドクダミとトウキのお茶の使い方を紹介します。</p>",
+        "template_suffix": null,
+        "handle": "dokudami-touki-tea-routine",
+        "tags": "product",
+        "admin_graphql_api_id": "gid://shopify/Article/575748079773",
+        "image": {
+          "created_at": "2026-05-07T22:49:51+09:00",
+          "alt": "朝のお茶を淹れる時間",
+          "width": 1448,
+          "height": 1086,
+          "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/articles/morning-tea_40ac76cb-a219-455b-874d-17f3c47ce6bb.webp?v=1778161791"
+        },
+        "metafields": [
+          {
+            "id": 34853483184285,
+            "namespace": "global",
+            "key": "title_tag",
+            "value": "ドクダミとトウキのお茶を淹れる | 四国ボタニカBLOG",
+            "description": null,
+            "owner_id": 575748079773,
+            "created_at": "2026-05-05T03:27:08+09:00",
+            "updated_at": "2026-05-07T22:49:53+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853483184285"
+          },
+          {
+            "id": 34853485215901,
+            "namespace": "global",
+            "key": "description_tag",
+            "value": "ドクダミとトウキのお茶を日々の一杯として取り入れるための淹れ方を紹介します。",
+            "description": null,
+            "owner_id": 575748079773,
+            "created_at": "2026-05-05T03:27:09+09:00",
+            "updated_at": "2026-05-05T03:27:09+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853485215901"
+          }
+        ]
+      },
+      {
+        "id": 575260164253,
+        "title": "古民家で過ごす朝",
+        "created_at": "2026-04-28T21:44:50+09:00",
+        "body_html": "<p>古民家の朝は、喜多灘の畑の空気と木の香りから始まります。派手に整えすぎず、当帰の栽培地に付属する畑と家の静けさをそのまま受け取れる滞在を目指しています。</p>",
+        "blog_id": 99437674653,
+        "author": "四国ボタニカ",
+        "user_id": null,
+        "published_at": "2026-04-28T21:44:50+09:00",
+        "updated_at": "2026-05-07T22:49:57+09:00",
+        "summary_html": "<p>古民家滞在の朝の雰囲気を紹介します。</p>",
+        "template_suffix": null,
+        "handle": "kominka-morning",
+        "tags": "kominka",
+        "admin_graphql_api_id": "gid://shopify/Article/575260164253",
+        "image": {
+          "created_at": "2026-05-07T22:49:55+09:00",
+          "alt": "古民家近くの朝の畑",
+          "width": 1448,
+          "height": 1086,
+          "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/articles/morning-field.webp?v=1778161795"
+        },
+        "metafields": [
+          {
+            "id": 34853487902877,
+            "namespace": "global",
+            "key": "title_tag",
+            "value": "古民家で過ごす朝 | 四国ボタニカBLOG",
+            "description": null,
+            "owner_id": 575260164253,
+            "created_at": "2026-05-05T03:27:12+09:00",
+            "updated_at": "2026-05-07T22:49:57+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853487902877"
+          },
+          {
+            "id": 34853488001181,
+            "namespace": "global",
+            "key": "description_tag",
+            "value": "喜多灘の当帰畑に付属する古民家で過ごす朝を紹介します。",
+            "description": null,
+            "owner_id": 575260164253,
+            "created_at": "2026-05-05T03:27:13+09:00",
+            "updated_at": "2026-05-05T03:27:13+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853488001181"
+          }
+        ]
+      },
+      {
+        "id": 575260131485,
+        "title": "朝のお茶を整える",
+        "created_at": "2026-04-28T21:44:48+09:00",
+        "body_html": "<p>朝の支度前に、湯を沸かし、茶葉を静かに開かせる時間を作ります。香りを強く出しすぎず、日々続けられる薄さから始めるのがおすすめです。</p>",
+        "blog_id": 99437674653,
+        "author": "山草のめぐみ",
+        "user_id": null,
+        "published_at": "2026-04-28T21:44:48+09:00",
+        "updated_at": "2026-04-28T21:44:48+09:00",
+        "summary_html": "<p>山のハーブブレンドを朝の習慣にするための案内です。</p>",
+        "template_suffix": null,
+        "handle": "morning-tea-routine",
+        "tags": "product",
+        "admin_graphql_api_id": "gid://shopify/Article/575260131485",
+        "image": {
+          "created_at": "2026-04-28T21:44:48+09:00",
+          "alt": null,
+          "width": 1448,
+          "height": 1086,
+          "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/articles/morning-tea.webp?v=1777380288"
+        },
+        "metafields": []
+      },
+      {
+        "id": 575260098717,
+        "title": "当帰の背景と日々の記録",
+        "created_at": "2026-04-28T21:44:46+09:00",
+        "body_html": "<p>当帰は、栽培、素材の香り、日々の記録とあわせて紹介している植物です。商品は食品として、疾病の診断、治療、予防を目的とせず、嗜好品として案内します。</p>",
+        "blog_id": 99437674653,
+        "author": "四国ボタニカ",
+        "user_id": null,
+        "published_at": "2026-04-28T21:44:46+09:00",
+        "updated_at": "2026-05-07T22:49:50+09:00",
+        "summary_html": "<p>当帰の背景と栽培、日々の記録について紹介します。</p>",
+        "template_suffix": null,
+        "handle": "satoyama-herbs",
+        "tags": "story",
+        "admin_graphql_api_id": "gid://shopify/Article/575260098717",
+        "image": {
+          "created_at": "2026-05-07T22:49:48+09:00",
+          "alt": "当帰の商品づくりに関わる風景",
+          "width": 1448,
+          "height": 1086,
+          "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/articles/field-walk.webp?v=1778161788"
+        },
+        "metafields": [
+          {
+            "id": 34853477056669,
+            "namespace": "global",
+            "key": "title_tag",
+            "value": "当帰の背景と日々の記録 | 四国ボタニカBLOG",
+            "description": null,
+            "owner_id": 575260098717,
+            "created_at": "2026-05-05T03:27:05+09:00",
+            "updated_at": "2026-05-07T22:49:49+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853477056669"
+          },
+          {
+            "id": 34853477122205,
+            "namespace": "global",
+            "key": "description_tag",
+            "value": "当帰の背景、栽培、日々の記録について紹介します。",
+            "description": null,
+            "owner_id": 575260098717,
+            "created_at": "2026-05-05T03:27:05+09:00",
+            "updated_at": "2026-05-07T18:14:31+09:00",
+            "owner_resource": "article",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/34853477122205"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 99410182301,
+    "handle": "ニュース",
+    "title": "ニュース",
+    "updated_at": "2026-04-30T10:02:29+09:00",
+    "commentable": "no",
+    "feedburner": null,
+    "feedburner_location": null,
+    "created_at": "2026-04-26T21:15:21+09:00",
+    "template_suffix": null,
+    "tags": "story",
+    "admin_graphql_api_id": "gid://shopify/Blog/99410182301",
+    "articles": [
+      {
+        "id": 575366693021,
+        "title": "テスト",
+        "created_at": "2026-04-30T10:02:29+09:00",
+        "body_html": "<p>コレは、スマホから投稿したテスト記事てす</p>",
+        "blog_id": 99410182301,
+        "author": "木村昂稀",
+        "user_id": 100336402589,
+        "published_at": "2026-04-30T10:01:53+09:00",
+        "updated_at": "2026-04-30T10:02:29+09:00",
+        "summary_html": "<p>テスト記事</p>",
+        "template_suffix": "article",
+        "handle": "テスト",
+        "tags": "story",
+        "admin_graphql_api_id": "gid://shopify/Article/575366693021",
+        "image": {
+          "created_at": "2026-04-30T10:02:29+09:00",
+          "alt": null,
+          "width": 1600,
+          "height": 1600,
+          "src": "https://cdn.shopify.com/s/files/1/0764/9643/7405/articles/O5UniPnWApQB6dipPBuPZejlXn2HZUQM0Qz-XUBELjzIumg9nCqkD3cOOkjglbRIr3Vh93W21LgX8eJUEHNpQD20IogrNDyJkcv5E5SNhWFsUb5NQDBaH-X0kv_eI9jqHqRA-QJAvy3L8948NkCqvcBRHvy5VpW2-7K9cSinPZBOssIIBxBDBQx.jpg?v=1777510949"
+        },
+        "metafields": []
+      }
+    ]
+  }
+]

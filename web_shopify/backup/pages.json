@@ -1,0 +1,220 @@
+[
+  {
+    "id": 119570661533,
+    "title": "お問い合わせ",
+    "shop_id": 76496437405,
+    "handle": "contact",
+    "body_html": "<p>商品、古民家、取材や訪問についてのお問い合わせはこちらからお送りください。</p>",
+    "author": null,
+    "created_at": "2026-04-26T21:15:21+09:00",
+    "updated_at": "2026-05-07T22:49:38+09:00",
+    "published_at": "2026-04-26T21:15:21+09:00",
+    "template_suffix": "contact",
+    "admin_graphql_api_id": "gid://shopify/Page/119570661533",
+    "metafields": [
+      {
+        "id": 34853464440989,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "お問い合わせ | 四国ボタニカ",
+        "description": null,
+        "owner_id": 119570661533,
+        "created_at": "2026-05-05T03:26:56+09:00",
+        "updated_at": "2026-05-07T22:49:38+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853464440989"
+      },
+      {
+        "id": 34853464604829,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "四国ボタニカの商品、古民家、取材や訪問に関するお問い合わせフォームです。",
+        "description": null,
+        "owner_id": 119570661533,
+        "created_at": "2026-05-05T03:26:57+09:00",
+        "updated_at": "2026-05-07T22:49:38+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853464604829"
+      }
+    ]
+  },
+  {
+    "id": 119620141213,
+    "title": "よくある質問",
+    "shop_id": 76496437405,
+    "handle": "faq",
+    "body_html": "<p>商品や古民家滞在について、事前によくいただく質問をまとめます。</p>",
+    "author": "Shopify API",
+    "created_at": "2026-04-28T21:44:43+09:00",
+    "updated_at": "2026-05-07T22:49:40+09:00",
+    "published_at": "2026-04-28T21:44:43+09:00",
+    "template_suffix": "faq",
+    "admin_graphql_api_id": "gid://shopify/Page/119620141213",
+    "metafields": [
+      {
+        "id": 34853464801437,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "よくある質問 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 119620141213,
+        "created_at": "2026-05-05T03:26:58+09:00",
+        "updated_at": "2026-05-07T22:49:40+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853464801437"
+      },
+      {
+        "id": 34853465227421,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "四国ボタニカの商品や古民家滞在について、事前によくいただく質問をまとめたページです。",
+        "description": null,
+        "owner_id": 119620141213,
+        "created_at": "2026-05-05T03:26:59+09:00",
+        "updated_at": "2026-05-07T22:49:40+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853465227421"
+      }
+    ]
+  },
+  {
+    "id": 119841489053,
+    "title": "利用規約",
+    "shop_id": 76496437405,
+    "handle": "terms-of-service",
+    "body_html": "<p>四国ボタニカオンラインストアの利用条件、注文、配送、返品、問い合わせ品、商品情報の取り扱いについて定めます。</p>",
+    "author": "Shopify API",
+    "created_at": "2026-05-07T18:56:59+09:00",
+    "updated_at": "2026-05-07T22:49:43+09:00",
+    "published_at": "2026-05-07T18:56:59+09:00",
+    "template_suffix": "terms-of-service",
+    "admin_graphql_api_id": "gid://shopify/Page/119841489053",
+    "metafields": [
+      {
+        "id": 34990673461405,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "利用規約 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 119841489053,
+        "created_at": "2026-05-07T18:57:00+09:00",
+        "updated_at": "2026-05-07T22:49:42+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34990673461405"
+      },
+      {
+        "id": 34990673494173,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "四国ボタニカオンラインストアの利用規約です。注文、配送、返品、問い合わせ品、商品情報の取り扱いについて定めます。",
+        "description": null,
+        "owner_id": 119841489053,
+        "created_at": "2026-05-07T18:57:00+09:00",
+        "updated_at": "2026-05-07T22:49:43+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34990673494173"
+      }
+    ]
+  },
+  {
+    "id": 119620108445,
+    "title": "古民家",
+    "shop_id": 76496437405,
+    "handle": "kominka",
+    "body_html": "<p>愛媛県大洲市長浜町今坊・喜多灘の当帰畑に付属する古民家で、畑の空気と海に近い集落の時間を過ごす滞在を案内します。</p><p>喜多灘は、肱川が伊予灘（瀬戸内海）に注ぐ河口域に位置する、年間平均気温約16℃の温暖で日照豊富な土地です。秋から冬の早朝には「肱川あらし」という神秘的な気象現象が見られ、大洲盆地の冷気が霧となって河口へと流れ下ります。こうした豊かな自然環境の中で、四国固有種のイヌトウキ（環境省絶滅危惧II類）を野生採取ではなく栽培・継承しています。</p>",
+    "author": "Shopify API",
+    "created_at": "2026-04-28T21:44:41+09:00",
+    "updated_at": "2026-05-07T22:49:34+09:00",
+    "published_at": "2026-04-28T21:44:41+09:00",
+    "template_suffix": "kominka",
+    "admin_graphql_api_id": "gid://shopify/Page/119620108445",
+    "metafields": [
+      {
+        "id": 34627254616221,
+        "namespace": "custom",
+        "key": "access_text",
+        "value": "〒799-3411 愛媛県大洲市長浜町今坊1154（旧喜多灘小学校・現喜多灘ふれあい広場）周辺。JR予讃線の喜多灘駅が最寄りですが、施設までは約2.3kmあります。車での来訪や送迎の有無、駐車場所は予約時に個別確認します。",
+        "description": null,
+        "owner_id": 119620108445,
+        "created_at": "2026-04-28T21:44:42+09:00",
+        "updated_at": "2026-05-05T03:26:51+09:00",
+        "owner_resource": "page",
+        "type": "multi_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34627254616221"
+      },
+      {
+        "id": 34853463326877,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "喜多灘の古民家 | 四国ボタニカ",
+        "description": null,
+        "owner_id": 119620108445,
+        "created_at": "2026-05-05T03:26:52+09:00",
+        "updated_at": "2026-05-07T22:49:34+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853463326877"
+      },
+      {
+        "id": 34853463752861,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "愛媛県大洲市長浜町今坊・喜多灘の当帰畑に付属する古民家の滞在案内です。旧喜多灘小学校周辺のアクセスも掲載します。",
+        "description": null,
+        "owner_id": 119620108445,
+        "created_at": "2026-05-05T03:26:53+09:00",
+        "updated_at": "2026-05-05T03:26:53+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853463752861"
+      }
+    ]
+  },
+  {
+    "id": 119773200541,
+    "title": "当帰コーナー",
+    "shop_id": 76496437405,
+    "handle": "srs",
+    "body_html": "<p>イヌトウキ、栽培記録、身体データの記録、当帰関連商品の情報をまとめた当帰コーナーです。</p>",
+    "author": "Shopify API",
+    "created_at": "2026-05-05T03:26:53+09:00",
+    "updated_at": "2026-05-07T22:49:36+09:00",
+    "published_at": "2026-05-05T03:26:53+09:00",
+    "template_suffix": "srs",
+    "admin_graphql_api_id": "gid://shopify/Page/119773200541",
+    "metafields": [
+      {
+        "id": 34853463785629,
+        "namespace": "global",
+        "key": "title_tag",
+        "value": "当帰コーナー | 四国ボタニカ",
+        "description": null,
+        "owner_id": 119773200541,
+        "created_at": "2026-05-05T03:26:54+09:00",
+        "updated_at": "2026-05-07T22:49:36+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853463785629"
+      },
+      {
+        "id": 34853463818397,
+        "namespace": "global",
+        "key": "description_tag",
+        "value": "イヌトウキ、栽培記録、身体データの記録、当帰茶、当帰粉末、苗を紹介する四国ボタニカの当帰コーナーです。",
+        "description": null,
+        "owner_id": 119773200541,
+        "created_at": "2026-05-05T03:26:55+09:00",
+        "updated_at": "2026-05-07T22:49:36+09:00",
+        "owner_resource": "page",
+        "type": "single_line_text_field",
+        "admin_graphql_api_id": "gid://shopify/Metafield/34853463818397"
+      }
+    ]
+  }
+]
