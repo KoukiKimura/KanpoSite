@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="shell policy-page">
+    <p class="eyebrow">Policy</p>
+    <h1 class="heading-serif section-heading">{{ page.title | default: '利用規約' }}</h1>
+    <div class="rte policy-rte">
+      {% render 'policy-content-terms' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "利用規約",
+  "settings": []
+}
+{% endschema %}

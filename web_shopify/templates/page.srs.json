@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "srs-inutouki-2022.jpg",
+        "image_alt": "イヌトウキの苗と当帰コーナー",
+        "eyebrow": "Touki",
+        "title": "当帰コーナー",
+        "text": "イヌトウキ、生活習慣、身体データの記録、当帰関連商品をまとめたページです。",
+        "overlay_opacity": 38,
+        "mobile_height": 48,
+        "desktop_height": 54
+      }
+    },
+    "main": {
+      "type": "main-page-srs",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "main"]
+}

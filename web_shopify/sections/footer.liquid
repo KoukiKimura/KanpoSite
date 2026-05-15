@@ -5,14 +5,22 @@
 <footer class="footer" role="contentinfo">
   <div class="footer__inner shell">
     <div>
+      <img
+        src="{{ 'shikoku-botanica-logo-footer.png' | asset_url }}"
+        alt="{{ settings.brand_name_ja | default: shop.name }}"
+        class="footer__logo"
+        width="240"
+        height="400"
+        loading="lazy"
+      >
       <p class="eyebrow">{{ settings.brand_name_ja }}</p>
       <h2 class="footer__title">{{ settings.brand_name_ja }}</h2>
       <p>{{ settings.footer_lead }}</p>
     </div>
 
     <div>
-      <p class="eyebrow">古民家と畑</p>
-      <p>築年数を重ねた家の時間と、季節ごとに変わる畑の景色。その両方を行き来しながら、日々に寄り添う養生を届けます。</p>
+      <p class="eyebrow">イヌトウキ</p>
+      <p>生活習慣への向き合い方を大切にしながら、日々に取り入れやすい当帰商品をご案内します。</p>
       <p>{{ settings.brand_name_en }}</p>
     </div>
 
@@ -32,16 +40,38 @@
       {% endif %}
 
       <nav class="footer__links" aria-label="フッターナビゲーション">
+        {% liquid
+          assign has_shipping_policy = false
+          assign has_refund_policy = false
+          assign has_privacy_policy = false
+          assign has_terms_policy = false
+          assign has_legal_notice = false
+
+          for link in footer_menu.links
+            if link.url == '/policies/shipping-policy'
+              assign has_shipping_policy = true
+            elsif link.url == '/policies/refund-policy'
+              assign has_refund_policy = true
+            elsif link.url == '/policies/privacy-policy'
+              assign has_privacy_policy = true
+            elsif link.url == '/pages/terms-of-service'
+              assign has_terms_policy = true
+            elsif link.url == '/policies/legal-notice'
+              assign has_legal_notice = true
+            endif
+          endfor
+        %}
+
         {% if footer_menu.links.size > 0 %}
           {% for link in footer_menu.links %}
             <a href="{{ link.url }}">{{ link.title }}</a>
           {% endfor %}
-        {% else %}
-          <a href="/policies/shipping-policy">配送情報</a>
-          <a href="/policies/refund-policy">返品・交換</a>
-          <a href="/policies/legal-notice">特定商取引法に基づく表記</a>
-          <a href="/policies/privacy-policy">プライバシーポリシー</a>
         {% endif %}
+        {% unless has_shipping_policy %}<a href="/policies/shipping-policy">配送ポリシー</a>{% endunless %}
+        {% unless has_refund_policy %}<a href="/policies/refund-policy">返金ポリシー</a>{% endunless %}
+        {% unless has_privacy_policy %}<a href="/policies/privacy-policy">プライバシーポリシー</a>{% endunless %}
+        {% unless has_terms_policy %}<a href="/pages/terms-of-service">利用規約</a>{% endunless %}
+        {% unless has_legal_notice %}<a href="/policies/legal-notice">特定商取引法に基づく表記</a>{% endunless %}
       </nav>
 
       <div class="social-links">

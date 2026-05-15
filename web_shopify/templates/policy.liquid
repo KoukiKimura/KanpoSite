@@ -1,9 +1,50 @@
 {% # theme-check-disable UndefinedObject %}
+{% liquid
+  assign policy_handle = request.path | split: '/' | last
+  assign fallback_title = policy.title
+
+  if fallback_title == blank
+    case policy_handle
+      when 'refund-policy'
+        assign fallback_title = '返金ポリシー'
+      when 'shipping-policy'
+        assign fallback_title = '配送ポリシー'
+      when 'privacy-policy'
+        assign fallback_title = 'プライバシーポリシー'
+      when 'terms-of-service'
+        assign fallback_title = '利用規約'
+      when 'legal-notice'
+        assign fallback_title = '特定商取引法に基づく表記'
+      else
+        assign fallback_title = 'ポリシー'
+    endcase
+  endif
+%}
+
 <section class="section">
-  <div class="shell" style="max-width: 920px;">
+  <div class="shell policy-page">
     <p class="eyebrow">Policy</p>
-    <h1 class="heading-serif section-heading">{{ policy.title }}</h1>
-    <div class="rte" style="margin-top: 24px;">{{ policy.body }}</div>
+    <h1 class="heading-serif section-heading">{{ fallback_title }}</h1>
+    <div class="rte policy-rte">
+      {% case policy_handle %}
+        {% when 'refund-policy' %}
+          {% render 'policy-content-refund' %}
+        {% when 'shipping-policy' %}
+          {% render 'policy-content-shipping' %}
+        {% when 'privacy-policy' %}
+          {% render 'policy-content-privacy' %}
+        {% when 'terms-of-service' %}
+          {% render 'policy-content-terms' %}
+        {% else %}
+          {% if policy.body != blank %}
+            {{ policy.body }}
+          {% elsif policy_handle == 'legal-notice' %}
+            {% render 'policy-content-legal-notice' %}
+          {% else %}
+            <p>現在、このポリシーは準備中です。詳細は<a href="/pages/contact">お問い合わせ</a>ください。</p>
+          {% endif %}
+      {% endcase %}
+    </div>
   </div>
 </section>
 {% # theme-check-enable UndefinedObject %}

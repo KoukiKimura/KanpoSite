@@ -5,7 +5,7 @@
   endif
 %}
 
-<section class="section">
+<section class="section related-products">
   <div class="shell">
     <div style="max-width: 760px; margin-bottom: 32px;">
       <p class="eyebrow">Related</p>
@@ -27,34 +27,38 @@
         {% endfor %}
         {% if rendered_related_count == 0 %}
           {% render 'fallback-product-card',
-            fallback_asset: 'product-botanical-tablets-main.webp',
-            type: '錠剤',
-            title: '草木の養生錠',
-            price: '¥3,800',
-            text: '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。'
+            fallback_asset: 'srs-touki-dt.jpg',
+            fallback_url: '/products/dokudami-touki-tea',
+            type: 'お茶',
+            title: 'ドクダミとトウキのお茶',
+            price: '¥1,500',
+            text: 'ドクダミとトウキを合わせた国産原材料100%のティーバッグです。'
           %}
           {% render 'fallback-product-card',
-            fallback_asset: 'product-night-soil-tea-main.webp',
-            type: 'お茶',
-            title: '夜のくつろぎ茶',
-            price: '¥2,900',
-            text: '灯りを落としたあとに似合う、静かな香りの夜のお茶です。'
+            fallback_asset: 'srs-touki-p.jpg',
+            fallback_url: '/products/touki-powder',
+            type: '粉末',
+            title: '当帰粉末',
+            price: '¥3,000',
+            text: 'ヒュウガトウキの茎と葉を粉末にした商品です。'
           %}
         {% endif %}
       {% else %}
         {% render 'fallback-product-card',
-          fallback_asset: 'product-botanical-tablets-main.webp',
-          type: '錠剤',
-          title: '草木の養生錠',
-          price: '¥3,800',
-          text: '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。'
+          fallback_asset: 'srs-touki-dt.jpg',
+          fallback_url: '/products/dokudami-touki-tea',
+          type: 'お茶',
+          title: 'ドクダミとトウキのお茶',
+          price: '¥1,500',
+          text: 'ドクダミとトウキを合わせた国産原材料100%のティーバッグです。'
         %}
         {% render 'fallback-product-card',
-          fallback_asset: 'product-night-soil-tea-main.webp',
-          type: 'お茶',
-          title: '夜のくつろぎ茶',
-          price: '¥2,900',
-          text: '灯りを落としたあとに似合う、静かな香りの夜のお茶です。'
+          fallback_asset: 'srs-touki-p.jpg',
+          fallback_url: '/products/touki-powder',
+          type: '粉末',
+          title: '当帰粉末',
+          price: '¥3,000',
+          text: 'ヒュウガトウキの茎と葉を粉末にした商品です。'
         %}
       {% endif %}
     </div>

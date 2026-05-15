@@ -29,27 +29,39 @@
       {% else %}
         {% render 'fallback-product-card',
           variant: 'simple',
-          fallback_asset: 'product-mountain-herb-blend-main.webp',
+          fallback_asset: 'srs-product-touki-powder.jpg',
+          fallback_url: '/products/inutouki-tea-powder',
+          type: '粉末',
+          title: 'イヌトウキ茶（粉末）',
+          price: '¥2,500',
+          text: '生活習慣の考え方に寄り添う粉末タイプです。'
+        %}
+        {% render 'fallback-product-card',
+          variant: 'simple',
+          fallback_asset: 'srs-product-touki-teabag.jpg',
+          fallback_url: '/products/inutouki-tea-teabag',
           type: 'お茶',
-          title: '山のハーブブレンド',
-          price: '¥3,200',
-          text: '野に立つ草花の香りを静かにまとめた、朝の湯気に似合う定番のお茶です。'
+          title: 'イヌトウキ茶（茶葉ティーバッグ）',
+          price: '¥1,500',
+          text: '1袋ずつ扱いやすい当帰茶のティーバッグタイプです。'
         %}
         {% render 'fallback-product-card',
           variant: 'simple',
-          fallback_asset: 'product-herbal-powder-main.webp',
-          type: '粉薬',
-          title: '和漢の養生粉',
-          price: '¥4,200',
-          text: '毎日の湯や粥に少量ずつ加えられる、やわらかな香りの和漢粉末です。'
+          fallback_asset: 'srs-touki-p.jpg',
+          fallback_url: '/products/touki-powder',
+          type: '粉末',
+          title: '当帰粉末',
+          price: '¥3,000',
+          text: 'ヒュウガトウキの茎と葉を粉末にした商品です。'
         %}
         {% render 'fallback-product-card',
           variant: 'simple',
-          fallback_asset: 'product-seasonal-care-set-main.webp',
-          type: '養生セット',
-          title: '季節の養生セット',
-          price: '¥8,600',
-          text: 'お茶、粉末、手当ての小物を一箱にまとめた、四季の贈りものです。'
+          fallback_asset: 'srs-inutouki-2022.jpg',
+          fallback_url: '/products/inutouki-seedling',
+          type: '苗',
+          title: 'イヌトウキ苗',
+          price: 'お問い合わせ',
+          text: 'Angelica shikokiana Makino の苗を予約・問い合わせ品としてご案内します。'
         %}
       {% endif %}
     </div>
@@ -76,7 +88,7 @@
       "type": "textarea",
       "id": "text",
       "label": "本文",
-      "default": "お茶、粉薬、錠剤、季節の箱物まで。畑で育てた草木を、暮らしの中で続けやすい形に整えています。"
+      "default": "生活習慣への向き合い方をもとに、イヌトウキ茶、ドクダミとトウキのお茶、当帰粉末、イヌトウキ苗をご案内します。"
     },
     {
       "type": "collection",

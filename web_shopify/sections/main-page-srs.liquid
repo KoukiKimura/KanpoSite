@@ -1,0 +1,197 @@
+<section class="section srs-page">
+  {% render 'breadcrumbs' %}
+
+  <div class="shell srs-page__inner">
+    <div class="srs-lead">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="heading-serif section-heading">{{ section.settings.title }}</h1>
+      <p class="section-body">{{ section.settings.lead }}</p>
+      <div class="srs-lead__actions">
+        <a class="button" href="#srs-notice">お知らせを見る</a>
+        <a class="button button-secondary" href="#srs-archive-title">活動実績を見る</a>
+      </div>
+    </div>
+
+    <nav class="srs-corner-nav" aria-label="当帰コーナー内メニュー">
+      <a href="#srs-notice">お知らせ</a>
+      <a href="#srs-archive-title">当帰の活動実績</a>
+      <a href="#srs-rural">農村の活性化ビジネス</a>
+      <a href="#srs-goal">私（荒堀）の目標</a>
+      <a href="#srs-effect-title">当帰とは</a>
+      <a href="#srs-lifestyle">生活習慣の見直し資料</a>
+      <a href="#srs-bodydata">身体データの変化</a>
+    </nav>
+
+    <section id="srs-notice" class="srs-notice" aria-labelledby="srs-notice-title">
+      <div class="srs-products__heading">
+        <p class="eyebrow">Information</p>
+        <h2 id="srs-notice-title" class="heading-serif section-heading">お知らせ</h2>
+      </div>
+
+      <div class="srs-notice-grid">
+        <article class="srs-info-card card">
+          <p class="eyebrow">Seedling</p>
+          <h3 class="heading-serif">イヌトウキ苗販売中</h3>
+          <div class="rte">
+            <p>弊社での当帰商品の取り扱いは2020年12月で終了いたしました。現在、イヌトウキ苗のみ販売中です。</p>
+            <p>イヌトウキの学名は <em>Angelica shikokiana Makino</em>（アンジェリカ シコキアーナ マキノ）です。</p>
+            <p class="srs-tel">ご予約・お問い合わせは TEL {{ section.settings.phone }}（荒堀まで）</p>
+          </div>
+        </article>
+
+        <article class="srs-info-card card">
+          <p class="eyebrow">Media</p>
+          <h3 class="heading-serif">朝ドラ『らんまん』に登場</h3>
+          <div class="rte">
+            <p>SRS研究会が提供したイヌトウキが、NHK連続テレビ小説『らんまん』第9回（2023年4月13日放送）に登場しました。</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="srs-feature">
+        <div class="srs-feature__copy">
+          <p class="eyebrow">Angelica Shikokiana</p>
+          <h3 class="heading-serif srs-feature__title">イヌトウキの苗</h3>
+          <div class="rte">
+            <p>イヌトウキ苗は現在販売中です。栽培や在庫状況は、事前にお問い合わせください。</p>
+            <p>
+              <a class="link-underline" href="/products/inutouki-seedling">苗の詳細を見る <span aria-hidden="true">&rarr;</span></a>
+            </p>
+          </div>
+        </div>
+        <div class="srs-feature__image image-frame">
+          {% render 'asset-or-image',
+            fallback_asset: 'srs-inutouki-2022.jpg',
+            alt: 'イヌトウキの苗',
+            sizes: '(max-width: 859px) 100vw, 50vw',
+            width: 1400
+          %}
+        </div>
+      </div>
+    </section>
+
+    <section class="srs-products" aria-labelledby="srs-products-title">
+      <div class="srs-products__heading">
+        <p class="eyebrow">Products</p>
+        <h2 id="srs-products-title" class="heading-serif section-heading">ドクダミとトウキのお茶・当帰粉末 取扱い中</h2>
+        <p class="section-body">現在販売している商品を、種類ごとに見やすくまとめました。</p>
+      </div>
+
+      <div class="srs-product-showcase">
+        <article class="srs-product-panel card">
+          <a class="srs-product-panel__media image-frame" href="/products/dokudami-touki-tea">
+            {% render 'asset-or-image',
+              fallback_asset: 'srs-touki-dt.jpg',
+              alt: 'ドクダミとトウキのお茶',
+              sizes: '(max-width: 859px) 100vw, 34vw',
+              width: 900
+            %}
+          </a>
+          <div class="srs-product-panel__body">
+            <p class="eyebrow">Tea bag</p>
+            <h3 class="heading-serif">ドクダミとトウキのお茶</h3>
+            <p class="price">2g×20袋入り / 1,500円（送料別途）</p>
+            <p class="section-body">伝統的な民間薬「ドクダミ」と「トウキ」をミックスしたお茶です。</p>
+            <ul class="note-list">
+              <li>ドクダミとトウキの成分を摂取しやすいよう、低温乾燥後にパウダー加工を行っています。</li>
+              <li>原材料は国産100%。添加物等は使用していません。</li>
+              <li>栽培期間中は農薬・除草剤・化学肥料を使いません。</li>
+              <li>ティーバッグの不織布は無漂白を使用しています。</li>
+            </ul>
+            <a class="link-underline" href="/products/dokudami-touki-tea">詳しく見る <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+
+        <article class="srs-product-panel card">
+          <a class="srs-product-panel__media image-frame" href="/products/touki-powder">
+            {% render 'asset-or-image',
+              fallback_asset: 'srs-touki-p.jpg',
+              alt: '当帰粉末',
+              sizes: '(max-width: 859px) 100vw, 34vw',
+              width: 900
+            %}
+          </a>
+          <div class="srs-product-panel__body">
+            <p class="eyebrow">Powder</p>
+            <h3 class="heading-serif">当帰粉末</h3>
+            <p class="price">30g入り / 3,000円（送料別途）</p>
+            <p class="section-body">ヒュウガトウキの茎と葉を粉末にしました。</p>
+            <ul class="note-list">
+              <li>ヒュウガトウキはセリ科の植物で、ミネラルを多く含んでいます。</li>
+              <li>原材料は国産100%。添加物等は使用していません。</li>
+              <li>栽培期間中は農薬・除草剤・化学肥料を使いません。</li>
+            </ul>
+            <a class="link-underline" href="/products/touki-powder">詳しく見る <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      </div>
+
+      <p class="srs-tel">ご注文・お問い合わせは TEL {{ section.settings.phone }}（荒堀まで）</p>
+    </section>
+
+    {% render 'srs-related-content' %}
+
+    <div class="srs-feature srs-feature--reverse">
+      <div class="srs-feature__copy">
+        <p class="eyebrow">Ranman</p>
+        <h2 class="heading-serif srs-feature__title">朝ドラ『らんまん』への提供</h2>
+        <div class="rte">
+          <p>牧野富太郎博士にちなむ学名を持つ植物として、イヌトウキの栽培と普及活動の背景を伝える要素です。</p>
+        </div>
+      </div>
+      <div class="srs-feature__image image-frame">
+        {% render 'asset-or-image',
+          fallback_asset: 'srs-ranman-inutouki.jpg',
+          alt: '朝ドラらんまんに登場したイヌトウキの紹介画像',
+          sizes: '(max-width: 859px) 100vw, 50vw',
+          width: 1400
+        %}
+      </div>
+    </div>
+
+    {% render 'srs-activity-details' %}
+
+    <div class="srs-instagram">
+      <p class="eyebrow">Instagram</p>
+      <p>当帰のこと、長浜研修施設のことなどは、Instagram <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">srstouki</a> でも発信されています。</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "当帰コーナー",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "肩書き",
+      "default": "Touki"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "見出し",
+      "default": "当帰コーナー"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "本文",
+      "default": "イヌトウキ苗、ドクダミとトウキのお茶、当帰粉末、当帰の活動実績をまとめたページです。"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "問い合わせ電話番号",
+      "default": "090-3185-8227"
+    },
+    {
+      "type": "text",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "default": "https://www.instagram.com/srstouki/"
+    }
+  ]
+}
+{% endschema %}

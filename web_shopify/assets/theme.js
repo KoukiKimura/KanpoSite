@@ -109,4 +109,21 @@
     select.addEventListener('change', syncVariant);
     syncVariant();
   });
+
+  // ロゴ切替スイッチャー
+  var LOGO_STORAGE_KEY = 'web_mock_logo';
+  var savedLogo = window.localStorage.getItem(LOGO_STORAGE_KEY) || 'original';
+  document.documentElement.dataset.logo = savedLogo;
+
+  document.querySelectorAll('[data-logo-btn]').forEach(function (btn) {
+    btn.classList.toggle('is-active', btn.dataset.logoBtn === savedLogo);
+    btn.addEventListener('click', function () {
+      var logo = btn.dataset.logoBtn;
+      document.documentElement.dataset.logo = logo;
+      window.localStorage.setItem(LOGO_STORAGE_KEY, logo);
+      document.querySelectorAll('[data-logo-btn]').forEach(function (b) {
+        b.classList.toggle('is-active', b.dataset.logoBtn === logo);
+      });
+    });
+  });
 })();

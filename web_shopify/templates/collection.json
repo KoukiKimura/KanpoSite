@@ -1,14 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-banner",
       "settings": {
         "style": "page",
-        "fallback_asset": "product-mountain-herb-blend-main.webp",
-        "image_alt": "商品のイメージ",
+        "fallback_asset": "srs-touki-dt.jpg",
+        "image_alt": "当帰関連商品のイメージ",
         "eyebrow": "Products",
         "title": "商品",
-        "text": "畑で育てた草木を、お茶、粉薬、錠剤、養生セットへ。香りや口当たりを整え、毎日の暮らしに取り入れやすい形にしています。",
+        "text": "生活習慣と身体データの記録を参考に、イヌトウキ茶、ドクダミとトウキのお茶、当帰粉末、イヌトウキ苗をご案内します。",
         "overlay_opacity": 28,
         "mobile_height": 42,
         "desktop_height": 46

@@ -5,7 +5,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, '..', '..');
-const envPath = path.join(repoRoot, 'env', 'shopify', '.env.local');
+const envArg = process.argv.find((a) => a.startsWith('--env='));
+const envFile = envArg === '--env=production' ? '.env' : '.env.local';
+const envPath = path.join(repoRoot, 'env', 'shopify', envFile);
 const apiVersionDefault = '2026-04';
 
 const categoryShortcuts = {

@@ -1,15 +1,30 @@
-<section class="section">
-  <div class="shell empty-state">
-    <p class="eyebrow">404</p>
-    <h1 class="heading-serif section-heading">ページが見つかりません</h1>
-    <p class="section-body">URLが変更されたか、ページが存在しない可能性があります。</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-      <a class="button" href="{{ routes.root_url }}">トップへ</a>
-      <a class="button button-secondary" href="{{ routes.all_products_collection_url }}">商品を見る</a>
-      <a class="button button-secondary" href="{{ routes.search_url }}">検索する</a>
+{% if request.path == '/policies/terms-of-service' %}
+  <meta http-equiv="refresh" content="0;url=/pages/terms-of-service">
+  <script>
+    window.location.replace('/pages/terms-of-service');
+  </script>
+  <section class="section">
+    <div class="shell empty-state">
+      <p class="eyebrow">Policy</p>
+      <h1 class="heading-serif section-heading">利用規約へ移動します</h1>
+      <p class="section-body">ページが自動で切り替わらない場合は、下のリンクから利用規約をご確認ください。</p>
+      <a class="button" href="/pages/terms-of-service">利用規約を見る</a>
     </div>
-  </div>
-</section>
+  </section>
+{% else %}
+  <section class="section">
+    <div class="shell empty-state">
+      <p class="eyebrow">404</p>
+      <h1 class="heading-serif section-heading">ページが見つかりません</h1>
+      <p class="section-body">URLが変更されたか、ページが存在しない可能性があります。</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <a class="button" href="{{ routes.root_url }}">トップへ</a>
+        <a class="button button-secondary" href="{{ routes.all_products_collection_url }}">商品を見る</a>
+        <a class="button button-secondary" href="{{ routes.search_url }}">検索する</a>
+      </div>
+    </div>
+  </section>
+{% endif %}
 
 {% schema %}
 {

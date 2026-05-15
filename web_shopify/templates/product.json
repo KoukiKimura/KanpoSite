@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,7 +17,7 @@
       "type": "product-metafields",
       "settings": {
         "title": "原材料と使い方",
-        "text": "ShopifyのProduct metafieldsから、商品ごとの補足情報を表示します。"
+        "text": "内容量、原材料、飲み方、注意事項を商品ごとにご確認いただけます。"
       }
     },
     "faq": {
@@ -17,15 +26,15 @@
         "faq_1": {
           "type": "faq",
           "settings": {
-            "question": "どんな時間に合いますか。",
-            "answer": "朝の支度前や、畑仕事から戻ったあとのひと息に合うように仕立てています。"
+            "question": "栽培方針はどこで確認できますか。",
+            "answer": "商品説明と当帰コーナーに、生活習慣への向き合い方、当帰の紹介、身体データの記録を掲載しています。"
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "味わいの特徴は何ですか。",
-            "answer": "草の青さを残しながら、花の香りがやわらかく立つように調整しています。"
+            "question": "問い合わせ品は購入できますか。",
+            "answer": "イヌトウキ苗などの問い合わせ品は、価格、在庫、出荷時期を確認してから個別にご案内します。商品ページの問い合わせ導線からご連絡ください。"
           }
         }
       },
@@ -33,7 +42,7 @@
       "settings": {
         "eyebrow": "FAQ",
         "title": "お届け前によくいただくご質問",
-        "text": "はじめて取り入れる方にも使い方の雰囲気が伝わるよう、案内で使う内容をまとめます。"
+        "text": "当帰商品を、生活習慣との関係も含めて購入前に確認しやすいようにまとめています。"
       }
     },
     "related": {

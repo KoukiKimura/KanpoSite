@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -5,10 +14,10 @@
       "settings": {
         "style": "page",
         "fallback_asset": "kominka-hero-stay.webp",
-        "image_alt": "古民家滞在ページのメイン画像",
+        "image_alt": "喜多灘の畑に近い古民家滞在ページのメイン画像",
         "eyebrow": "Kominka",
-        "title": "古民家",
-        "text": "築年数を重ねた古民家で、畑の景色と湯気のある朝を味わう滞在を想定しています。",
+        "title": "喜多灘の古民家",
+        "text": "愛媛県大洲市長浜町今坊。イヌトウキを育てる畑の近くで、海沿いの集落の静かな時間を過ごせる古民家です。",
         "overlay_opacity": 34,
         "mobile_height": 48,
         "desktop_height": 54
@@ -23,19 +32,22 @@
         },
         "schedule_2": {
           "type": "schedule",
-          "settings": { "text": "17:30 畑と里山の散歩" }
+          "settings": { "text": "17:30 当帰畑と喜多灘の集落を散歩" }
         },
         "schedule_3": {
           "type": "schedule",
-          "settings": { "text": "19:00 季節の夕食またはお茶の時間" }
+          "settings": { "text": "19:00 ドクダミとトウキのお茶でひと息" }
         },
         "schedule_4": {
           "type": "schedule",
-          "settings": { "text": "翌朝 古民家の縁側で朝の一服" }
+          "settings": { "text": "翌朝 畑の空気を感じる朝の一服" }
         }
       },
       "block_order": ["schedule_1", "schedule_2", "schedule_3", "schedule_4"],
-      "settings": {}
+      "settings": {
+        "title": "畑とともにある古民家",
+        "text": "古民家は、当帰を育てる畑のそばにあります。近くには旧喜多灘小学校・現喜多灘ふれあい広場があり、海沿いの集落と山の気配が近い長浜町今坊の環境を感じながら過ごせます。"
+      }
     },
     "gallery": {
       "type": "kominka-gallery",
@@ -91,15 +103,21 @@
       "blocks": {
         "note_1": {
           "type": "note",
-          "settings": { "text": "チェックイン時間は事前にご相談ください。" }
+          "settings": { "text": "所在地は愛媛県大洲市長浜町今坊1154周辺です。旧喜多灘小学校・現喜多灘ふれあい広場を目印にお越しください。" }
         },
         "note_2": {
           "type": "note",
-          "settings": { "text": "古い建物のため、段差や冬季の冷え込みがあります。" }
+          "settings": { "text": "喜多灘駅からは距離があるため、到着方法と駐車場所はご予約時に確認します。" }
+        },
+        "note_3": {
+          "type": "note",
+          "settings": { "text": "古い建物のため段差があります。冬季は冷え込むことがあるため、暖かい服装でお越しください。" }
         }
       },
-      "block_order": ["note_1", "note_2"],
-      "settings": {}
+      "block_order": ["note_1", "note_2", "note_3"],
+      "settings": {
+        "access_text": "〒799-3411 愛媛県大洲市長浜町今坊1154（旧喜多灘小学校・現喜多灘ふれあい広場）周辺です。JR予讃線の喜多灘駅が最寄りですが、施設までは約2.3kmあります。海に近く平地が限られる地区のため、車での来訪や送迎の有無はご予約時にご確認ください。"
+      }
     },
     "reservation": {
       "type": "reservation-cta",
@@ -111,12 +129,19 @@
         "faq_1": {
           "type": "faq",
           "settings": {
+            "question": "古民家と当帰畑はどのような関係ですか。",
+            "answer": "古民家は、当帰を育てる畑のそばにあります。畑の背景や当帰の情報は、当帰コーナーでも確認できます。"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
             "question": "予約はどこからできますか。",
-            "answer": "初期実装では外部予約サービスへ遷移します。予約URLはShopifyのページmetafieldまたはテーマエディタで管理します。"
+            "answer": "予約ページ、またはお問い合わせから受け付けます。予約ページの準備が整うまでは、お問い合わせから希望日程をお知らせください。"
           }
         }
       },
-      "block_order": ["faq_1"],
+      "block_order": ["faq_1", "faq_2"],
       "settings": {
         "title": "古民家のよくある質問"
       }

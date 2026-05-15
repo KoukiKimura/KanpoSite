@@ -1,0 +1,71 @@
+<section class="srs-related-content" aria-labelledby="srs-related-title">
+  <div class="srs-products__heading">
+    <p class="eyebrow">Study</p>
+    <h2 id="srs-related-title" class="heading-serif section-heading">当帰関連コンテンツ</h2>
+    <p class="section-body">当帰の背景や栽培の考え方、関連資料をまとめてご覧いただけます。</p>
+  </div>
+
+  <div class="srs-related-grid">
+    <details id="srs-rural" class="srs-related-card card" open>
+      <summary>
+        <span class="eyebrow">Business</span>
+        <span class="heading-serif">農村の活性化ビジネス</span>
+      </summary>
+      <div class="srs-related-body">
+        <p class="section-body">人口減少における農村の活性化ビジネス、薬草によるビジネスモデル構築の資料です。</p>
+        <div class="srs-document-pages">
+          {% for index in (1..20) %}
+            {% liquid
+              assign padded_index = index
+              if index < 10
+                assign padded_index = '0' | append: index
+              endif
+              assign asset_name = 'srs-old-index-' | append: padded_index | append: '.jpg'
+            %}
+            <img src="{{ asset_name | asset_url }}" alt="農村の活性化ビジネス 資料 {{ index }}" width="900" height="600" loading="lazy">
+          {% endfor %}
+        </div>
+      </div>
+    </details>
+
+    <details id="srs-goal" class="srs-related-card card">
+      <summary>
+        <span class="eyebrow">Goal</span>
+        <span class="heading-serif">私（荒堀）の目標</span>
+      </summary>
+      <div class="srs-related-body">
+        <img class="srs-document-image" src="{{ 'srs-old-mygoal-01.jpg' | asset_url }}" alt="私（荒堀）の目標" width="900" height="600" loading="lazy">
+      </div>
+    </details>
+
+    <details id="srs-effect-title" class="srs-related-card card">
+      <summary>
+        <span class="eyebrow">Angelica</span>
+        <span class="heading-serif">当帰とは</span>
+      </summary>
+      <div class="srs-related-body">
+        <img class="srs-document-image" src="{{ 'srs-old-angelica-01.jpg' | asset_url }}" alt="当帰とは" width="900" height="600" loading="lazy">
+      </div>
+    </details>
+
+    <details id="srs-lifestyle" class="srs-related-card card">
+      <summary>
+        <span class="eyebrow">Lifestyle</span>
+        <span class="heading-serif">生活習慣の見直し資料</span>
+      </summary>
+      <div class="srs-related-body">
+        <img class="srs-document-image" src="{{ 'srs-old-lifestyle-01.jpg' | asset_url }}" alt="生活習慣の見直し資料" width="900" height="600" loading="lazy">
+      </div>
+    </details>
+
+    <details id="srs-bodydata" class="srs-related-card card">
+      <summary>
+        <span class="eyebrow">Body Data</span>
+        <span class="heading-serif">身体データの変化</span>
+      </summary>
+      <div class="srs-related-body">
+        <img class="srs-document-image" src="{{ 'srs-old-bodydata-01.jpg' | asset_url }}" alt="身体データの変化" width="900" height="600" loading="lazy">
+      </div>
+    </details>
+  </div>
+</section>

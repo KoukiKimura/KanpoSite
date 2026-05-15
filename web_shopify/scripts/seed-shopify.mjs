@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, '..', '..');
-const envPath = path.join(repoRoot, 'env', 'shopify', '.env.local');
+const envArg = process.argv.find((a) => a.startsWith('--env='));
+const envFile = envArg === '--env=production' ? '.env' : '.env.local';
+const envPath = path.join(repoRoot, 'env', 'shopify', envFile);
 const apiVersionDefault = '2026-04';
 
 const metafieldDefinitions = [
@@ -70,119 +72,203 @@ const metafieldDefinitions = [
 
 const products = [
   {
-    handle: 'mountain-herb-blend',
-    title: '山のハーブブレンド',
-    type: 'お茶',
-    price: '3200',
-    stock: 18,
-    summary: '野に立つ草花の香りを静かにまとめた、朝の湯気に似合う定番のお茶です。',
+    handle: 'inutouki-tea-powder',
+    title: 'イヌトウキ茶（粉末）',
+    type: '粉末',
+    price: '2500',
+    stock: 30,
+    summary: '愛媛県大洲市長浜・喜多灘産のイヌトウキを使った、日々に取り入れやすい粉末タイプのお茶です。',
     description:
-      '里山で育てた草木の香りを、毎日の一杯として続けやすいよう穏やかに整えました。朝の支度前や畑仕事のあとに、湯気とともに香りを楽しむためのブレンドです。',
+      '愛媛県大洲市長浜町（喜多灘・今坊）の畑で大切に育てたイヌトウキ（Angelica shikokiana）を粉末にしたお茶です。イヌトウキはセリ科シシウド属の四国固有種で、自然界では環境省レッドリスト絶滅危惧II類（VU）に指定される希少な植物です。肱川が伊予灘に注ぐ温暖で日照豊富な土地の畑で、野生採取ではなく栽培・継承しています。水またはお湯に溶かしやすく、毎日の一杯として取り入れやすい形です。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
     quantity: '30g',
-    ingredients: 'カモミール、レモンバーム、ヨモギ、黒文字、柿の葉',
-    howToUse: 'ティースプーン1杯を熱湯200mlで3分ほど抽出してください。',
-    caution: '高温多湿を避け、開封後は香り移りに注意して保存してください。',
-    tags: ['featured', 'お茶'],
-    seoTitle: '山のハーブブレンド | 山草のめぐみ',
+    ingredients: 'イヌトウキ加工品',
+    howToUse: '1日小さじすりきり1杯を目安に、水またはお湯500ccに溶かしてお召し上がりください。',
+    caution:
+      '本品は医薬品ではありません。体質や服薬状況に不安がある場合は、医師または薬剤師へご相談ください。',
+    tags: ['featured', 'new', '粉末', 'イヌトウキ'],
+    seoTitle: 'イヌトウキ茶（粉末） | 四国ボタニカ',
     seoDescription:
-      '里山で育てた草木の香りを穏やかに整えた朝向けのお茶です。毎日の一杯に取り入れやすい定番ブレンドです。',
-    imageAlts: {
-      'main.webp': '山のハーブブレンドの商品パッケージ',
-      'detail-01.webp': '山のハーブブレンドの茶葉',
-      'detail-02.webp': '山のハーブブレンドを淹れたお茶',
-    },
+      'イヌトウキ茶の粉末タイプです。水またはお湯に溶かして飲める日々の一杯としてご案内します。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-product-touki-powder.jpg'),
+        alt: 'イヌトウキ茶 粉末の商品画像',
+      },
+    ],
   },
   {
-    handle: 'herbal-powder',
-    title: '和漢の養生粉',
-    type: '粉薬',
-    price: '4200',
-    stock: 7,
-    summary: '毎日の湯や粥に少量ずつ加えられる、やわらかな香りの和漢粉末です。',
-    description:
-      '乾かした根や葉を細かく挽き、白湯や粥に混ぜやすい粉末に仕立てました。食事の延長で取り入れられるよう、香りと口当たりを穏やかに整えています。',
-    quantity: '45g',
-    ingredients: '生姜粉末、陳皮粉末、なつめ粉末、葛粉、ヨモギ粉末',
-    howToUse: '小さじ1/2を白湯、粥、スープなどに混ぜてお召し上がりください。',
-    caution: '香りが強くなりすぎないよう、少量からお試しください。',
-    tags: ['featured', '粉薬'],
-    seoTitle: '和漢の養生粉 | 山草のめぐみ',
-    seoDescription:
-      '白湯や粥に少量ずつ加えられる和漢粉末です。生姜や陳皮などの香りを日々の食事に添えやすく整えました。',
-    imageAlts: {
-      'main.webp': '和漢の養生粉の商品パッケージ',
-      'detail-01.webp': '和漢の養生粉の粉末',
-      'detail-02.webp': '和漢の養生粉を食事に添えるイメージ',
-    },
-  },
-  {
-    handle: 'seasonal-care-set',
-    title: '季節の養生セット',
-    type: '養生セット',
-    price: '8600',
-    stock: 104,
-    summary: 'お茶、粉末、手当ての小物を一箱にまとめた、四季の贈りものです。',
-    description:
-      '季節ごとの整え方を一箱にまとめた養生セットです。朝と夜で使い分けられるお茶、日々の食事に添える粉末、香りの小物を組み合わせています。',
-    quantity: '季節により変動',
-    ingredients: '朝の茶葉、夜の茶葉、和漢粉、香り小物',
-    howToUse: '朝、夜、休憩時に分けて、それぞれの説明に沿って使用してください。',
-    caution: '内容は季節により一部変更されます。商品同封の案内をご確認ください。',
-    tags: ['featured', '養生セット'],
-    seoTitle: '季節の養生セット | 山草のめぐみ',
-    seoDescription:
-      '季節ごとの整え方を一箱にまとめた養生セットです。お茶、和漢粉、香りの小物を贈りものにも使いやすく組み合わせました。',
-    imageAlts: {
-      'main.webp': '季節の養生セットの商品パッケージ',
-      'detail-01.webp': '季節の養生セットの内容物',
-      'detail-02.webp': '季節の養生セットを広げたイメージ',
-    },
-  },
-  {
-    handle: 'botanical-tablets',
-    title: '草木の養生錠',
+    handle: 'inutouki-tea-tablets',
+    title: 'イヌトウキ茶（錠剤）',
     type: '錠剤',
-    price: '3800',
-    stock: 4,
-    summary: '外出先でも取り入れやすいよう、小粒に仕立てた養生用の錠剤です。',
+    price: '3000',
+    stock: 30,
+    summary: '愛媛県大洲市長浜・喜多灘産の当帰を使った、外出先でも続けやすい錠剤タイプです。',
     description:
-      '草木の粉末を小粒にまとめ、外出先や忙しい日でも続けやすい形にしました。お茶を淹れる時間が取れない日にも使いやすい養生錠です。',
-    quantity: '90粒',
-    ingredients: '桑の葉粉末、生姜粉末、山椒粉末、陳皮粉末、霊芝粉末',
-    howToUse: '1日3から6粒を目安に、水または白湯でお召し上がりください。',
-    caution: '開封後は早めに使用し、乾燥した場所で保管してください。',
-    tags: ['featured', '錠剤'],
-    seoTitle: '草木の養生錠 | 山草のめぐみ',
+      '愛媛県大洲市長浜町（喜多灘・今坊）産のイヌトウキ（四国固有種）を使用した錠剤タイプです。粉末を溶かす手間を少なくし、外出先でも取り入れやすい形です。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '30g',
+    ingredients: 'イヌトウキ加工品',
+    howToUse: '1日4から6錠を目安に、水またはお湯とともにお召し上がりください。',
+    caution:
+      '本品は医薬品ではありません。体質に合わない場合は使用をお控えください。',
+    tags: ['featured', 'new', '錠剤', 'イヌトウキ'],
+    seoTitle: 'イヌトウキ茶（錠剤） | 四国ボタニカ',
     seoDescription:
-      '外出先でも取り入れやすい小粒の養生錠です。桑の葉や生姜などの草木粉末を続けやすい形にしました。',
-    imageAlts: {
-      'main.webp': '草木の養生錠の商品パッケージ',
-      'detail-01.webp': '草木の養生錠の粒',
-      'detail-02.webp': '草木の養生錠を手に取るイメージ',
-    },
+      'イヌトウキ茶の錠剤タイプです。水またはお湯とともに取り入れられます。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-product-touki-tablets.jpg'),
+        alt: 'イヌトウキ茶 錠剤の商品画像',
+      },
+    ],
   },
   {
-    handle: 'night-soil-tea',
-    title: '夜のくつろぎ茶',
-    type: 'お茶',
-    price: '2900',
-    stock: 0,
-    summary: '灯りを落としたあとの時間に似合う、静かな香りの夜のお茶です。',
+    handle: 'inutouki-tea-pills',
+    title: 'イヌトウキ茶（丸剤）',
+    type: '丸剤',
+    price: '3000',
+    stock: 30,
+    summary: '愛媛県大洲市長浜・喜多灘産の当帰を粒状で取り入れやすくした丸剤タイプです。',
     description:
-      '一日の終わりに湯気を眺めながら飲める、香りの穏やかな夜のお茶です。ほうじ茶を土台に、花と木の香りをやわらかく重ねています。',
-    quantity: '25g',
-    ingredients: 'ほうじ茶、ラベンダー、カモミール、桂皮、レモングラス',
-    howToUse: 'ティースプーン1杯を熱湯180mlで2から3分ほど抽出してください。',
-    caution: '就寝前でも重くなりすぎないよう、薄めの抽出からお試しください。',
-    tags: ['featured', 'お茶'],
-    seoTitle: '夜のくつろぎ茶 | 山草のめぐみ',
+      '愛媛県大洲市長浜町（喜多灘・今坊）産のイヌトウキ（四国固有種）を使用した丸剤タイプです。粒状で扱いやすく、毎日の一杯や食事の時間にあわせて続けやすい形です。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '30g',
+    ingredients: 'イヌトウキ加工品',
+    howToUse: '1日4から6錠を目安に、水またはお湯とともにお召し上がりください。',
+    caution:
+      '本品は医薬品ではありません。体質に合わない場合は使用をお控えください。',
+    tags: ['featured', 'new', '丸剤', 'イヌトウキ'],
+    seoTitle: 'イヌトウキ茶（丸剤） | 四国ボタニカ',
     seoDescription:
-      '一日の終わりに似合う、香りの穏やかな夜のお茶です。ほうじ茶を土台に花と木の香りを重ねました。',
-    imageAlts: {
-      'main.webp': '夜のくつろぎ茶の商品パッケージ',
-      'detail-01.webp': '夜のくつろぎ茶の茶葉',
-      'detail-02.webp': '夜のくつろぎ茶を淹れたカップ',
-    },
+      'イヌトウキ茶の丸剤タイプです。粒状で扱いやすい形です。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-product-touki-pills.jpg'),
+        alt: 'イヌトウキ茶 丸剤の商品画像',
+      },
+    ],
+  },
+  {
+    handle: 'inutouki-tea-leaves',
+    title: 'イヌトウキ茶（茶葉）',
+    type: 'お茶',
+    price: '1500',
+    stock: 30,
+    summary: '愛媛県大洲市長浜・喜多灘産のイヌトウキ特有の芳香を、ゆっくり蒸らして引き出す茶葉タイプです。',
+    description:
+      '愛媛県大洲市長浜町（喜多灘・今坊）産のイヌトウキ（四国固有種）を茶葉にした商品です。セリ科植物特有の豊かな芳香が特長で、湯を注いで待つ時間とともに香りを楽しめます。3から5分蒸らしてお召し上がりください。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '40g',
+    ingredients: 'イヌトウキ茶葉',
+    howToUse: '温めたティーポットに茶葉を入れ、95度程度のお湯を静かに注ぎます。ふたをして3から5分蒸らしてから茶葉を取り出してください。',
+    caution:
+      '体調や服薬状況により合わない場合があります。通院中、妊娠中、授乳中の方は医師または薬剤師へご相談ください。',
+    tags: ['featured', 'new', 'お茶', 'イヌトウキ'],
+    seoTitle: 'イヌトウキ茶（茶葉） | 四国ボタニカ',
+    seoDescription:
+      'イヌトウキ茶の茶葉タイプです。3から5分蒸らして香りを引き出します。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-product-touki-leaves.jpg'),
+        alt: 'イヌトウキ茶 茶葉の商品画像',
+      },
+    ],
+  },
+  {
+    handle: 'inutouki-tea-teabag',
+    title: 'イヌトウキ茶（茶葉ティーバッグ）',
+    type: 'お茶',
+    price: '1500',
+    stock: 30,
+    summary: '愛媛県大洲市長浜・喜多灘産のイヌトウキを、1袋ずつ手軽に楽しめるティーバッグタイプです。',
+    description:
+      '愛媛県大洲市長浜町（喜多灘・今坊）産のイヌトウキ（四国固有種）を茶葉ティーバッグにした商品です。1袋ずつ扱える仕様で、セリ科植物特有の香りを手軽に毎日の一杯として楽しめます。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '2g×20袋',
+    ingredients: 'イヌトウキ茶葉',
+    howToUse: '温めたティーポットに1袋を入れ、95度程度のお湯を静かに注ぎます。ふたをして3から5分蒸らしてからティーバッグを取り出してください。',
+    caution:
+      '本品は医薬品ではありません。体質に合わない場合は使用をお控えください。',
+    tags: ['featured', 'new', 'お茶', 'イヌトウキ'],
+    seoTitle: 'イヌトウキ茶（茶葉ティーバッグ） | 四国ボタニカ',
+    seoDescription:
+      'イヌトウキ茶の茶葉ティーバッグタイプです。1袋ずつ扱いやすい商品です。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-product-touki-teabag.jpg'),
+        alt: 'イヌトウキ茶 茶葉ティーバッグの商品画像',
+      },
+    ],
+  },
+  {
+    handle: 'dokudami-touki-tea',
+    title: 'ドクダミとトウキのお茶',
+    type: 'お茶',
+    price: '1500',
+    stock: 30,
+    summary: 'ドクダミと、愛媛県大洲市長浜産のイヌトウキ（当帰）を合わせたブレンドハーブティーです。',
+    description:
+      '昔から暮らしの中で親しまれてきたドクダミと、愛媛県大洲市長浜町（喜多灘・今坊）産のイヌトウキ（当帰）を組み合わせたブレンドハーブティーです。国産原材料100%・無添加でお届けします。香りを楽しむ日々の一杯としてお召し上がりください。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '2g×20袋',
+    ingredients: 'ドクダミ、トウキ',
+    howToUse: '1袋に熱湯を注ぎ、好みの濃さまで抽出してお召し上がりください。',
+    caution:
+      '原材料は国産100%、添加物は使用していません。体質や服薬状況に不安がある場合は、医師または薬剤師へご相談ください。',
+    tags: ['featured', 'new', 'お茶', 'イヌトウキ'],
+    seoTitle: 'ドクダミとトウキのお茶 | 四国ボタニカ',
+    seoDescription:
+      'ドクダミとトウキを合わせた国産原材料100%のお茶です。1袋ずつ扱いやすいティーバッグです。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-touki-dt.jpg'),
+        alt: 'ドクダミとトウキのお茶の商品画像',
+      },
+    ],
+  },
+  {
+    handle: 'touki-powder',
+    title: '当帰粉末',
+    type: '粉末',
+    price: '3000',
+    stock: 20,
+    summary: '栽培期間中農薬不使用のヒュウガトウキ茎・葉を粉末にした当帰粉末です。',
+    description:
+      '栽培期間中は農薬・除草剤・化学肥料を使わずに育てたヒュウガトウキの茎と葉を粉末にした商品です。シシウド属（当帰類）の豊かな植物の香りとともに、食事や飲みもの・白湯に少量ずつ加えやすい形です。食品であり、疾病の診断、治療、予防を目的とするものではありません。',
+    quantity: '30g',
+    ingredients: 'ヒュウガトウキの茎、ヒュウガトウキの葉',
+    howToUse: '少量から、白湯やお茶、食事に混ぜてお召し上がりください。',
+    caution:
+      '原材料は国産100%、添加物は使用していません。栽培期間中は農薬・除草剤・化学肥料を使っていません。体質に合わない場合は使用をお控えください。',
+    tags: ['featured', 'new', '粉末', 'イヌトウキ'],
+    seoTitle: '当帰粉末 | 四国ボタニカ',
+    seoDescription:
+      'ヒュウガトウキの茎と葉を粉末にした当帰粉末です。白湯や食事に少量ずつ加えやすい形です。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-touki-p.jpg'),
+        alt: '当帰粉末の商品画像',
+      },
+    ],
+  },
+  {
+    handle: 'inutouki-seedling',
+    title: 'イヌトウキ苗',
+    type: '苗',
+    price: '0',
+    stock: 0,
+    summary: '四国の名を学名に冠する日本固有種・環境省絶滅危惧II類のイヌトウキ苗を、予約・問い合わせ品としてご案内します。',
+    description:
+      'イヌトウキ（Angelica shikokiana Makino）は、四国の名を学名に冠する日本固有のセリ科植物です。環境省レッドリストで絶滅危惧II類（VU）に指定されるほど自然界では希少ですが、愛媛県大洲市長浜の畑で大切に栽培・継承しています。苗から育てることで、植物の背景や栽培の時間を自宅や畑でも体感できます。多年草のため一度根付けば毎年楽しめます。価格、在庫、出荷時期、栽培方法はお問い合わせください。',
+    quantity: '1苗から相談',
+    ingredients: 'イヌトウキ苗',
+    howToUse: '植え付け時期、管理方法、発送可否は個別にご案内します。',
+    caution: '予約・問い合わせ品です。カート販売ではなく、お問い合わせ後に条件を確認します。',
+    tags: ['featured', 'new', '苗', 'inquiry-only'],
+    seoTitle: 'イヌトウキ苗 | 四国ボタニカ',
+    seoDescription:
+      'Angelica shikokiana Makino のイヌトウキ苗です。価格、在庫、出荷時期、栽培方法はお問い合わせください。',
+    images: [
+      {
+        file: path.join(repoRoot, 'web_shopify', 'assets', 'srs-inutouki-2022.jpg'),
+        alt: 'イヌトウキ苗の商品画像',
+      },
+    ],
   },
 ];
 
@@ -190,52 +276,62 @@ const collections = [
   {
     handle: 'featured-products',
     title: '注目商品',
-    description: 'トップページに表示する商品です。',
+    description: '当帰の素材感や産地の背景を感じられる商品です。',
     productHandles: products.map((product) => product.handle),
-    imageProductHandle: 'mountain-herb-blend',
-    imageAlt: '山草のめぐみの注目商品',
-    seoTitle: '注目商品 | 山草のめぐみ',
-    seoDescription: '山草のめぐみで初期展開するお茶、粉薬、錠剤、養生セットをまとめた注目商品の一覧です。',
+    imageProductHandle: 'inutouki-tea-powder',
+    imageAlt: '四国ボタニカのイヌトウキ関連商品',
+    seoTitle: '注目商品 | 四国ボタニカ',
+    seoDescription: 'イヌトウキ茶、ドクダミとトウキのお茶、当帰粉末、イヌトウキ苗をまとめた四国ボタニカの注目商品一覧です。',
   },
   {
     handle: 'tea',
     title: 'お茶',
-    description: '湯気と香りを楽しむ、日々の養生茶です。',
-    productHandles: ['mountain-herb-blend', 'night-soil-tea'],
-    imageProductHandle: 'mountain-herb-blend',
-    imageAlt: '山草のめぐみのお茶商品',
-    seoTitle: 'お茶 | 山草のめぐみ',
-    seoDescription: '里山の草木や香りを楽しむ、山草のめぐみのお茶一覧です。朝と夜の時間に寄り添う商品を掲載します。',
+    description: '日々の一杯として楽しめるイヌトウキ茶です。',
+    productHandles: ['inutouki-tea-leaves', 'inutouki-tea-teabag', 'dokudami-touki-tea'],
+    imageProductHandle: 'inutouki-tea-teabag',
+    imageAlt: 'イヌトウキ茶の商品',
+    seoTitle: 'お茶 | 四国ボタニカ',
+    seoDescription: 'イヌトウキ茶の茶葉、茶葉ティーバッグ、ドクダミとトウキのお茶を掲載します。',
   },
   {
     handle: 'powder',
-    title: '粉薬',
-    description: '白湯や粥に少量ずつ加えられる和漢粉末です。',
-    productHandles: ['herbal-powder'],
-    imageProductHandle: 'herbal-powder',
-    imageAlt: '山草のめぐみの和漢粉末',
-    seoTitle: '粉薬 | 山草のめぐみ',
-    seoDescription: '白湯や粥に少量ずつ加えやすい、山草のめぐみの和漢粉末商品を掲載します。',
+    title: '粉末',
+    description: '飲みものや食事に少量ずつ加えやすい粉末商品です。',
+    productHandles: ['inutouki-tea-powder', 'touki-powder'],
+    imageProductHandle: 'inutouki-tea-powder',
+    imageAlt: 'イヌトウキ茶 粉末の商品',
+    seoTitle: '粉末 | 四国ボタニカ',
+    seoDescription: 'イヌトウキ茶の粉末と当帰粉末を掲載します。飲みものや食事に少量ずつ加えやすい商品です。',
   },
   {
     handle: 'tablets',
     title: '錠剤',
-    description: '外出先でも取り入れやすい小粒の養生品です。',
-    productHandles: ['botanical-tablets'],
-    imageProductHandle: 'botanical-tablets',
-    imageAlt: '山草のめぐみの錠剤商品',
-    seoTitle: '錠剤 | 山草のめぐみ',
-    seoDescription: '外出先でも取り入れやすい、小粒に仕立てた山草のめぐみの錠剤商品を掲載します。',
+    description: '水またはお湯とともに取り入れやすい当帰茶の錠剤です。',
+    productHandles: ['inutouki-tea-tablets'],
+    imageProductHandle: 'inutouki-tea-tablets',
+    imageAlt: 'イヌトウキ茶 錠剤の商品',
+    seoTitle: '錠剤 | 四国ボタニカ',
+    seoDescription: 'イヌトウキ茶の錠剤タイプを掲載します。水またはお湯とともに取り入れやすい商品です。',
   },
   {
-    handle: 'care-set',
-    title: '養生セット',
-    description: '季節の整え方を一箱にまとめたセットです。',
-    productHandles: ['seasonal-care-set'],
-    imageProductHandle: 'seasonal-care-set',
-    imageAlt: '山草のめぐみの養生セット',
-    seoTitle: '養生セット | 山草のめぐみ',
-    seoDescription: '季節ごとのお茶や和漢粉を一箱にまとめた、山草のめぐみの養生セットを掲載します。',
+    handle: 'pills',
+    title: '丸剤',
+    description: '粒状で取り入れやすい当帰茶の丸剤です。',
+    productHandles: ['inutouki-tea-pills'],
+    imageProductHandle: 'inutouki-tea-pills',
+    imageAlt: 'イヌトウキ茶 丸剤の商品',
+    seoTitle: '丸剤 | 四国ボタニカ',
+    seoDescription: 'イヌトウキ茶の丸剤タイプを掲載します。粒状で扱いやすい商品です。',
+  },
+  {
+    handle: 'seedlings',
+    title: '苗',
+    description: '予約・問い合わせ品としてご案内するイヌトウキ苗です。',
+    productHandles: ['inutouki-seedling'],
+    imageProductHandle: 'inutouki-seedling',
+    imageAlt: 'イヌトウキ苗',
+    seoTitle: '苗 | 四国ボタニカ',
+    seoDescription: 'Angelica shikokiana Makino のイヌトウキ苗を予約・問い合わせ品としてご案内します。',
   },
 ];
 
@@ -244,68 +340,97 @@ const pages = [
     handle: 'kominka',
     title: '古民家',
     templateSuffix: 'kominka',
-    bodyHtml: '<p>畑と山の景色に近い古民家で、湯気のある朝と静かな夜を過ごす滞在を案内します。</p>',
-    seoTitle: '古民家 | 山草のめぐみ',
+    bodyHtml:
+      '<p>愛媛県大洲市長浜町今坊・喜多灘の当帰畑の近くにある古民家で、畑の空気と海に近い集落の時間を過ごす滞在をご案内します。</p><p>喜多灘は、肱川が伊予灘（瀬戸内海）に注ぐ河口域に位置する、年間平均気温約16℃の温暖で日照豊富な土地です。秋から冬の早朝には「肱川あらし」という神秘的な気象現象が見られ、大洲盆地の冷気が霧となって河口へと流れ下ります。こうした豊かな自然環境の中で、四国固有種のイヌトウキ（環境省絶滅危惧II類）を野生採取ではなく栽培・継承しています。</p>',
+    seoTitle: '喜多灘の古民家 | 四国ボタニカ',
     seoDescription:
-      '畑と山の景色に近い古民家で、湯気のある朝と静かな夜を過ごす滞在案内です。予約導線とアクセス情報を掲載します。',
+      '愛媛県大洲市長浜町今坊・喜多灘の当帰畑の近くにある古民家の滞在案内です。旧喜多灘小学校周辺のアクセスも掲載しています。',
     metafields: [
       {
         namespace: 'custom',
         key: 'access_text',
         type: 'multi_line_text_field',
         value:
-          '所在地、駐車場、最寄り駅からの案内は予約確定時に個別にご案内します。古い建物のため、季節により寒暖差があります。',
+          '〒799-3411 愛媛県大洲市長浜町今坊1154（旧喜多灘小学校・現喜多灘ふれあい広場）周辺です。JR予讃線の喜多灘駅が最寄りですが、施設までは約2.3kmあります。車での来訪や送迎の有無、駐車場所はご予約時に確認します。',
       },
     ],
+  },
+  {
+    handle: 'srs',
+    title: '当帰コーナー',
+    templateSuffix: 'srs',
+    bodyHtml:
+      '<p>イヌトウキ、栽培記録、身体データの記録、当帰関連商品の情報をまとめた当帰コーナーです。</p>',
+    seoTitle: '当帰コーナー | 四国ボタニカ',
+    seoDescription:
+      'イヌトウキ、栽培記録、身体データの記録、当帰茶、当帰粉末、苗を紹介する四国ボタニカの当帰コーナーです。',
+    metafields: [],
   },
   {
     handle: 'contact',
     title: 'お問い合わせ',
     templateSuffix: 'contact',
     bodyHtml: '<p>商品、古民家、取材や訪問についてのお問い合わせはこちらからお送りください。</p>',
-    seoTitle: 'お問い合わせ | 山草のめぐみ',
-    seoDescription: '山草のめぐみの商品、古民家、取材や訪問に関するお問い合わせフォームです。',
+    seoTitle: 'お問い合わせ | 四国ボタニカ',
+    seoDescription: '四国ボタニカの商品、古民家、取材や訪問に関するお問い合わせフォームです。',
     metafields: [],
   },
   {
     handle: 'faq',
     title: 'よくある質問',
     templateSuffix: 'faq',
-    bodyHtml: '<p>商品や古民家滞在について、事前によくいただく質問をまとめます。</p>',
-    seoTitle: 'よくある質問 | 山草のめぐみ',
-    seoDescription: '山草のめぐみの商品や古民家滞在について、事前によくいただく質問をまとめたページです。',
+    bodyHtml: '<p>商品や古民家滞在について、事前によくいただく質問をまとめています。</p>',
+    seoTitle: 'よくある質問 | 四国ボタニカ',
+    seoDescription: '四国ボタニカの商品や古民家滞在について、事前によくいただく質問をまとめたページです。',
     metafields: [],
+  },
+  {
+    handle: 'terms-of-service',
+    title: '利用規約',
+    templateSuffix: 'terms-of-service',
+    bodyHtml:
+      '<p>四国ボタニカオンラインストアの利用条件、注文、配送、返品、問い合わせ品、商品情報の取り扱いについて定めます。</p>',
+    seoTitle: '利用規約 | 四国ボタニカ',
+    seoDescription: '四国ボタニカオンラインストアの利用規約です。注文、配送、返品、問い合わせ品、商品情報の取り扱いについて定めます。',
+    metafields: [],
+  },
+];
+
+const redirects = [
+  {
+    path: '/policies/terms-of-service',
+    target: '/pages/terms-of-service',
   },
 ];
 
 const blog = {
   handle: 'stories',
   title: 'BLOG',
-  seoTitle: 'BLOG | 山草のめぐみ',
-  seoDescription: '山草のめぐみのBLOGです。里山の草木、商品づくり、古民家での時間を紹介します。',
+  seoTitle: 'BLOG | 四国ボタニカ',
+  seoDescription: '四国ボタニカのBLOGです。四国の植物、薬草、商品づくり、古民家での時間を紹介します。',
   articles: [
     {
       handle: 'satoyama-herbs',
-      title: '里山で草木を育てること',
+      title: '当帰の背景と日々の記録',
       tags: 'story',
-      summary: '畑、季節、素材づくりの背景を紹介します。',
-      seoTitle: '里山で草木を育てること | 山草のめぐみBLOG',
-      seoDescription: '山草のめぐみが里山で草木を育て、季節を見ながら素材を整える背景を紹介します。',
-      imageAlt: '里山の畑を歩く様子',
+      summary: '当帰の背景と栽培、日々の記録について紹介します。',
+      seoTitle: '当帰の背景と日々の記録 | 四国ボタニカBLOG',
+      seoDescription: '当帰の背景、栽培、日々の記録について紹介します。',
+      imageAlt: '当帰の商品づくりに関わる風景',
       body:
-        '<p>山草のめぐみでは、古民家の庭先から続く畑で季節の草木を育てています。仕入れだけに頼らず、土と季節の変化を見ながら素材を整えることを大切にしています。</p>',
+      '<p>当帰は、栽培、素材の香り、日々の記録とあわせて紹介している植物です。商品は食品として、疾病の診断、治療、予防を目的とせず、嗜好品としてご案内しています。</p>',
       image: path.join(repoRoot, 'web_mock', 'public', 'images', 'home', 'field-walk.webp'),
     },
     {
-      handle: 'morning-tea-routine',
-      title: '朝のお茶を整える',
+      handle: 'dokudami-touki-tea-routine',
+      title: 'ドクダミとトウキのお茶を淹れる',
       tags: 'product',
-      summary: '山のハーブブレンドを朝の習慣にするための案内です。',
-      seoTitle: '朝のお茶を整える | 山草のめぐみBLOG',
-      seoDescription: '山のハーブブレンドを朝の習慣にするための淹れ方と、湯気を眺める時間の整え方を紹介します。',
+      summary: 'ドクダミとトウキのお茶の使い方を紹介します。',
+      seoTitle: 'ドクダミとトウキのお茶を淹れる | 四国ボタニカBLOG',
+      seoDescription: 'ドクダミとトウキのお茶を日々の一杯として取り入れるための淹れ方を紹介します。',
       imageAlt: '朝のお茶を淹れる時間',
       body:
-        '<p>朝の支度前に、湯を沸かし、茶葉を静かに開かせる時間を作ります。香りを強く出しすぎず、日々続けられる薄さから始めるのがおすすめです。</p>',
+        '<p>ドクダミとトウキのお茶は、湯を注いで好みの濃さまで抽出します。香りを強く出しすぎず、日々続けられる薄さから始めるのがおすすめです。</p>',
       image: path.join(repoRoot, 'web_mock', 'public', 'images', 'home', 'morning-tea.webp'),
     },
     {
@@ -313,11 +438,11 @@ const blog = {
       title: '古民家で過ごす朝',
       tags: 'kominka',
       summary: '古民家滞在の朝の雰囲気を紹介します。',
-      seoTitle: '古民家で過ごす朝 | 山草のめぐみBLOG',
-      seoDescription: '畑の空気と木の香りから始まる、山草のめぐみの古民家滞在の朝を紹介します。',
+      seoTitle: '古民家で過ごす朝 | 四国ボタニカBLOG',
+      seoDescription: '喜多灘の当帰畑の近くにある古民家で過ごす朝を紹介します。',
       imageAlt: '古民家近くの朝の畑',
       body:
-        '<p>古民家の朝は、畑の空気と木の香りから始まります。派手に整えすぎず、この家に残っていた静けさをそのまま受け取れる滞在を目指しています。</p>',
+        '<p>古民家の朝は、喜多灘の畑の空気と木の香りから始まります。派手に整えすぎず、当帰を育てる畑と家の静けさをそのまま受け取れる滞在をご案内しています。</p>',
       image: path.join(repoRoot, 'web_mock', 'public', 'images', 'kominka', 'morning-field.webp'),
     },
   ],
@@ -403,29 +528,29 @@ function makeClient(env, token) {
   return { rest, graphql };
 }
 
-function productImageFiles(handle) {
+function productImageFiles(product) {
+  if (product.images?.length) {
+    return product.images.map((image) => image.file).filter((file) => existsSync(file));
+  }
+
   return ['main.webp', 'detail-01.webp', 'detail-02.webp']
-    .map((file) => path.join(repoRoot, 'web_mock', 'public', 'images', 'products', handle, file))
+    .map((file) => path.join(repoRoot, 'web_mock', 'public', 'images', 'products', product.handle, file))
     .filter((file) => existsSync(file));
 }
 
 function productImageAlt(product, file) {
+  const customImage = product.images?.find((image) => path.resolve(image.file) === path.resolve(file));
+  if (customImage?.alt) return customImage.alt;
+
   const filename = path.basename(file);
   return product.imageAlts?.[filename] || `${product.title}の商品画像`;
 }
 
 function collectionImageFile(collection) {
   if (!collection.imageProductHandle) return null;
-  const file = path.join(
-    repoRoot,
-    'web_mock',
-    'public',
-    'images',
-    'products',
-    collection.imageProductHandle,
-    'main.webp',
-  );
-  return existsSync(file) ? file : null;
+  const product = products.find((item) => item.handle === collection.imageProductHandle);
+  if (!product) return null;
+  return productImageFiles(product)[0] || null;
 }
 
 async function imageAttachment(file, alt) {
@@ -588,13 +713,13 @@ async function seedProducts(client) {
 
   for (const product of products) {
     const images = await Promise.all(
-      productImageFiles(product.handle).map((file) => imageAttachment(file, productImageAlt(product, file))),
+      productImageFiles(product).map((file) => imageAttachment(file, productImageAlt(product, file))),
     );
     let saved = existingProducts.get(product.handle);
     const payload = {
       title: product.title,
       body_html: productBodyHtml(product),
-      vendor: '山草のめぐみ',
+      vendor: '四国ボタニカ',
       product_type: product.type,
       handle: product.handle,
       status: 'active',
@@ -758,6 +883,25 @@ async function seedPages(client) {
   return result;
 }
 
+async function seedRedirects(client) {
+  const existingRedirects = await getAll(client, '/redirects.json?limit=250', 'redirects');
+
+  for (const redirect of redirects) {
+    const existing = existingRedirects.find((item) => item.path === redirect.path);
+    if (existing) {
+      await client.rest('PUT', `/redirects/${existing.id}.json`, {
+        redirect: { id: existing.id, path: redirect.path, target: redirect.target },
+      });
+      console.log(`redirect ${redirect.path}: updated`);
+    } else {
+      await client.rest('POST', '/redirects.json', {
+        redirect: { path: redirect.path, target: redirect.target },
+      });
+      console.log(`redirect ${redirect.path}: created`);
+    }
+  }
+}
+
 async function seedBlog(client) {
   const existingBlogs = byHandle(await getAll(client, '/blogs.json?limit=250', 'blogs'));
   let savedBlog = existingBlogs.get(blog.handle);
@@ -789,7 +933,7 @@ async function seedBlog(client) {
       body_html: article.body,
       summary_html: `<p>${article.summary}</p>`,
       tags: article.tags,
-      author: '山草のめぐみ',
+      author: '四国ボタニカ',
       published: true,
       ...(image ? { image } : {}),
     };
@@ -864,6 +1008,7 @@ async function seedMenus(client, pageMap, blogObject) {
   const mainItems = [
     { title: 'トップ', type: 'HTTP', url: '/', items: [] },
     { title: '商品', type: 'CATALOG', url: '/collections/all', items: [] },
+    { title: '当帰コーナー', type: 'PAGE', resourceId: gid('Page', pageMap.get('srs').id), url: '/pages/srs', items: [] },
     { title: '古民家', type: 'PAGE', resourceId: gid('Page', pageMap.get('kominka').id), url: '/pages/kominka', items: [] },
     { title: 'BLOG', type: 'BLOG', resourceId: gid('Blog', blogObject.id), url: '/blogs/stories', items: [] },
     { title: 'お問い合わせ', type: 'PAGE', resourceId: gid('Page', pageMap.get('contact').id), url: '/pages/contact', items: [] },
@@ -871,10 +1016,12 @@ async function seedMenus(client, pageMap, blogObject) {
 
   const footerItems = [
     { title: '商品', type: 'CATALOG', url: '/collections/all', items: [] },
+    { title: '当帰コーナー', type: 'PAGE', resourceId: gid('Page', pageMap.get('srs').id), url: '/pages/srs', items: [] },
     { title: '古民家', type: 'PAGE', resourceId: gid('Page', pageMap.get('kominka').id), url: '/pages/kominka', items: [] },
     { title: 'BLOG', type: 'BLOG', resourceId: gid('Blog', blogObject.id), url: '/blogs/stories', items: [] },
     { title: 'FAQ', type: 'PAGE', resourceId: gid('Page', pageMap.get('faq').id), url: '/pages/faq', items: [] },
     { title: 'お問い合わせ', type: 'PAGE', resourceId: gid('Page', pageMap.get('contact').id), url: '/pages/contact', items: [] },
+    { title: '利用規約', type: 'PAGE', resourceId: gid('Page', pageMap.get('terms-of-service').id), url: '/pages/terms-of-service', items: [] },
     { title: '配送ポリシー', type: 'HTTP', url: '/policies/shipping-policy', items: [] },
     { title: '返金ポリシー', type: 'HTTP', url: '/policies/refund-policy', items: [] },
     { title: 'プライバシーポリシー', type: 'HTTP', url: '/policies/privacy-policy', items: [] },
@@ -922,6 +1069,9 @@ async function publishResources(client, productMap, collectionMap) {
 }
 
 async function main() {
+  const args = new Set(process.argv.slice(2));
+  const skipPublish = args.has('--skip-publish');
+  const skipProducts = args.has('--skip-products');
   const env = await loadEnv();
   const required = ['SHOPIFY_STORE_DOMAIN', 'SHOPIFY_DEV_CLIENT_ID', 'SHOPIFY_DEV_CLIENT_SECRET'];
   for (const key of required) {
@@ -934,12 +1084,19 @@ async function main() {
   } catch (error) {
     console.log(`metafield definitions: skipped ${error.message}`);
   }
-  const productMap = await seedProducts(client);
-  const collectionMap = await seedCollections(client, productMap);
+  const productMap = skipProducts ? new Map() : await seedProducts(client);
+  const collectionMap = skipProducts ? new Map() : await seedCollections(client, productMap);
   const pageMap = await seedPages(client);
+  await seedRedirects(client);
   const blogObject = await seedBlog(client);
   await seedMenus(client, pageMap, blogObject);
-  await publishResources(client, productMap, collectionMap);
+  if (skipPublish) {
+    console.log('resource publish: skipped (--skip-publish)');
+  } else if (skipProducts) {
+    console.log('resource publish: skipped (--skip-products)');
+  } else {
+    await publishResources(client, productMap, collectionMap);
+  }
   console.log('Shopify seed completed.');
 }
 

@@ -3,11 +3,13 @@
   assign selected_variant = card_product.selected_or_first_available_variant
   assign card_variant = variant | default: 'card'
   assign card_class = 'product-card product-card--' | append: card_variant
+  assign card_url = card_product.url | default: routes.all_products_collection_url
   assign show_quick_add_setting = show_quick_add
   assign stock_label = 'products.in_stock' | t
   assign product_label = card_product.type
   assign quantity_cap = 9
   assign is_new_product = false
+  assign is_inquiry_only = false
   assign new_window_seconds = 5184000
 
   if show_quick_add_setting == nil
@@ -32,6 +34,11 @@
     assign stock_label = 'products.sold_out' | t
   endunless
 
+  if card_product.tags contains 'inquiry-only'
+    assign is_inquiry_only = true
+    assign stock_label = '予約・問い合わせ品'
+  endif
+
   if card_product.tags contains 'new'
     assign is_new_product = true
   elsif card_product.published_at != blank
@@ -46,7 +53,7 @@
 %}
 
 <article class="{{ card_class }}">
-  <a class="product-card__media image-frame" href="{{ card_product.url }}" aria-label="{{ card_product.title | escape }}">
+  <a class="product-card__media image-frame" href="{{ card_url }}" aria-label="{{ card_product.title | escape }}">
     {% if card_product.featured_image != blank %}
       {% if card_variant == 'simple' %}
         {% render 'responsive-image',
@@ -81,7 +88,7 @@
   <div class="product-card__content">
     {% if card_variant == 'simple' %}
       <h3 class="product-card__title">
-        <a href="{{ card_product.url }}">{{ card_product.title }}</a>
+        <a href="{{ card_url }}">{{ card_product.title }}</a>
       </h3>
     {% else %}
       <div class="product-card__meta">
@@ -90,13 +97,19 @@
             <p class="eyebrow">{{ product_label }}</p>
           {% endif %}
           <h3 class="product-card__title">
-            <a href="{{ card_product.url }}">{{ card_product.title }}</a>
+            <a href="{{ card_url }}">{{ card_product.title }}</a>
           </h3>
         </div>
-        <p class="price">{{ card_product.price | money }}</p>
+        <p class="price">
+          {% if is_inquiry_only %}
+            お問い合わせください
+          {% else %}
+            {{ card_product.price | money }}
+          {% endif %}
+        </p>
       </div>
 
-      {% if show_quick_add_setting %}
+      {% if show_quick_add_setting and is_inquiry_only == false %}
         <div class="product-card__purchase">
           <p class="stock-label{% unless card_product.available %} stock-label--sold-out{% endunless %}">
             {{ stock_label }}
@@ -124,7 +137,7 @@
       {% endif %}
 
       {% unless card_variant == 'list' %}
-        <a class="link-underline" href="{{ card_product.url }}">
+        <a class="link-underline" href="{{ card_url }}">
           {{ 'general.read_more' | t }}
           <span aria-hidden="true">→</span>
         </a>

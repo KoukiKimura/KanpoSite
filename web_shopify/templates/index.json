@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -34,16 +43,21 @@
         "slide_5": {
           "type": "slide",
           "settings": {
-            "fallback_asset": "product-mountain-herb-blend-main.webp",
-            "alt": "山のハーブブレンドの商品イメージ"
+            "fallback_asset": "srs-touki-dt.jpg",
+            "alt": "ドクダミとトウキのお茶の商品イメージ"
           }
         }
       },
       "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
       "settings": {
         "style": "home",
-        "overlay_opacity": 22,
-        "mobile_height": 82,
+        "eyebrow": "Shikoku Botanica",
+        "title": "四国ボタニカ",
+        "text": "botanica（ボタニカ）はイタリア語で「植物・植物学」のこと。その名に込めた植物の知恵を、四国のイヌトウキ、当帰茶、粉末、苗、古民家滞在として届けます。",
+        "cta_label": "",
+        "cta_link": "",
+        "overlay_opacity": 48,
+        "mobile_height": 100,
         "desktop_height": 100
       }
     },
@@ -58,7 +72,7 @@
       "settings": {
         "collection": "featured-products",
         "cta_link": "/collections/all",
-        "product_limit": 5,
+        "product_limit": 8,
         "show_quick_add": false
       }
     },

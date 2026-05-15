@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_moss | default: '#41543b' }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="icon" href="{{ 'favicon.svg' | asset_url }}" type="image/svg+xml">
+    {% if settings.google_site_verification != blank %}
+      <meta name="google-site-verification" content="{{ settings.google_site_verification | escape }}">
+    {% endif %}
 
     <title>
       {{ page_title }}

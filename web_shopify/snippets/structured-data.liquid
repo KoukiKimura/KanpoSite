@@ -170,26 +170,49 @@
 {% endif %}
 
 {% if request.page_type == 'product' and product != blank %}
-  {% assign selected_variant = product.selected_or_first_available_variant %}
+  {% liquid
+    assign selected_variant = product.selected_or_first_available_variant
+    assign is_inquiry_only = false
+    if product.tags contains 'inquiry-only' or selected_variant.price <= 0
+      assign is_inquiry_only = true
+    endif
+  %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": {{ product.title | json }},
     "description": {{ product.description | strip_html | json }},
-    "url": {{ shop.url | append: product.url | json }}
+    "url": {{ shop.url | append: product.url | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": {{ settings.brand_name_ja | default: settings.organization_name | default: shop.name | json }}
+    }
     {% if product.featured_image != blank %},
       "image": [
         {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}
       ]
-    {% endif %},
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": {{ cart.currency.iso_code | json }},
-      "price": "{{ selected_variant.price | money_without_currency | remove: ',' }}",
-      "availability": "https://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
-      "url": {{ shop.url | append: selected_variant.url | json }}
-    }
+    {% endif %}
+    {% if selected_variant.sku != blank %},
+      "sku": {{ selected_variant.sku | json }}
+    {% endif %}
+    {% if product.type != blank %},
+      "category": {{ product.type | json }}
+    {% endif %}
+    {% unless is_inquiry_only %},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": "{{ selected_variant.price | money_without_currency | remove: ',' }}",
+        "availability": "https://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": {{ shop.url | append: selected_variant.url | json }},
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ settings.organization_name | default: shop.name | json }}
+        }
+      }
+    {% endunless %}
   }
   </script>
 {% endif %}
@@ -215,13 +238,33 @@
 {% endif %}
 
 {% if request.page_type == 'page' and page.handle == 'kominka' %}
+  {% assign reservation_url = page.metafields.custom.reservation_url.value %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": {{ page.title | default: settings.brand_name_ja | json }},
+    "@type": "LodgingBusiness",
+    "name": "喜多灘の古民家",
     "url": {{ shop.url | append: page.url | json }},
-    "description": {{ page.content | strip_html | default: settings.organization_description | json }}
+    "description": {{ page.content | strip_html | default: settings.organization_description | json }},
+    "image": {{ 'kominka-hero-stay.webp' | asset_url | prepend: 'https:' | json }},
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%A4%A7%E6%B4%B2%E5%B8%82%E9%95%B7%E6%B5%9C%E7%94%BA%E4%BB%8A%E5%9D%8A1154",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "長浜町今坊1154周辺",
+      "addressLocality": "大洲市",
+      "addressRegion": "愛媛県",
+      "postalCode": "799-3411",
+      "addressCountry": "JP"
+    }
+    {% if settings.contact_phone != blank %},
+      "telephone": {{ settings.contact_phone | json }}
+    {% endif %}
+    {% if reservation_url != blank %},
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {{ reservation_url | json }}
+      }
+    {% endif %}
   }
   </script>
 {% endif %}
