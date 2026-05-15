@@ -52,9 +52,9 @@ export type MockProduct = {
 };
 
 export const mockSite = {
-  brandJa: '山草のめぐみ',
-  brandEn: 'Sansou no Megumi',
-  mockLabel: '里山で養う漢方と暮らし',
+  brandJa: '四国ボタニカ',
+  brandEn: 'Shikoku Botanica',
+  mockLabel: '四国の植物と暮らし',
   referenceDesign: 'https://www.roccadeifiori.eu/en/the-company/',
   mockDeployReference:
     process.env.NEXT_PUBLIC_MOCK_DEPLOY_URL ??

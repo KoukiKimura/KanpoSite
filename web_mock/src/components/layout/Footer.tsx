@@ -3,12 +3,19 @@ import { mockSite } from '@/lib/mock/site';
 export default function Footer() {
   return (
     <footer id="site-footer" className="mock-footer-bg border-t border-mock-border">
-      <div id="site-footer-inner" className="mx-auto grid max-w-screen-2xl gap-8 px-6 py-12 text-sm text-mock-muted lg:grid-cols-[1.05fr_0.75fr_0.85fr] lg:px-10">
-        <div id="site-footer-brand" className="space-y-3">
-          <p id="site-footer-brand-kicker" className="text-xs uppercase tracking-[0.35em] text-mock-gold">山草のめぐみ</p>
+      <div id="site-footer-inner" className="mx-auto grid max-w-screen-2xl gap-10 px-6 py-12 text-sm text-mock-muted lg:grid-cols-[1.2fr_0.8fr_0.85fr] lg:gap-12 lg:px-10">
+        <div id="site-footer-brand" className="space-y-3 text-center lg:text-left">
+          <div className="flex justify-center lg:justify-center">
+            <img
+              src="/images/logo-footer.png"
+              alt="四国ボタニカ"
+              className="h-[44rem] w-auto object-contain lg:h-[56rem]"
+            />
+          </div>
+          <p id="site-footer-brand-kicker" className="text-xs uppercase tracking-[0.35em] text-mock-gold">四国ボタニカ</p>
           <p id="site-footer-brand-title" className="font-serif text-3xl text-mock-ink">{mockSite.brandJa}</p>
           <p className="max-w-2xl leading-8">
-            里山の古民家で和漢の草木を育て、お茶、粉薬、錠剤へと静かに仕立てています。畑の景色と暮らしの手ざわりが、そのまま伝わる場所でありたいと考えています。
+            四国の古民家で薬草や草木を育て、お茶、粉末、錠剤へと静かに仕立てています。畑の景色と暮らしの手ざわりが、そのまま伝わる場所でありたいと考えています。
           </p>
         </div>
         <div id="site-footer-story" className="space-y-3">

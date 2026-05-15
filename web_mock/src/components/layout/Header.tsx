@@ -23,10 +23,21 @@ type ThemeKey = (typeof themeOptions)[number]['key'];
 
 const THEME_STORAGE_KEY = 'web_mock_theme';
 
+const logoOptions = [
+  { key: 'original', label: 'オリジナル' },
+  { key: 'shikaku', label: '四角' },
+  { key: 'yoko', label: '横' },
+] as const;
+
+type LogoKey = (typeof logoOptions)[number]['key'];
+
+const LOGO_STORAGE_KEY = 'web_mock_logo';
+
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [activeTheme, setActiveTheme] = useState<ThemeKey>('current');
+  const [activeLogo, setActiveLogo] = useState<LogoKey>('original');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalQuantity } = useCart();
   const isLightTheme = activeTheme !== 'current';
@@ -42,6 +53,10 @@ export default function Header() {
 
     setActiveTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
+
+    const savedLogo = window.localStorage.getItem(LOGO_STORAGE_KEY) as LogoKey | null;
+    const nextLogo = logoOptions.some((item) => item.key === savedLogo) ? (savedLogo as LogoKey) : 'original';
+    setActiveLogo(nextLogo);
   }, []);
 
   useEffect(() => {
@@ -76,6 +91,11 @@ export default function Header() {
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }
 
+  function applyLogo(logo: LogoKey) {
+    setActiveLogo(logo);
+    window.localStorage.setItem(LOGO_STORAGE_KEY, logo);
+  }
+
   return (
     <header
       id="site-header"
@@ -91,7 +111,7 @@ export default function Header() {
     >
       <div
         id="site-header-inner"
-        className={`relative mx-auto flex max-w-screen-2xl flex-col items-center gap-3 px-4 py-4 md:gap-4 md:px-6 md:py-5 lg:px-10 ${
+        className={`relative mx-auto flex max-w-screen-2xl flex-col items-center gap-3 px-4 pt-4 pb-7 md:gap-4 md:px-6 md:pt-5 md:pb-6 lg:px-10 ${
           isLightTheme ? 'text-mock-ink' : 'text-mock-paper'
         }`}
       >
@@ -102,7 +122,7 @@ export default function Header() {
           aria-controls="site-side-menu"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((current) => !current)}
-          className={`absolute left-4 top-4 z-[80] flex h-10 w-10 items-center justify-center border transition md:left-6 md:h-11 md:w-11 lg:left-10 ${
+          className={`absolute left-4 top-4 z-[80] flex h-9 w-9 items-center justify-center border transition md:left-6 md:h-11 md:w-11 lg:left-10 ${
             isLightTheme
               ? 'border-mock-border bg-mock-paper text-mock-ink hover:bg-mock-background'
               : 'border-white/18 bg-white/8 text-mock-paper hover:bg-white/14'
@@ -132,7 +152,7 @@ export default function Header() {
           id="site-mobile-cart-link"
           href="/cart"
           aria-label="カートを見る"
-          className={`absolute right-4 top-4 z-[80] flex h-10 w-10 items-center justify-center border transition md:hidden ${
+          className={`absolute right-4 top-4 z-[80] flex h-9 w-9 items-center justify-center border transition md:hidden ${
             isLightTheme
               ? 'border-mock-border bg-mock-paper text-mock-ink hover:bg-mock-background'
               : 'border-white/18 bg-white/90 text-mock-ink hover:bg-white'
@@ -210,34 +230,79 @@ export default function Header() {
         </div>
 
         <div id="site-brand" className="flex w-full flex-col items-center justify-center gap-4 text-center">
-          <Link id="site-brand-link" href="/" className="max-w-[calc(100%-5.5rem)] space-y-1 md:max-w-none">
-            <p
-              id="site-brand-kicker"
-              className={`text-[11px] uppercase tracking-[0.4em] ${
-                isLightTheme ? 'text-mock-muted' : 'text-white/55'
-              }`}
-            >
-              {mockSite.mockLabel}
-            </p>
-            <div id="site-brand-text">
-              <p id="site-brand-ja" className="font-serif text-2xl leading-none md:text-3xl">
-                {mockSite.brandJa}
-              </p>
-              <p
-                id="site-brand-en"
-                className={`text-xs tracking-[0.18em] md:text-sm md:tracking-[0.22em] ${
-                  isLightTheme ? 'text-mock-muted' : 'text-white/65'
-                }`}
-              >
-                {mockSite.brandEn}
-              </p>
-            </div>
+          <Link id="site-brand-link" href="/" className="max-w-[calc(100%-4.5rem)] space-y-1 md:max-w-none">
+            {activeLogo === 'original' ? (
+              <>
+                <p
+                  id="site-brand-kicker"
+                  className={`text-[11px] uppercase tracking-[0.4em] ${
+                    isLightTheme ? 'text-mock-muted' : 'text-white/55'
+                  }`}
+                >
+                  {mockSite.mockLabel}
+                </p>
+                <div id="site-brand-text">
+                  <p id="site-brand-ja" className="font-serif text-4xl leading-none md:text-7xl">
+                    {mockSite.brandJa}
+                  </p>
+                  <p
+                    id="site-brand-en"
+                    className={`text-sm tracking-[0.18em] md:text-base md:tracking-[0.22em] ${`
+                      isLightTheme ? 'text-mock-muted' : 'text-white/65'
+                    }`}
+                  >
+                    {mockSite.brandEn}
+                  </p>
+                </div>
+              </>
+            ) : activeLogo === 'shikaku' ? (
+              <>
+                {/* モバイル：中央寄せ画像 */}
+                <img
+                  id="site-brand-logo-shikaku"
+                  src="/images/logo-shikaku.png"
+                  alt={mockSite.brandJa}
+                  className="mx-auto h-36 w-auto object-contain md:hidden"
+                />
+                {/* PC：ロゴ左・タイトル右の横並び */}
+                <div id="site-brand-logo-shikaku-pc" className="hidden items-center gap-5 md:flex">
+                  <img
+                    src="/images/logo-shikaku.png"
+                    alt={mockSite.brandJa}
+                    className="h-32 w-auto object-contain"
+                  />
+                  <div className="text-left">
+                    <p
+                      className={`font-serif text-7xl leading-none ${`
+                        isLightTheme ? 'text-mock-ink' : 'text-mock-paper'
+                      }`}
+                    >
+                      {mockSite.brandJa}
+                    </p>
+                    <p
+                      className={`mt-1 text-lg tracking-[0.22em] ${`
+                        isLightTheme ? 'text-mock-muted' : 'text-white/65'
+                      }`}
+                    >
+                      {mockSite.brandEn}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <img
+                id="site-brand-logo-yoko"
+                src="/images/logo-yoko.png"
+                alt={mockSite.brandJa}
+                className="h-24 w-auto object-contain md:h-24"
+              />
+            )}
           </Link>
 
           <div id="site-header-controls" className="flex w-full flex-col items-center gap-3">
             <nav
               id="site-primary-nav"
-              className={`hidden flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs uppercase tracking-[0.32em] md:flex ${
+              className={`hidden flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm uppercase tracking-[0.28em] md:flex ${`
                 isLightTheme ? 'text-mock-muted' : 'text-white/75'
               }`}
             >
@@ -355,6 +420,35 @@ export default function Header() {
                     }`}
                   >
                     {theme.label}
+                  </button>
+                ))}
+              </div>
+              <p
+                id="site-side-logo-switcher-label"
+                className={`mt-6 text-[10px] uppercase tracking-[0.32em] ${
+                  isLightTheme ? 'text-mock-muted' : 'text-white/55'
+                }`}
+              >
+                Logo
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {logoOptions.map((logo) => (
+                  <button
+                    id={`site-side-logo-${logo.key}`}
+                    key={logo.key}
+                    type="button"
+                    onClick={() => applyLogo(logo.key)}
+                    className={`border px-3 py-2 text-[10px] tracking-[0.14em] transition ${
+                      activeLogo === logo.key
+                        ? isLightTheme
+                          ? 'border-mock-ink bg-mock-ink text-mock-paper'
+                          : 'border-white/70 bg-white/90 text-mock-ink'
+                        : isLightTheme
+                          ? 'border-mock-border bg-mock-background text-mock-muted hover:bg-mock-paper'
+                          : 'border-white/18 bg-white/8 text-white/72 hover:bg-white/14'
+                    }`}
+                  >
+                    {logo.label}
                   </button>
                 ))}
               </div>

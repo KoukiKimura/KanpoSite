@@ -35,7 +35,7 @@ export default function HeroSlider({ id = 'hero-slider', slides }: HeroSliderPro
   }
 
   return (
-    <section id={id} className="mock-section-hero relative h-[82svh] min-h-[520px] w-full overflow-hidden md:h-[100svh]">
+    <section id={id} className="mock-section-hero relative h-[100svh] min-h-[520px] w-full overflow-hidden md:h-[100svh]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.12),_transparent_25%),linear-gradient(140deg,_rgba(173,139,87,0.14),_transparent_45%)]" />
       <div id={`${id}-inner`} className="relative h-full w-full">
         {slides.map((slide, index) => (
@@ -59,7 +59,7 @@ export default function HeroSlider({ id = 'hero-slider', slides }: HeroSliderPro
           </div>
         ))}
 
-        <div id={`${id}-controls`} className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 items-center justify-between px-3 md:px-6 lg:px-8">
+        <div id={`${id}-controls`} className="pointer-events-none absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 hidden items-center justify-between px-3 md:flex md:px-6 lg:px-8">
           <button
             id={`${id}-prev`}
             type="button"
