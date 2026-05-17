@@ -51,6 +51,10 @@
 
     {% render 'structured-data' %}
 
+    <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">
+      <img src="{{ 'arrow-up.png' | asset_url }}" alt="" width="28" height="28">
+    </button>
+
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>

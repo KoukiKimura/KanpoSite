@@ -309,18 +309,19 @@ select[disabled] {
   position: sticky;
   inset-block-start: 0;
   z-index: 120;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   background: var(--color-ink);
-  background: color-mix(in srgb, var(--color-ink), transparent 8%);
   color: var(--color-paper);
-  backdrop-filter: blur(14px);
+  transition: background 0.3s ease;
 }
 
 .template-index .site-header {
-  position: absolute;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  inset-block-start: 0;
   inset-inline: 0;
-  background: var(--color-ink);
-  background: color-mix(in srgb, var(--color-ink), transparent 0%);
+  background: transparent;
 }
 
 .site-header__inner {
@@ -375,8 +376,10 @@ select[disabled] {
 
 .footer__logo {
   display: block;
-  height: 560px;
   width: auto;
+  height: auto;
+  max-height: 560px;
+  max-width: 100%;
   margin: 0 auto 20px;
 }
 
@@ -1617,113 +1620,38 @@ select[disabled] {
 }
 
 
-/* ============================================================
-   ロゴ切替スイッチャー
-   ============================================================ */
-
-/* デフォルト：すべてのロゴ画像を非表示 */
-[data-logo-img] {
-  display: none;
-}
-
-/* オリジナル（デフォルト） */
-html:not([data-logo]) [data-logo-img='original'],
-html[data-logo='original'] [data-logo-img='original'] {
-  display: block;
-}
-
-/* 四角 */
-html[data-logo='shikaku'] [data-logo-img='shikaku'] {
-  display: block;
-}
-
-/* 横 */
-html[data-logo='yoko'] [data-logo-img='yoko'] {
-  display: block;
-}
-
-/* 横ロゴは幅広なので高さを抑える */
-.site-header__logo--yoko {
-  height: 78px;
-  width: auto;
-}
-
-@media (min-width: 860px) {
-  .site-header__logo--yoko {
-    height: 64px;
-  }
-}
-
-/* ロゴスイッチャーウィジェット（デスクトップ） */
-.site-logo-switcher {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  padding: 6px 12px;
-}
-
-@media (min-width: 860px) {
-  .site-logo-switcher {
-    display: flex;
-    justify-self: start;
-    margin-block: 4px 10px;
-  }
-}
-
-.site-logo-switcher__label {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.48);
-  font-size: 0.625rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-}
-
-.site-logo-switcher__btn {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.625rem;
-  letter-spacing: 0.14em;
-  padding: 3px 10px;
-  transition: background 0.15s, color 0.15s;
-}
-
-.site-logo-switcher__btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-
-.site-logo-switcher__btn.is-active {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--color-ink);
-}
-
-/* モバイルドロワー内ロゴスイッチャー */
-.mobile-drawer__logo-switcher {
-  margin-top: auto;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.mobile-drawer__logo-switcher .site-logo-switcher__label {
-  display: block;
-  margin-bottom: 12px;
-}
-
-.mobile-drawer__logo-switcher-btns {
+/* トップへ戻るボタン */
+.back-to-top {
+  position: fixed;
+  inset-inline-end: 24px;
+  inset-block-end: 24px;
+  z-index: 200;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: none;
+  cursor: pointer;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+  padding: 0;
 }
 
-.mobile-drawer__logo-switcher .site-logo-switcher__btn {
-  border-radius: 0;
-  padding: 7px 14px;
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.back-to-top img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
 }
 
 .form-grid {
@@ -1883,10 +1811,6 @@ html[data-logo='yoko'] [data-logo-img='yoko'] {
     height: 160px;
   }
 
-  .site-header__logo--yoko {
-    height: 128px;
-  }
-
   .site-header__name {
     font-size: clamp(2rem, 3vw, 3rem);
   }
@@ -1900,7 +1824,7 @@ html[data-logo='yoko'] [data-logo-img='yoko'] {
   }
 
   .footer__logo {
-    height: 720px;
+    max-height: 720px;
     margin: 0 auto 24px;
   }
 

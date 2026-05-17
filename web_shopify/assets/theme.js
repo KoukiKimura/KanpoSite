@@ -110,20 +110,31 @@
     syncVariant();
   });
 
-  // ロゴ切替スイッチャー
-  var LOGO_STORAGE_KEY = 'web_mock_logo';
-  var savedLogo = window.localStorage.getItem(LOGO_STORAGE_KEY) || 'original';
-  document.documentElement.dataset.logo = savedLogo;
+  // トップへ戻るボタン
+  (function () {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    var header = document.querySelector('.site-header');
+    var footer = document.querySelector('.footer');
+    var MARGIN = 24;
+    function onScroll() {
+      var threshold = header ? header.offsetHeight : 80;
+      btn.classList.toggle('is-visible', window.scrollY > threshold);
 
-  document.querySelectorAll('[data-logo-btn]').forEach(function (btn) {
-    btn.classList.toggle('is-active', btn.dataset.logoBtn === savedLogo);
+      // フッターに重ならないよう bottom を動的調整
+      if (footer) {
+        var footerTop = footer.getBoundingClientRect().top;
+        if (footerTop < window.innerHeight) {
+          btn.style.bottom = (window.innerHeight - footerTop + MARGIN) + 'px';
+        } else {
+          btn.style.bottom = '';
+        }
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
     btn.addEventListener('click', function () {
-      var logo = btn.dataset.logoBtn;
-      document.documentElement.dataset.logo = logo;
-      window.localStorage.setItem(LOGO_STORAGE_KEY, logo);
-      document.querySelectorAll('[data-logo-btn]').forEach(function (b) {
-        b.classList.toggle('is-active', b.dataset.logoBtn === logo);
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  });
+    onScroll();
+  })();
 })();
