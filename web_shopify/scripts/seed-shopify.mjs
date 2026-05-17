@@ -394,6 +394,30 @@ const pages = [
     seoDescription: '四国ボタニカオンラインストアの利用規約です。注文、配送、返品、問い合わせ品、商品情報の取り扱いについて定めます。',
     metafields: [],
   },
+  {
+    handle: 'about-us',
+    title: 'About Us',
+    templateSuffix: 'about-us',
+    bodyHtml:
+      '<h2>アラン・ペレグリーニ：精神・芸術・大地を紡ぐ道</h2>' +
+      '<h3>ブランド名に込めた想い：シコク・ボタニカ</h3>' +
+      '<p>「シコク・ボタニカ（Shikoku Botanica）」という名には、私の二つの魂が込められています。「シコク（四国）」は、私が移り住み、人生の拠点として選んだ日本の精神的で豊かな地。そして「ボタニカ（Botanica）」はイタリア語で「植物学」を意味し、私の母国イタリアの伝統への敬意を表しています。この名は、西洋と東洋を薬草の力で結ぶ架け橋となるという、私の決意そのものです。</p>' +
+      '<h3>探求の旅：道から根源へ</h3>' +
+      '<p>私の道のりは、世界の道の上から始まりました。自転車と徒歩で国境を越え、何千キロもの道を旅する中で、私は「真の豊かさ」は速度ではなく、観察の深さと土地への深い敬意にあることを学びました。その探求心に導かれ、私はイタリアから愛媛の山々へと辿り着きました。ここでの生活は、私の美と真理への探求が、大地を慈しむという新たな形を見出した瞬間でもありました。</p>' +
+      '<h3>師から受け継いだ遺産：芸術・人生・規律</h3>' +
+      '<p>私の世界観を決定づけたのは、師である藤部吉人氏との出会いでした。彫刻の師としてだけでなく、人生と芸術の導き手として、彼は私を<strong>日本の本草学（薬草学）</strong>の世界へと導いてくれました。石を削る際も、薬草をミリ単位の精度で裁断する際も、すべての所作は「調和」に導かれるべきであるという教えです。</p>' +
+      '<p>この規律は、合気道の師範としての私の生き方とも深く共鳴しています。畳の上で培った「和」と「気」の探求は、長浜の研究所へと続いています。私たちが向き合う一枚一葉の当帰には、武道や芸術と同じ、至高の規律と情熱が注がれているのです。</p>' +
+      '<h3>長浜の聖地：生命が生まれる場所</h3>' +
+      '<p>シコク・ボタニカの核心は、瀬戸内海を望む長浜の山小屋にあります。太陽の光が降り注ぎ、潮風が優しく撫でるこの唯一無二のマイクロクライメイト（微気候）の中で、私はヒュウガトウキと稀少な<strong>イヌトウキ（日本当帰）</strong>を育てています。</p>' +
+      '<p>私は「いーえひめ本草研究会」の副会長として、絶滅の危機にあるイヌトウキの保護に人生を捧げています。私たちの哲学は、倫理的かつ科学的です。植物の命を絶やさぬよう根を残し、ミネラル成分が最も豊富な<strong>「葉と茎」</strong>のみを収穫することで、自然との共生を実現しています。</p>' +
+      '<h3>ティーの芸術：純粋なオーガニックと至高のブレンド</h3>' +
+      '<p>シコク・ボタニカが届けるのは、純粋でオーガニックな心身の調和です。私たちの植物は完全無農薬で育てられ、厳格な規律のもと、すべて手摘みで収穫されています。</p>' +
+      '<p>単一品種の純粋さを追求するだけでなく、私は「ドクダミ」や「キバナオウギ（黄花黄耆）」を配合した独自のブレンドも手がけています。これらは五感を満たす「芸術作品」であり、長浜の大地のエネルギーを一杯のティーに凝縮したものです。また、エビスグサの栽培やジャカランダの植樹など、健康と風景の美しさが共鳴する未来を、私はこの地で描き続けています。</p>' +
+      '<p><em>Made with love by Alan Pellegrini</em></p>',
+    seoTitle: 'About Us | 四国ボタニカ',
+    seoDescription: 'アラン・ペレグリーニと四国ボタニカのストーリー。愛媛の長浜から、イヌトウキの守り手として薬草の知恵をお届けします。',
+    metafields: [],
+  },
 ];
 
 const redirects = [
@@ -1011,6 +1035,7 @@ async function seedMenus(client, pageMap, blogObject) {
     { title: '当帰コーナー', type: 'PAGE', resourceId: gid('Page', pageMap.get('srs').id), url: '/pages/srs', items: [] },
     { title: '古民家', type: 'PAGE', resourceId: gid('Page', pageMap.get('kominka').id), url: '/pages/kominka', items: [] },
     { title: 'BLOG', type: 'BLOG', resourceId: gid('Blog', blogObject.id), url: '/blogs/stories', items: [] },
+    { title: 'ABOUT AS', type: 'PAGE', resourceId: gid('Page', pageMap.get('about-us').id), url: '/pages/about-us', items: [] },
     { title: 'お問い合わせ', type: 'PAGE', resourceId: gid('Page', pageMap.get('contact').id), url: '/pages/contact', items: [] },
   ];
 
@@ -1019,6 +1044,7 @@ async function seedMenus(client, pageMap, blogObject) {
     { title: '当帰コーナー', type: 'PAGE', resourceId: gid('Page', pageMap.get('srs').id), url: '/pages/srs', items: [] },
     { title: '古民家', type: 'PAGE', resourceId: gid('Page', pageMap.get('kominka').id), url: '/pages/kominka', items: [] },
     { title: 'BLOG', type: 'BLOG', resourceId: gid('Blog', blogObject.id), url: '/blogs/stories', items: [] },
+    { title: 'ABOUT AS', type: 'PAGE', resourceId: gid('Page', pageMap.get('about-us').id), url: '/pages/about-us', items: [] },
     { title: 'FAQ', type: 'PAGE', resourceId: gid('Page', pageMap.get('faq').id), url: '/pages/faq', items: [] },
     { title: 'お問い合わせ', type: 'PAGE', resourceId: gid('Page', pageMap.get('contact').id), url: '/pages/contact', items: [] },
     { title: '利用規約', type: 'PAGE', resourceId: gid('Page', pageMap.get('terms-of-service').id), url: '/pages/terms-of-service', items: [] },

@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "style": "page",
+        "fallback_asset": "home-field-walk.webp",
+        "image_alt": "About Us - 四国ボタニカの物語",
+        "eyebrow": "About Us",
+        "title": "アラン・ペレグリーニと四国ボタニカ",
+        "overlay_opacity": 36,
+        "mobile_height": 42,
+        "desktop_height": 48
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "contact_cta": {
+      "type": "contact-cta",
+      "settings": {
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["hero", "main", "contact_cta"]
+}
