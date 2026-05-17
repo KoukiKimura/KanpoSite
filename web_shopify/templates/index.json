@@ -12,6 +12,13 @@
     "hero": {
       "type": "hero-banner",
       "blocks": {
+        "slide_kyoten": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "shikoku-botanica-kyoten.jpg",
+            "alt": "四国ボタニカの長浜拠点・山小屋の風景"
+          }
+        },
         "slide_1": {
           "type": "slide",
           "settings": {
@@ -48,12 +55,12 @@
           }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
+      "block_order": ["slide_kyoten", "slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
       "settings": {
         "style": "home",
-        "eyebrow": "Shikoku Botanica",
-        "title": "四国ボタニカ",
-        "text": "botanica（ボタニカ）はイタリア語で「植物・植物学」のこと。その名に込めた植物の知恵を、四国のイヌトウキ、当帰茶、粉末、苗、古民家滞在として届けます。",
+        "eyebrow": "山と海が出会う場所",
+        "title": "イヌトウキの守り手",
+        "text": "長浜の山小屋から、アラン・ペレグリーニが太陽の恵みと潮風を、絶滅の危機から救われた唯一無二のボタニカルな宝物へと変え、皆様の健康にお届けします。",
         "cta_label": "",
         "cta_link": "",
         "overlay_opacity": 48,
@@ -64,7 +71,12 @@
     "brand_intro": {
       "type": "brand-intro",
       "settings": {
-        "second_cta_link": "/pages/kominka"
+        "first_title": "長浜での自然栽培",
+        "first_text": "愛媛の太陽と瀬戸内海の潮風に育まれて。農薬や化学肥料を一切使用せず、山の生態系を守りながら、自然の力だけで育てています。",
+        "second_title": "葉と茎の選定",
+        "second_text": "一般的な当帰（トウキ）とは異なり、私たちは地上部（葉と茎）のみを収穫します。ミネラルと香りが凝縮されたこの部分は、植物の命を尊びながら、最高の純度を追求した選択です。",
+        "second_cta_label": "About Us",
+        "second_cta_link": "/pages/about-us"
       }
     },
     "featured_products": {

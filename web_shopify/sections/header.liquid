@@ -33,43 +33,17 @@
             <a href="/pages/contact">お問い合わせ</a>
           {% endif %}
         </nav>
-        <div class="mobile-drawer__logo-switcher">
-          <p class="site-logo-switcher__label">Logo</p>
-          <div class="mobile-drawer__logo-switcher-btns">
-            <button class="site-logo-switcher__btn" type="button" data-logo-btn="original">オリジナル</button>
-            <button class="site-logo-switcher__btn" type="button" data-logo-btn="shikaku">四角</button>
-            <button class="site-logo-switcher__btn" type="button" data-logo-btn="yoko">横</button>
-          </div>
-        </div>
+
       </div>
     </details>
 
     <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
       <img
-        data-logo-img="original"
         src="{{ 'shikoku-botanica-logo.png' | asset_url }}"
         alt="{{ settings.brand_name_ja | default: shop.name }}"
         class="site-header__logo"
         width="240"
         height="240"
-        loading="eager"
-      >
-      <img
-        data-logo-img="shikaku"
-        src="{{ 'shikoku-botanica-logo-shikaku.png' | asset_url }}"
-        alt="{{ settings.brand_name_ja | default: shop.name }}"
-        class="site-header__logo"
-        width="240"
-        height="240"
-        loading="eager"
-      >
-      <img
-        data-logo-img="yoko"
-        src="{{ 'shikoku-botanica-logo-yoko.png' | asset_url }}"
-        alt="{{ settings.brand_name_ja | default: shop.name }}"
-        class="site-header__logo site-header__logo--yoko"
-        width="600"
-        height="160"
         loading="eager"
       >
       <span class="site-header__brand-text">
