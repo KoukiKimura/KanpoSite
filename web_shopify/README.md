@@ -94,8 +94,11 @@ shopify theme push --store $envMap['SHOPIFY_STORE_DOMAIN'] --password $envMap['S
 
 ```powershell
 cd D:\Works\project\KanpoSite\web_shopify
-node scripts\seed-shopify.mjs
+node scripts\seed-shopify.mjs --env=production
 ```
+
+> **2026-05-18以降**: 検証環境はクローズしました。seed スクリプト・テーマプッシュは本番環境（`--env=production`）のみ実行します。  
+> 検証環境の復活手順は [docs/運用記録/検証環境クローズ記録.md](../docs/運用記録/検証環境クローズ記録.md) を参照してください。
 
 商品にShopify標準の商品カテゴリを設定する場合:
 

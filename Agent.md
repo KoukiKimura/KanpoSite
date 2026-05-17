@@ -15,8 +15,8 @@
 | フロントエンド | Shopify Online Store 2.0 テーマ（Liquid / JSON templates / sections / CSS / JavaScript） |
 | データ管理 | Shopify Products / Collections / Blogs / Pages / Policies を正本にする |
 | API | Shopify Admin API seed補助。独自問い合わせAPIは初期対象外 |
-| 本番環境 | Shopify 本番ストア（新規用意） |
-| 検証環境 | Shopify 検証ストア（これまで更新してきた Shopify サイト）|
+| 本番環境 | Shopify 本番ストア（`7jcarb-ee.myshopify.com`） |
+| 検証環境 | Shopify 検証ストア（2026-05-18 クローズ・休止中） |
 
 ---
 
@@ -100,12 +100,14 @@ KanpoSite/
 
 ## 環境構成
 
-本プロジェクトでは Shopify ストアを2つ運用します。
+本プロジェクトでは Shopify ストアを管理します。
 
-| 環境名 | 指す対象 | 用途 |
-|---|---|---|
-| **本番環境** | Shopify 本番ストア | 実際の顧客向け公開サイト。リリース済みコンテンツのみ反映する |
-| **検証環境** | Shopify 検証ストア（これまで更新してきた Shopify サイト） | 開発・動作確認・依頼者レビュー用。本番反映前の確認に使う |
+| 環境名 | 指す対象 | 用途 | 状態 |
+|---|---|---|---|
+| **本番環境** | Shopify 本番ストア `7jcarb-ee.myshopify.com` | 実際の顧客向け公開サイト。リリース済みコンテンツのみ反映する | **稼働中** |
+| **検証環境** | Shopify 検証ストア `cqs1ru-bs.myshopify.com` | 開発・動作確認・依頼者レビュー用 | **休止中（2026-05-18 クローズ）** |
+
+> 検証環境は将来復活させる可能性があります。復活手順は [docs/運用記録/検証環境クローズ記録.md](docs/運用記録/検証環境クローズ記録.md) を参照してください。
 
 各環境の接続情報（ストアドメイン、テーマID、CLIトークン等）は `env/shopify/` 配下の環境ファイルで管理します。
 
@@ -116,9 +118,9 @@ KanpoSite/
 
 環境切り替え運用ルール:
 
-- `shopify theme push` を実行する前に、対象が本番環境か検証環境かを必ず確認する
-- 本番環境への反映は、検証環境で動作確認が完了したコンテンツのみとする
-- 本番環境用・検証環境用のテーマIDと接続情報を混同しないよう、環境ファイルで明示的に区別する
+- `shopify theme push` を実行する前に、対象が本番環境かを必ず確認する
+- **2026-05-18以降**: 検証環境は休止中のため、テーマ変更は本番環境へ直接反映する
+- 本番環境用の接続情報は `env/shopify/.env` で管理する
 - `SHOPIFY_THEME_ID`（および関連する `SHOPIFY_STORE_DOMAIN`、`SHOPIFY_CLI_THEME_TOKEN`）は環境ごとに別管理とする
 
 ---
