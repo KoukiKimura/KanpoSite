@@ -13,9 +13,7 @@
 
     <div class="card contact-panel">
       {% form 'contact', class: 'form-grid' %}
-        {% if form.posted_successfully? %}
-          <p class="form-message">お問い合わせを受け付けました。</p>
-        {% endif %}
+        <input type="hidden" name="return_to" value="/pages/contact-thanks">
 
         {% if form.errors %}
           <div class="form-message">
