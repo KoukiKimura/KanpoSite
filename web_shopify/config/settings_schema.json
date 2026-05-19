@@ -176,7 +176,12 @@
       {
         "type": "text",
         "id": "google_site_verification",
-        "label": "Google Search Console verification content"
+        "label": "Google Search Console 確認コード（metaタグのcontent値のみ）"
+      },
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "Google Analytics 4 測定ID（例: G-XXXXXXXXXX）"
       },
       {
         "type": "text",
