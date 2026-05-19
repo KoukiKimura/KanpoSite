@@ -15,6 +15,7 @@ html {
 
 body {
   margin: 0;
+  position: relative;
   background: var(--color-background);
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 28%),
@@ -315,12 +316,11 @@ select[disabled] {
 }
 
 .template-index .site-header {
-  position: fixed !important;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  inset-block-start: 0;
-  inset-inline: 0;
+  width: 100%;
   background: transparent;
 }
 

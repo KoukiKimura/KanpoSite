@@ -116,19 +116,23 @@
     if (!btn) return;
     var header = document.querySelector('.site-header');
     var footer = document.querySelector('.footer');
+    var contact = document.querySelector('.cta-band');
     var MARGIN = 24;
     function onScroll() {
       var threshold = header ? header.offsetHeight : 80;
       btn.classList.toggle('is-visible', window.scrollY > threshold);
 
-      // フッターに重ならないよう bottom を動的調整
-      if (footer) {
-        var footerTop = footer.getBoundingClientRect().top;
-        if (footerTop < window.innerHeight) {
-          btn.style.bottom = (window.innerHeight - footerTop + MARGIN) + 'px';
-        } else {
-          btn.style.bottom = '';
-        }
+      // CONTACT・フッターに重ならないよう bottom を動的調整（上にある方を基準）
+      var barriers = [footer, contact].filter(Boolean);
+      var barrierTop = null;
+      for (var i = 0; i < barriers.length; i++) {
+        var t = barriers[i].getBoundingClientRect().top;
+        if (barrierTop === null || t < barrierTop) barrierTop = t;
+      }
+      if (barrierTop !== null && barrierTop < window.innerHeight) {
+        btn.style.bottom = (window.innerHeight - barrierTop + MARGIN) + 'px';
+      } else {
+        btn.style.bottom = '';
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });

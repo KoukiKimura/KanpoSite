@@ -376,6 +376,15 @@ const pages = [
     metafields: [],
   },
   {
+    handle: 'contact-thanks',
+    title: 'お問い合わせ受付完了',
+    templateSuffix: 'contact-thanks',
+    bodyHtml: '<p>お問い合わせを受け付けました。</p>',
+    seoTitle: 'お問い合わせ受付完了 | 四国ボタニカ',
+    seoDescription: '四国ボタニカへのお問い合わせを受け付けました。',
+    metafields: [],
+  },
+  {
     handle: 'faq',
     title: 'よくある質問',
     templateSuffix: 'faq',
